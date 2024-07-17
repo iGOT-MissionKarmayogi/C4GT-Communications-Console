@@ -1,0 +1,54 @@
+
+.Container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 607px;
+    padding-top: 3rem;
+    background-color: #FDE5CD;
+    font-family: 'Poppins', sans-serif;
+}
+.MediumsList{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Option{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-weight: bold;
+    margin: 1rem;
+    border-radius: 20px;
+    padding-inline: 1rem;
+    width: 15rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border: solid 1px;
+}
+/*To adjust the whatsapp image gap according to other images */
+.whatsapp{
+    margin-left: -1.5rem;
+}
+.Option:hover,active{
+    transform: scale(105%);
+
+}
+.MediumsList button{
+    height: 2.5rem;
+    width: 15rem;
+    cursor: pointer;
+    color: white;
+    background-color:#184486 ;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+
+}
+.MediumsList button:hover{
+    background-color: #063273;
+}
+.MediumsList button:disabled{
+    cursor: not-allowed;
+}

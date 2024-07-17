@@ -1,0 +1,48 @@
+<div class="container">
+
+    <div class="header">
+      <div>
+        <h2>SMS-Service</h2>
+        <h3>Select Users</h3>
+      </div>
+  
+      <div class="actions">
+        <button (click)="showAddForm = true">Add Manually</button>
+        <button (click)="showFilePopup = true">Import from CSV</button>
+      </div>
+  
+    </div>
+  
+    <div class="popupform" *ngIf="showAddForm">
+      <form (ngSubmit)="addUser()">
+        <input [(ngModel)]="newUser.name" name="name" placeholder="Name" required>
+        <input [(ngModel)]="newUser.phoneNo" name="phoneNo" placeholder="Phone Number" required>
+        <button class="submit" type="submit">Add User</button>
+        <button class="close" type="button" (click)="showAddForm = false">🞥</button>
+      </form>
+    </div>
+  
+    <div class="file-popup" *ngIf="showFilePopup">
+        <div>
+
+            <label for="fileInput">Select a file to import</label>
+            <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".csv">
+            <button class="close" type="button" (click)="showFilePopup = false">🞥</button>
+        </div>
+    </div>
+  
+    <div class="user-list">
+      <div *ngFor="let user of users" class="user-item">
+        <div class="avatar">{{ user.name[0] }}</div>
+        <div class="user-info">
+          <div>{{ user.name }}</div>
+          <div>PhoneNo - {{ user.phoneNo }}</div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="bottom">
+      <button class="send-button" (click)="sendSMS()">Send</button>
+    </div>
+  </div>
+  

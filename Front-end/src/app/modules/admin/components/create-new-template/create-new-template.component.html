@@ -1,0 +1,42 @@
+<!-- create-new-template.component.html -->
+
+<div class="Container">
+    <div class="Upper">
+        <h2>{{ selectedMedium }} Create Template Service</h2>
+        <h2> Create New Template --></h2>
+
+    </div>
+    <div class="Lower">
+        <div class="Header">
+            <div class="form-group box">
+                <div class="label-container">
+                    <label for="templateId">Template ID:</label>
+                </div>
+                <input type="text" id="templateId" name="templateId" placeholder="Enter Template ID">
+            </div>
+            <div class="form-group box">
+                <div class="label-container">
+                    <label for="category">Category:</label>
+                </div>
+                <select id="category" name="category" [(ngModel)]="selectedCategory" class="form-control">
+                    <option value="">Select Category</option>
+                    <option value="SMS">SMS</option>
+                    <option value="Email">Email</option>
+                    <option value="WhatsApp">WhatsApp</option>
+                </select>
+            </div>
+            <div class="form-group box">
+                <div class="label-container">
+                    <label for="Subject">{{ selectedMedium }} Subject:</label>
+                </div>
+                <input type="text" id="Subject" name="Subject" placeholder="Enter Subject">
+            </div>
+            <div class="Body box" >
+                <textarea id="bigTextBox" name="bigTextBox" rows="10" cols="50" placeholder="Fill in content here..."></textarea>
+            </div>
+        </div>
+        <div class="CreateButton">
+            <button>Create</button>
+        </div>
+    </div>
+</div>

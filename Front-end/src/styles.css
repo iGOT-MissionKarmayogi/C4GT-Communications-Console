@@ -1,0 +1,14 @@
+/* Reset margin and padding for html and body */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+/* Make sure the app-root takes full height and width */
+app-root {
+    display: block;
+    height: 100%;
+    width: 100%;
+}

@@ -1,0 +1,29 @@
+<!-- your-component.component.html -->
+<div class="Container">
+    <div class="Upper">
+        <h2>{{ selectedMedium }} Service</h2>
+        <div class="Header">
+            <h3>Choose Template --></h3>
+            <button  (click)="createtemplate()">New Template</button>
+        </div>
+    </div>
+    <div class="Lower">
+        <div class="CardsSection">
+            <div class="Card" *ngFor="let template of templates" (click)="selectTemplate(template)">
+                <div class="CardUpper">
+                    <div class="TemplateId">
+                        <h3>Template Id</h3>
+                        <h4>{{ template?.templateId }}</h4>
+                    </div>
+                    <input type="radio" name="selectedTemplate" [checked]="selectedTemplateId === template.templateId"
+                        (click)="onRadioClick(template.id)">
+                        <span class="radio-checkmark"></span>
+                </div>
+                <p [innerHTML]="template.Content | highlight"></p>
+            </div>
+        </div>
+        <div class="SubmitButton">
+            <button [disabled]="!selectedTemplateId" (click)="navigator()">Select</button>
+        </div>
+    </div>
+</div>

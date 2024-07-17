@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif; /* Default font for the entire body */
+}
+.Container{
+    min-height: 90vh;
+   
+}
+
+.Content{
+    padding: 3rem;
+    padding-inline: 10rem;
+    background-color: #FDE5CD;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
+}
+.CampaignBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+.CampaignBox img{
+    height: 150px;
+    border-radius: 10px;
+}
+.CampaignBox:hover {
+    transform: scale(105%); /* Scale up to 110% on hover */
+}
