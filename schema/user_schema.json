@@ -1,0 +1,31 @@
+{
+  "schema": {
+    "type": "object",
+    "properties": {
+      "_id": "String",
+      "courseId": "String",
+      "batchId": "String",
+      "userId": "String",
+      "location": "String",
+      "totalLeafNodecount": "Number",
+      "completedContents": [
+        {
+          "identifier": "String",
+          "status": "Number"
+        }
+      ],
+      "progress": "Number",
+      "batchEnrollmentDate": "Date",
+      "lastAccessTime": "Date",
+      "lastCompletedTime": "Date",
+      "lastUpdatedTime": "Date",
+      "viewCount": "Number",
+      "createdAt": "Date",
+      "updatedAt": "Date"
+    },
+    "config": {
+      "response_fields_to_be_returned": [],
+      "fields_allowed_to_be_in_range": ["progress", "batchEnrollmentDate"]
+    }
+  }
+}
