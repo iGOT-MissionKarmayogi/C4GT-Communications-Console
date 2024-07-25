@@ -6,7 +6,6 @@ const path = require("path");
 const axios = require("axios");
 const { createErrorResponse } = require("../utils/errorResponse");
 
-const keysToExclude = ["config", "_id"];
 let fields = [];
 let validFields = [];
 let config = null;
@@ -46,9 +45,7 @@ async function fetchAndProcessSchema() {
   properties = fields.properties;
   console.log(properties, "properties");
 
-  validFields = Object.keys(properties).filter(
-    (key) => !keysToExclude.includes(key)
-  );
+  validFields = Object.keys(properties);
   console.log("Valid Fields:", validFields);
 
   config = fields.config;
@@ -75,7 +72,7 @@ function buildQuery(filter, config) {
   for (const key in filter) {
     if (filter.hasOwnProperty(key)) {
       if (rangeFields.includes(key)) {
-        const fieldType = properties[key];
+        const fieldType = properties[key].type;
         const filterValue = filter[key];
 
         console.log(fieldType, "type");
@@ -84,17 +81,17 @@ function buildQuery(filter, config) {
           const { min, max } = filterValue;
 
           query[key] = {};
-          if (fieldType === "Date") {
+          if (fieldType === "date") {
             if (min !== undefined) query[key].$gte = new Date(min);
             if (max !== undefined) query[key].$lte = new Date(max);
-          } else if (fieldType === "Number") {
+          } else if (fieldType === "number") {
             if (min !== undefined) query[key].$gte = min;
             if (max !== undefined) query[key].$lte = max;
           }
         } else {
           query[key] = {};
 
-          if (fieldType === "Date") {
+          if (fieldType === "date") {
             const minDate = filterValue + "T00:00:00.000Z";
             const maxDate = filterValue + "T23:59:59.999Z";
             console.log(query[key], "key");

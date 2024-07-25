@@ -1,77 +1,86 @@
 const mongoose = require("mongoose");
+const axios = require("axios");
+const fs = require("fs");
+const path = require("path");
 
-const userSchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    required: true,
-  },
-  courseId: {
-    type: String,
-    required: true,
-  },
-  batchId: {
-    type: String,
-    required: true,
-  },
-  userId: {
-    type: String,
-    required: true,
-  },
-  location: {
-    type: String,
-    required: false,
-  },
-  totalLeafNodecount: {
-    type: Number,
-    required: true,
-  },
-  completedContents: [
-    {
-      identifier: {
-        type: String,
-        required: true,
-      },
-      status: {
-        type: Number,
-        required: true,
-        enum: [0, 1, 2], // 2 - completed, 0 & 1 - initiated but not completed
-      },
-    },
-  ],
-  progress: {
-    type: Number,
-    required: true,
-  },
-  batchEnrollmentDate: {
-    type: Date,
-    required: true,
-  },
-  lastAccessTime: {
-    type: Date,
-    required: false,
-  },
-  lastCompletedTime: {
-    type: Date,
-    required: false,
-  },
-  lastUpdatedTime: {
-    type: Date,
-    required: false,
-  },
-  viewCount: {
-    type: Number,
-    required: false,
-    default: 0,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-  },
-  updatedAt: {
-    type: Date,
-    default: null,
-  },
-});
-const User = mongoose.model("User", userSchema);
+const SCHEMA_PATH = process.env.SCHEMA_PATH;
+
+const convertJsonSchemaToMongooseSchema = (jsonSchema) => {
+  const mongooseSchema = {};
+
+  for (const key in jsonSchema.properties) {
+    const property = jsonSchema.properties[key];
+    const typeMapping = {
+      string: String,
+      number: Number,
+      date: Date,
+      array: Array,
+      object: Object,
+    };
+
+    const fieldSchema = {
+      type: typeMapping[property.type],
+    };
+
+    if (property.required) {
+      fieldSchema.required = property.required;
+    }
+
+    if (property.enum) {
+      fieldSchema.enum = property.enum;
+    }
+
+    if (property.type === "array" && property.items) {
+      fieldSchema.items = convertJsonSchemaToMongooseSchema({
+        type: "object",
+        properties: property.items.properties,
+      });
+    }
+
+    mongooseSchema[key] = fieldSchema;
+  }
+  return mongooseSchema;
+};
+
+async function fetchSchemaFromUrl(url) {
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching schema from URL:", error);
+    throw error;
+  }
+}
+
+async function readSchemaFromLocalFile(SCHEMA_PATH) {
+  try {
+    const data = fs.readFileSync(SCHEMA_PATH);
+    jsonSchema = JSON.parse(data).schema;
+  } catch (err) {
+    console.error("Error reading or parsing the schema file:", err);
+    process.exit(1);
+  }
+}
+
+let jsonSchema;
+const getSchema = async () => {
+  console.log(SCHEMA_PATH);
+  if (SCHEMA_PATH.startsWith("http://") || SCHEMA_PATH.startsWith("https://")) {
+    jsonSchema = await fetchSchemaFromUrl(SCHEMA_PATH);
+  } else {
+    const fullPath = path.resolve(__dirname, SCHEMA_PATH);
+    console.log(fullPath);
+    jsonSchema = await readSchemaFromLocalFile(fullPath);
+  }
+};
+getSchema();
+
+console.log(jsonSchema, "json schema");
+
+const mongooseSchema = new mongoose.Schema(
+  convertJsonSchemaToMongooseSchema(jsonSchema)
+);
+
+const User = mongoose.model("User", mongooseSchema);
 
 module.exports = User;

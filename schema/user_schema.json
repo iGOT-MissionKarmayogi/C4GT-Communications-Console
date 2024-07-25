@@ -2,29 +2,74 @@
   "schema": {
     "type": "object",
     "properties": {
-      "_id": "String",
-      "courseId": "String",
-      "batchId": "String",
-      "userId": "String",
-      "location": "String",
-      "totalLeafNodecount": "Number",
-      "completedContents": [
-        {
-          "identifier": "String",
-          "status": "Number"
+      "_id": {
+        "type": "string"
+      },
+      "courseId": {
+        "type": "string",
+        "required": true
+      },
+      "batchId": {
+        "type": "string",
+        "required": true
+      },
+      "userId": {
+        "type": "string",
+        "required": true
+      },
+      "location": {
+        "type": "string",
+        "required": true
+      },
+      "totalLeafNodecount": {
+        "type": "number",
+        "required": true
+      },
+      "completedContents": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "identifier": {
+              "type": "string",
+              "required": true
+            },
+            "status": {
+              "type": "number",
+              "required": true,
+              "enum": [0, 1, 2]
+            }
+          }
         }
-      ],
-      "progress": "Number",
-      "batchEnrollmentDate": "Date",
-      "lastAccessTime": "Date",
-      "lastCompletedTime": "Date",
-      "lastUpdatedTime": "Date",
-      "viewCount": "Number",
-      "createdAt": "Date",
-      "updatedAt": "Date"
+      },
+      "progress": {
+        "type": "number",
+        "required": true
+      },
+      "batchEnrollmentDate": {
+        "type": "date"
+      },
+      "lastAccessTime": {
+        "type": "date"
+      },
+      "lastCompletedTime": {
+        "type": "date"
+      },
+      "lastUpdatedTime": {
+        "type": "date"
+      },
+      "viewCount": {
+        "type": "number"
+      },
+      "createdAt": {
+        "type": "date"
+      },
+      "updatedAt": {
+        "type": "date"
+      }
     },
     "config": {
-      "response_fields_to_be_returned": [],
+      "response_fields_to_be_returned": ["userId courseId location"],
       "fields_allowed_to_be_in_range": ["progress", "batchEnrollmentDate"]
     }
   }
