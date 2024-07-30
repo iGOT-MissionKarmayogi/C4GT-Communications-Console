@@ -1,5 +1,18 @@
 import mongoose from "mongoose";
 
+
+const variable = {
+    name : {
+        type: String,
+    },
+    type : {
+        type: String,
+    },
+    value : {
+        type: String,
+    }
+}
+
 const TemplateSchema = new mongoose.Schema({
     templateId: {
         type: String,
@@ -18,6 +31,7 @@ const TemplateSchema = new mongoose.Schema({
         enum : ['email','sms','whatsapp'],
         required: true,
     },
+    variables : [variable],
 });
 
 const Template = mongoose.model("Template", TemplateSchema);

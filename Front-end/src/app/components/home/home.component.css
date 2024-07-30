@@ -12,7 +12,7 @@ body {
 .left{
     display: flex;
     flex-direction: column;
-    background-color: #FDE5CD;
+    background-color: #ffffff;
     width: 55%;
     justify-content: center;
     align-items: center;

@@ -20,20 +20,28 @@ body {
   }
   
   .popup {
-    width: 50%;
-    height: 50%;
+    max-width: 400px;
+    max-height: 370px;
     border-radius: 30px;
-    padding: 2rem;
+    padding: 1rem 2rem;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    line-height: 1.2;
     gap: 0rem;
-    background-color:#FDE5CD;
+    background-color:#ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     animation: popupOpenAnimation 0.3s forwards;
     transition: transform 0.3s ease, opacity 0.3s ease;
     font-family: 'Poppins', sans-serif;
   }
+  .popup h1{
+    font-size: 1.75rem;
+    margin: 20px;
+    font-weight: 600;
+  }
+
   .Closer{
     position: fixed;
     top: 1rem;
@@ -49,27 +57,42 @@ body {
     margin-top: rem;
     font-size: 18px;
     font-weight: 600;
+    width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
   .Option{
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
+    margin-top: 10px;
     cursor: pointer;
     transition: transform 0.1s ease;
   }
   .Option:hover{
     transform: scale(103%);
   }
+  .Option img{
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+  }
+
+  .Option div{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
   .MediumsList button {
-    margin-top: 3rem;
     padding: 0.7rem;
+    margin-block: 1rem;
     padding-inline: 4rem;
     background-color: #0a316c;
     border: none;
-    border-radius: 10px;
+    border-radius: 25px;
     color: white;
     cursor: pointer;
     font-size: 1rem;
@@ -79,7 +102,22 @@ body {
     background-color: #06285b;
   }
   
+  /* radio button css */
 
+  input[type="radio"] {
+    box-sizing: border-box;
+    appearance: none;
+    background: white;
+    outline: 2px solid #7e7e7e;
+    border: 3px solid white;
+    width: 16px;
+    height: 16px;
+  }
+  input[type='radio']:checked {
+    background: #333;
+  }
+  
+  
 
 
 

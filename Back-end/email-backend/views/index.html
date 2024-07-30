@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Features</title>
+</head>
+<body>
+    Welcome to Smart Email Notifier
+<!-- 
+    <h1>Testing Features</h1>
+    <ul>
+        <li>Send Email without Template (default)
+            <form action="/send-email" method="post">
+                <button type="submit">Send Email</button>
+            </form>
+        </li>
+
+        <li> Send Email with Template
+            <form action="/send-email" method="post">
+                <label for="to">Email To:</label>
+                <input type="to" id="to" name="to" required>
+                <label for="templateId">templateId:</label>
+                <input type="templateId" id="templateId" name="templateId" required>
+                <button type="submit">Send Email</button>
+            </form>
+        </li>
+
+    </ul>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Select the form
+        const form = document.querySelector('form');
+    
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+    
+            // Create a FormData object, passing the form as a parameter
+            const formData = new FormData(form);
+    
+            // Convert FormData to a plain object
+            const formDataObj = Object.fromEntries(formData.entries());
+    
+            // Use fetch to send the form data as JSON
+            fetch(form.action, {
+                method: form.method,
+                headers: {
+                    'Content-Type': 'application/json', // Indicate that we're sending JSON
+                },
+                body: JSON.stringify(formDataObj), // Convert the object to a JSON string
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Process the response if it's JSON
+            })
+            .then(data => {
+                console.log(data); // Handle the data from the server
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+            });
+        });
+    });
+    </script> -->
+</body>
+</html>

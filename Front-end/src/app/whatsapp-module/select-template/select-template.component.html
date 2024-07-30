@@ -1,0 +1,36 @@
+<div>
+    <div class="Container">
+        <div class="Upper">
+            <h2>Whatsapp Service Templates</h2>
+            <div class="Header">
+                <h3>Choose Template</h3>
+                <button>Create New Template</button>
+            </div>
+        </div>
+        <div class="Lower">
+            <div class="SubContainer">
+                <div class="CardsSection">
+                    <div class="Card" *ngFor="let template of templates"
+                        (click)="selectTemplate(template)">
+                        <div class="CardUpper">
+                            <div class="TemplateId">
+                                <h3>Template Id</h3>
+                                <h4>{{ template.id }}</h4>
+                            </div>
+                            <input type="radio" name="selectedTemplate" [checked]="selectedTemplateId === template.id"
+                                (click)="onRadioClick(template.id)">
+                            <span class="radio-checkmark"></span>
+                        </div>
+                        <div>
+                            <span><strong>Name:</strong> {{template.name}}</span>
+                        </div>
+                        <p [innerHTML]="template.structure.body.text | removeBraces"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="SubmitButton">
+            <button [disabled]="!selectedTemplateId" (click)="navigate()">Select</button>
+        </div>
+    </div>
+</div>

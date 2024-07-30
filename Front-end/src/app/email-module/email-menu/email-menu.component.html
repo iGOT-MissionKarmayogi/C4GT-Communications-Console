@@ -1,0 +1,45 @@
+<div class="menu">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'create-template'" (click)="selectMenu('create-template')">Create Template</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'configure-template'" (click)="selectMenu('configure-template')">Configure Template</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'view-user-data'" (click)="selectMenu('view-user-data')">View User Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'upload-user-data'" (click)="selectMenu('upload-user-data')">Upload User Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'send-email'" (click)="selectMenu('send-email')">Send Email</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'history'" (click)="selectMenu('history')">History</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <main class="main-content">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <div *ngIf="selectedMenu === 'default'">Welcome to Smart Email Notifier</div>
+                    <app-create-template *ngIf="selectedMenu === 'create-template'"></app-create-template>
+                    <app-configure-template *ngIf="selectedMenu === 'configure-template'"></app-configure-template>
+                    <app-view-user-data *ngIf="selectedMenu === 'view-user-data'"></app-view-user-data>
+                    <app-upload-user-data *ngIf="selectedMenu === 'upload-user-data'"></app-upload-user-data>
+                    <app-send-email *ngIf="selectedMenu === 'send-email'"></app-send-email>
+                    <app-history *ngIf="selectedMenu === 'history'"></app-history>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+

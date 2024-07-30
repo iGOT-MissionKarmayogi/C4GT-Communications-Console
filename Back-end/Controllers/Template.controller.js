@@ -43,30 +43,14 @@ const getTemplates = asyncHandler(async (req, res) => {
 const createTemplate = asyncHandler(async (req, res) => {
     try {
 
-        const schema = z.object({
-            Subject: z.string(),
-            Content: z.string(),
-            type: z.string(),
-            templateId: z.string(),
-        });
+        const { name, body ,subject,variables } = req.body;
 
-        const input  = req.body;
-
-        const parsedInput = schema.safeParse(input);
-
-        if (parsedInput.success === false) {
-            return res.status(400).json({
-                success: false,
-                message: "Invalid Input",
-            });
-        }
-
-        const { Subject, Content, type ,templateId } = parsedInput.data;
         const template = await Template.create({
-            Subject,
-            Content,
-            type,
-            templateId,
+            Subject: name,
+            Content: body,
+            type : "sms",
+            templateId : subject,
+            variables
         });
         if (template) {
             return res.status(201).json({
@@ -114,5 +98,28 @@ const deleteTemplate = asyncHandler(async (req, res) => {
     }
 });
 
+const updateTemplate = asyncHandler(async (req, res) => {
+    try {
+        const templateId = req.params.id;
+        const { body } = req.body;
 
-export { getTemplates, createTemplate, deleteTemplate };
+        const template = await Template.findOneAndUpdate({ templateId }, { body });
+
+        if (template) {
+            return res.status(200).json({
+                success: true,
+                message: "Template updated successfully",
+            });
+        }
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+}
+);
+
+
+export { getTemplates, createTemplate, deleteTemplate,updateTemplate };

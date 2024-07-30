@@ -19,7 +19,7 @@ export class MediumSelectorComponent {
   ) {}
 
   selectMedium(response: string) {
-    this.selectedMedium = response;
+    this.selectedMedium = response.toLowerCase();
   }
 
   submitHandler() {

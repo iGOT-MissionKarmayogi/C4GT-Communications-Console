@@ -9,7 +9,9 @@ body {
     padding: 20px 10px;
     padding-inline: 25px;
     width: vw;
-    background-color: #FDE5CD;
+    background-color: white;
+    height: 13vh;
+    border-bottom: solid rgba(128, 128, 128, 0.236) 1px;
 }
 
 .Container img {

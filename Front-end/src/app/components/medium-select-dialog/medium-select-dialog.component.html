@@ -1,24 +1,29 @@
 <div class="backdrop" *ngIf="Open" (click)="closeDetails()">
     <div class="popup" [ngClass]="{'closing': isClosing}" (click)="$event.stopPropagation()">
-        <img src="image.png" class="Closer" (click)="closeDetails()">
-        <h1>Select method of communication</h1>
+        <h1>Select Communication Method</h1>
         <div class="MediumsList">
             <div class="Option" (click)="mediumSelect('Email')">
+                <div>
+                    <img src="email.png" alt="Email" height="30px" />
+                    <p>Email</p>
+                </div>
                 <input type="radio" name="communicationMethod" value="Email" [(ngModel)]="selectedMedium" />
-                <p>Email</p>
-                <img src="email.png" alt="Email" height="30px" />
             </div>
 
             <div class="Option" (click)="mediumSelect('Whatsapp')">
+                <div>
+                    <img src="whatsapp.png" alt="Whatsapp" height="55px" class="whatsapp" />
+                    <p>Whatsapp</p>
+                </div>
                 <input type="radio" name="communicationMethod" value="Whatsapp" [(ngModel)]="selectedMedium" />
-                <p>Whatsapp</p>
-                <img src="whatsapp.png" alt="Whatsapp" height="55px" class="whatsapp" />
             </div>
 
             <div class="Option" (click)="mediumSelect('SMS')">
+                <div>
+                    <img src="sms.png" alt="SMS" height="30px" />
+                    <p>SMS</p>
+                </div>
                 <input type="radio" name="communicationMethod" value="SMS" [(ngModel)]="selectedMedium" />
-                <p>SMS</p>
-                <img src="sms.png" alt="SMS" height="30px" />
             </div>
 
 

@@ -6,6 +6,12 @@ html, body {
     width: 100%;
 }
 
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 /* Make sure the app-root takes full height and width */
 app-root {
     display: block;

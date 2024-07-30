@@ -17,4 +17,4 @@ const notfound = (req, res, next) => {
     });
   };
   
-  export { notfound, errorHandler };
+  export {errorHandler,notfound};

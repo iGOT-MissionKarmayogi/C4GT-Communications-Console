@@ -1,37 +1,55 @@
 body {
-    font-family: Arial, sans-serif; /* Default font for the entire body */
+  font-family: Arial, sans-serif; /* Default font for the entire body */
 }
-.Container{
-    min-height: 90vh;
-   
+.Container {
+  min-height: 90vh;
 }
 
-.Content{
-    padding: 3rem;
-    padding-inline: 10rem;
-    background-color: #FDE5CD;
-    justify-content: center;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 40px;
+.Content {
+  padding: 3rem;
+  padding-inline: 10rem;
+  background-color: #fde5cd;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 40px;
 }
+
 .CampaignBox{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    overflow: hidden;
     align-items: center;
     cursor: pointer;
     background-color: white;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease;
-    font-family: 'Poppins', sans-serif;
 }
+
+.CampaignBox div{
+    padding-block: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.CampaignBox h3{
+    margin: 0 0.5rem 0 0.5rem;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.CampaignBox p{
+    margin:0 0.5rem 0 0.5rem;
+    font-size: 0.7rem;
+    color: #333;
+}
+
+
+
 .CampaignBox img{
-    height: 150px;
-    border-radius: 10px;
-}
-.CampaignBox:hover {
-    transform: scale(105%); /* Scale up to 110% on hover */
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
 }

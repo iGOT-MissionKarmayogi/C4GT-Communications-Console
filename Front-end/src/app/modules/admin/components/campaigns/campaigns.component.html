@@ -2,8 +2,10 @@
   <div class="Content">
     <div *ngFor="let Campaign of CampaignsList" class="CampaignBox" (click)="onCampaignClick(Campaign)">
       <img [src]="Campaign.img" />
-      <h3>{{Campaign.title}}</h3>
-      <p>{{Campaign.description}}</p>
+      <div>
+        <h3>{{Campaign.title}}</h3>
+        <p>{{Campaign.description}}</p>
+      </div>
     </div>
   </div>
 </div>
