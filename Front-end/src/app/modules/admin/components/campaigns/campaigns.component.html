@@ -1,0 +1,14 @@
+<div class="Container">
+  <div class="Content">
+    <div *ngFor="let Campaign of CampaignsList" class="CampaignBox" (click)="onCampaignClick(Campaign)">
+      <img [src]="Campaign.img" />
+      <div>
+        <h3>{{Campaign.title}}</h3>
+        <p>{{Campaign.description}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedCampaign" class="backdrop" (click)="closeDialog()"></div>
+<app-medium-select-dialog *ngIf="selectedCampaign" (close)="closeDialog()"></app-medium-select-dialog>

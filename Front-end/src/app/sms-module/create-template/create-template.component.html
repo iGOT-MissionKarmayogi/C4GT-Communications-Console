@@ -1,0 +1,42 @@
+<div class="create-template">
+  <h2>Create SMS Template</h2>
+  <form [formGroup]="templateForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Template Name</label>
+      <input type="text" id="name" formControlName="name" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="subject">Template Id</label>
+      <input type="text" id="subject" formControlName="subject" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="body">Body</label>
+      <textarea id="body" formControlName="body" class="form-control" rows="6" required (input)="onBodyChange($event)"></textarea>
+    </div>
+
+    <div formArrayName="variables" class="variables">
+      <div *ngFor="let variable of variablesArray.controls; let i = index" [formGroupName]="i">
+        <div class="form-g">
+          <label>{{ variable.get('name')?.value }} :</label>
+          <select formControlName="type" (change)="onVariableTypeChange(i, $event)">
+            <option value="predefined">Predefined</option>
+            <option value="userDefined">User Defined</option>
+          </select> 
+          <ng-container *ngIf="variable.get('type')?.value === 'predefined'">
+            <select formControlName="value">
+              <option *ngFor="let predefinedVar of predefinedVariables" [value]="predefinedVar">{{ predefinedVar }}</option>
+            </select>
+          </ng-container>
+          <ng-container *ngIf="variable.get('type')?.value === 'userDefined'">
+            <input type="text" formControlName="value" class="form-control">
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Template</button>
+  </form>
+  <div *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
+    Template created successfully!
+  </div>
+</div>

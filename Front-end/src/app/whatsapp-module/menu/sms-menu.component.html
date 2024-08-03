@@ -1,0 +1,40 @@
+<div class="menu">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-col">
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'send-message'" (click)="selectMenu('send-message')">Send message</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'create-template'" (click)="selectMenu('create-template')">Create Template</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'configure-template'" (click)="selectMenu('configure-template')">Configure Template</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'view-user-data'" (click)="selectMenu('view-user-data')">View User Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'upload-user-data'" (click)="selectMenu('upload-user-data')">Upload User Data</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <main class="main-content">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <div *ngIf="selectedMenu === 'default'">Welcome to Smart Email Notifier</div>
+                    <app-create-WhatsApp-template *ngIf="selectedMenu === 'create-template'"></app-create-WhatsApp-template>
+                    <app-configure-WhatsApp-template *ngIf="selectedMenu === 'configure-template'"></app-configure-WhatsApp-template>
+                    <app-view-WhatsApp-user-data *ngIf="selectedMenu === 'view-user-data'"></app-view-WhatsApp-user-data>
+                    <app-upload-WhatsApp-user-data *ngIf="selectedMenu === 'upload-user-data'"></app-upload-WhatsApp-user-data>
+                    <app-send-whatsapp *ngIf="selectedMenu === 'send-message'"></app-send-whatsapp>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>

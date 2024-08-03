@@ -1,0 +1,72 @@
+body {
+  font-family: Arial, sans-serif;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.form input,
+textarea,
+select {
+  width: 300px;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+}
+
+select {
+  font-family: 'Poppins', sans-serif;
+}
+select option{
+  font-family: 'Poppins', sans-serif;
+}
+
+.form input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+.fields {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+
+
+.ExampleAdder button {
+  height: 40px;
+  width: 100px;
+  background-color: rgb(189, 188, 188);
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.SubmitButton button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  min-width: 50px;
+  padding: 20px;
+  border-radius: 30px;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+  border: solid #184486 2px;
+  background-color: #184486;
+}
+
+.SubmitButton button:active {
+  background-color: #082754;
+  scale: 90%;
+}

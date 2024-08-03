@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif; /* Default font for the entire body */
+}
+#container{
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    height: 100vh;
+    width: fill;
+}
+/* Properties for the lest side of Homepage */
+.left{
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    width: 55%;
+    justify-content: center;
+    align-items: center;
+}
+.Upper{
+    position: absolute;
+    top: 7%;
+    mix-blend-mode: multiply;
+}
+.Lower{
+    mix-blend-mode: multiply;
+}
+
+
+/* Properties for the lest side of Homepage */
+
+.Right{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+    font-family: 'Poppins', sans-serif;
+}
+.Right .Form{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Right section{
+    display: flex;
+    flex-direction: column;
+    margin-block:10px;
+}
+.Right .Form label{
+    margin-left: 1px;
+}
+.Right section input{
+    padding-inline-start: 10px;
+    font-size: 18px;
+    width: 300px;
+    height: 45px;
+    border-radius: 10px;
+    border: solid gray 2px;
+}
+.Right .Form p{
+    width: 300px;
+    text-align: right;
+}
+.Right .Form a{
+    text-decoration: none;
+
+}
+.Right .Form button{
+    width: 300px;
+    height: 44px;
+    border-radius: 10px;
+    background-color: #1E4281;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}

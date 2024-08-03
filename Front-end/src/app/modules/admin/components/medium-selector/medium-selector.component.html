@@ -1,0 +1,24 @@
+<div class="Container">
+  <h1>Select method of communication</h1>
+  <div class="MediumsList">
+    <div class="Option" (click)="selectMedium('email')">
+      <input type="radio" name="communicationMethod" [checked]="selectedMedium=='Email'" />
+      <p>Email</p>
+      <img src="email.png" alt="Email" height="30px" />
+    </div>
+
+    <div class="Option" (click)="selectMedium('whatsApp')">
+      <input type="radio" name="communicationMethod" [checked]="selectedMedium=='WhatsApp'"/>
+      <p>WhatsApp</p>
+      <img src="whatsapp.png" alt="WhatsApp" height="55px" class="whatsapp"/>
+    </div>
+
+    <div class="Option" (click)="selectMedium('sms')">
+      <input type="radio" name="communicationMethod" [checked]="selectedMedium=='SMS'"/>
+      <p>SMS</p>
+      <img src="sms.png" alt="SMS" height="30px" />
+    </div>
+
+    <button [disabled]="!selectedMedium" (click)="submitHandler()">Submit</button>
+  </div>
+</div>

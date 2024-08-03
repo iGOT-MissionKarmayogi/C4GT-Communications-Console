@@ -1,0 +1,197 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent black background */
+    backdrop-filter: blur(5px);
+    /* Add backdrop blur effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Ensure popup is above other content */
+    animation: backdropOpenAnimation 0.3s forwards;
+    transition: opacity 0.3s ease;
+}
+
+.popup {
+    border: solid;
+    min-height: 100%;
+    min-width: 90%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transform: scale(0.7);
+    /* Initial scale down effect */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    /* Smooth transitions */
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup button {
+    height: 30px;
+    width: 40%;
+
+}
+
+.Closer {
+    position: fixed;
+    top: 1.2rem;
+    right: 1.2rem;
+    height: 2.5rem;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.Closer:hover {
+    transform: rotate(90deg);
+}
+
+.popup.active {
+    opacity: 1;
+    /* Show popup */
+    transform: scale(1);
+    /* Scale up effect */
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    font-size: 2rem;
+}
+
+.form input,
+textarea,
+select {
+    height: 2.5rem;
+    width: 300px;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+}
+
+select {
+    height: 3.2rem;
+    width: 320px;
+    font-size: 1.6rem;
+    font-family: 'Poppins', sans-serif;
+}
+select option{
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form input,
+textarea {
+    font-size: 1.8rem;
+}
+
+.form input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+}
+
+.fields {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.ExampleAdder button {
+    height: 50px;
+    width: 120px;
+    background-color: rgb(189, 188, 188);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.SubmitButton button {
+    height: 70px;
+    padding: 10px;
+    border-radius: 30px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    border: solid #184486 2px;
+    background-color: #184486;
+}
+
+.SubmitButton button:active {
+    background-color: #082754;
+    scale: 90%;
+}
+
+/*Animations*/
+
+.popup-container .closing {
+    animation: backdropCloseAnimation 0.3s forwards;
+  }
+  
+  .popup.closing {
+    animation: popupCloseAnimation 0.3s forwards;
+  }
+  
+
+@keyframes backdropOpenAnimation {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes backdropCloseAnimation {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes popupOpenAnimation {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes popupCloseAnimation {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    to {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+}

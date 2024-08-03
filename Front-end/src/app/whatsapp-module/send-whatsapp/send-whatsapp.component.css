@@ -1,0 +1,186 @@
+body {
+  font-family: Arial, sans-serif;
+  /* Default font for the entire body */
+}
+
+.Container {
+  background-color: #FDE5CD;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+.Upper{
+  display: flex;
+  flex-direction: column;
+}
+
+.Upper h2 {
+  margin-inline: 3rem;
+  padding-inline: 0.5rem;
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 1.5rem;
+  margin-inline: 2rem;
+}
+
+.Header button {
+  height: 65%;
+  margin-right: 15px;
+  padding: 10px;
+  border-radius: 30px;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  color: #184486;
+  font-weight: bold;
+  border: solid #184486 2px;
+  background-color: transparent;
+}
+
+.Header button:hover {
+  background-color: #184486;
+  color: white;
+}
+
+.SubContainer{
+  margin-top:3rem ;
+}
+
+.SubContainer .Prev{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 40%;
+  left: 10px;
+  border-radius: 40px;
+  padding: 10px;
+  border: solid gray;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.SubContainer .Next {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 40%;
+  right: 10px;
+  border-radius: 40px;
+  padding: 10px;
+  border: solid gray;
+  font-size: 20px;
+  cursor: pointer;
+}
+.SubContainer button:hover{
+  background-color: #1B4CA1;
+
+}
+
+.CardsSection {
+  display: grid;
+  margin-inline: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem; /* Adjust the gap as needed */
+}
+
+/*These are the properties for scrollbar*/
+.CardsSection::-webkit-scrollbar {
+  height: 12px;
+  /* Height of the horizontal scrollbar */
+}
+
+.CardsSection::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Background of the scrollbar track */
+  border-radius: 10px;
+  /* Rounded edges for the scrollbar track */
+}
+
+.CardsSection::-webkit-scrollbar-thumb {
+  background: #888;
+  /* Color of the scroller */
+  border-radius: 10px;
+  /* Rounded edges for the scroller */
+}
+
+.CardsSection::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  /* Color of the scroller on hover */
+}
+
+.Card {
+  min-height: 150px;
+  min-width: 200px;
+  background-color: white;
+  border-radius: 10px;
+  padding-inline: 1rem;
+  cursor: pointer;
+  font-family: 'Roboto Mono', monospace;
+  margin-bottom: 2rem;
+  flex: 0 0 calc(25% - 20px);
+  /* Adjust width based on number of cards per view */
+  margin-right: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.Card:hover {
+  background-color: #d4d9e0;
+}
+
+.CardUpper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.CardUpper input[type="radio"] {
+  accent-color: black;
+  transform: scale(1.5);
+  height: 20px;
+  width: 13px;
+}
+
+:host ::ng-deep .example-text {
+  color: red;
+}
+
+.SubmitButton {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  display: flex;
+  justify-content: right;
+  padding: 1.5rem;
+}
+
+.SubmitButton button {
+  margin-right: 2rem;
+  padding: 0.7rem;
+  padding-inline: 4rem;
+  background-color: #0a316c;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.SubmitButton button:hover {
+  background-color: #06285b;
+}
+
+.SubmitButton button:disabled {
+  cursor: not-allowed;
+}
+
+:host ::ng-deep .highlight {
+  color: #1B4CA1;
+  font-weight: 500;
+}

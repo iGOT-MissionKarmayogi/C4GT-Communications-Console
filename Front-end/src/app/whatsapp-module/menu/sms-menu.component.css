@@ -1,0 +1,91 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    width: 100%;
+}
+
+p {
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    background-color: #007bff;
+    border-bottom: 1px solid #ccc;
+    margin: 0;
+}
+
+
+.menu {
+    display: flex;
+    height: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.container-fluid {
+    display: flex;
+    flex: 1;
+    flex-direction: row; /* Changed to row to align sidebar and main content side by side */
+    height: 100%;
+}
+
+.row {
+    display: flex;
+    flex: 1;
+    flex-direction: row; /* Ensure row direction */
+}
+
+.sidebar {
+    flex: 0 0 300px;
+    border-right: 1px solid #ccc;
+    background-color: #ffffff;
+    padding-top: 20px;
+    overflow-y: auto;
+}
+
+.sidebar .position-sticky {
+    position: sticky;
+    top: 0;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    list-style: none;
+    margin: 0;
+}
+
+.nav-item {
+    width: 100%;
+}
+
+.nav-link {
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #e0e0e0;
+}
+
+.nav-link.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.main-content {
+    flex: 1; /* Takes the remaining space */
+    padding: 20px;
+    background-color: #fde5cd;
+    overflow-y: auto;
+}
+
+
+

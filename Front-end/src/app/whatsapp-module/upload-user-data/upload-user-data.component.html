@@ -1,0 +1,18 @@
+<p>upload-user-data works!</p>
+<button routerLink="../edashboard">Back to Menu</button>
+<p>Upload User Data</p>
+<form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="file">Select JSON File</label>
+        <input type="file" id="file" name="file" (change)="onFileChange($event)" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>
+
+<div *ngIf="uploadSuccess" class="alert alert-success">
+    Data uploaded successfully!
+</div>
+
+<div *ngIf="uploadError" class="alert alert-danger">
+    Error uploading data. Please try again.
+</div>

@@ -1,0 +1,43 @@
+<h2>Select an Email Template to configure</h2>
+<div class="template-container">
+  <div class="card" *ngFor="let template of templates" (click)="selectTemplate(template)">
+    <div class="card-body">
+      <h5 class="card-title">{{ template.name }}</h5>
+      <p class="card-text">{{ template.subject }}</p>
+      <button class="btn btn-primary" (click)="previewTemplate(template, $event)">Select</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedTemplate" class="preview-container" #previewSection>
+  <div class="preview-header">
+    <h2>Configure Template</h2>
+    <button class="btn btn-secondary" (click)="editTemplate()">EDIT</button>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ selectedTemplate.name }}</h5>
+      <p class="card-text">{{ selectedTemplate.subject }}</p>
+      <p class="card-text">{{ selectedTemplate.body }}</p>
+      
+    </div>
+  </div>
+</div>
+
+<!-- Message Display -->
+<div *ngIf="message" [ngClass]="{'message-success': messageType === 'success', 'message-error': messageType === 'error'}">
+  {{ message }}
+</div>
+
+<div *ngIf="isEditing" class="edit-container" #editSection>
+  <h2>Edit Template</h2>
+  <div class="card">
+    <div class="card-body">
+      <input type="text" [(ngModel)]="selectedTemplate.name" class="form-control" placeholder="Template Name">
+      <input type="text" [(ngModel)]="selectedTemplate.subject" class="form-control" placeholder="Template Subject">
+      <textarea [(ngModel)]="selectedTemplate.body" class="form-control custom-textarea" placeholder="Template Body"></textarea>
+      <button class="btn btn-success" (click)="saveTemplate()">SAVE</button>
+    </div>
+  </div>
+</div>

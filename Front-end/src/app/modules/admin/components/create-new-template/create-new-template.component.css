@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, sans-serif;
+    /* Default font for the entire body */
+}
+
+.Container {
+    background-color: #FDE5CD;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.Upper h2 {
+    margin-inline: 3rem;
+    padding-inline: 0.5rem;
+}
+
+.Header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-inline: 1.5rem;
+    margin-inline: 2rem;
+}
+
+.Header button {
+    height: 65%;
+    margin-right: 15px;
+    padding: 10px;
+    border-radius: 30px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    color: #184486;
+    font-weight: bold;
+    border: solid #184486 2px;
+    background-color: transparent;
+}
+
+.Header button:hover {
+    background-color: #184486;
+    color: white;
+}
+
+.box input {
+    border-radius: 5px;
+}
+
+.box textarea {
+    border-radius: 5px;
+}
+
+
+.CreateButton {
+    display: flex;
+    justify-content: right;
+    padding: 1.5rem;
+}
+
+.CreateButton button {
+    margin-right: 2rem;
+    padding: 0.7rem;
+    padding-inline: 4rem;
+    background-color: #0a316c;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.CreateButton button:hover {
+    background-color: #06285b;
+}
+
+.CreateButton button:disabled {
+    cursor: not-allowed;
+}
+
+:host ::ng-deep .highlight {
+    color: #1B4CA1;
+    font-weight: 500;
+}
+
+.Body.box textarea {
+    width: 100%;
+    box-sizing: border-box;
+    /* Ensures padding and border are included in the element's total width and height */
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    /* Adjust spacing between form groups */
+}
+
+.label-container {
+    flex: 0 0 150px;
+
+    text-align: right;
+    margin-right: 10px;
+   
+}
+
+input[type="text"] {
+    flex: 1;
+    border: none;
+}

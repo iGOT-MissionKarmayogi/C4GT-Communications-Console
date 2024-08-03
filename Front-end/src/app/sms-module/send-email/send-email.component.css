@@ -1,0 +1,103 @@
+/* General container styling */
+.template-container, .preview-container {
+  margin: 2rem;
+}
+
+/* Flexbox container for cards */
+.template-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Card container */
+.card {
+  flex: 1 1 calc(33.333% - 1rem); /* Adjust to have 3 columns */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 200px; /* Set a fixed height */
+  /* width: calc(33.333% - 1rem); */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: auto;
+}
+
+/* Card hover effect */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Card body */
+.card-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Card title */
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+/* Card text */
+.card-text {
+  margin-bottom: 1rem;
+}
+
+/* Button styling */
+.btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+/* Preview container */
+.preview-container {
+  
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-top: 2rem;
+  overflow: auto;
+}
+
+/* Preview title */
+.preview-container h2 {
+  margin-bottom: 1rem;
+}
+
+/* Add some spacing around the card elements */
+.card + .card {
+  margin-top: 1rem;
+}
+
+/* Define the base alert class */
+.alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* Define the success variant */
+.alert-success {
+  background-color: #4CAF50; /* Green */
+}

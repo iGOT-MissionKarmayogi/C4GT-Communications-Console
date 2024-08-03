@@ -1,0 +1,193 @@
+.user-list {
+    margin-top: 20px;
+    height: 50vh;
+    overflow-y: scroll;
+    padding-inline: 20px;
+  }
+  
+  .user-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    background-color: white;
+    border: 1px solid #000000;
+    border-radius: 15px;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #3f51b5;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .user-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 300px;
+  }
+  
+  input {
+    padding: 5px;
+  }
+  
+  .bottom {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .send-button {
+    margin-top: 20px;
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    padding: 10px 40px;
+    width: 200px;
+    font-size: 1rem;
+    border-radius: 5px;
+    align-self: flex-end;
+  }
+
+  .container{
+    padding-inline: 5rem;
+  }
+
+  .header{
+    display: flex;
+    margin-top: 2rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header h2{
+    font-weight: 600;
+    font-size: 2rem;
+    margin: 0;
+  }
+
+  .header h3{
+    font-weight: 400;
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .file-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .file-popup div{
+    position: relative;
+    background-color: #fff;
+    padding: 50px 30px 30px 30px;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .file-popup input {
+    display: none;
+  }
+  
+  .file-popup label {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .file-popup label:hover {
+    background-color: #f0f0f0;
+  }
+
+  /* Actions */
+    .actions {
+    display: flex;
+    gap:2.5rem;
+  }
+
+  .actions button{
+    background-color: transparent;
+    border: #3f51b5 solid 2px;
+    color: #3f51b5;
+    padding: 10px 20px;
+    border-radius: 25px;
+        cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
+  
+  /* Popup Form */
+  .popupform {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popupform form {
+    position: relative;
+    background-color: #fff;
+    padding: 50px 30px 30px 30px;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+  }
+  
+  .popupform form input,
+  .popupform form button {
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+
+  .submit{
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 15px 30px;
+    margin-right: 40px;
+    width: 300px;
+  }
+  
+  .close{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    transform: rotate(45deg);
+    font-size: 20px;
+  }

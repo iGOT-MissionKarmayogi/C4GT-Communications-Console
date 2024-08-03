@@ -1,0 +1,54 @@
+<h2>Select an Email Template</h2>
+<div class="template-container">
+  <div class="card" *ngFor="let template of templates" (click)="selectTemplate(template)">
+    <div class="card-body">
+      <h5 class="card-title">{{ template.name }}</h5>
+      <p class="card-text">{{ template.subject }}</p>
+      <button class="btn btn-primary" (click)="previewTemplate(template, $event)">Preview</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedTemplate" class="preview-container" #previewSection>
+  <h2>Preview Template</h2>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ selectedTemplate.name }}</h5>
+      <p class="card-text">{{ selectedTemplate.subject }}</p>
+      <p class="card-text">{{ selectedTemplate.body }}</p>
+    </div>
+  </div>
+  <button class="btn btn-primary" (click)="sendEmail()">Send Email</button>
+  <div *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
+    Email sent successfully!
+</div>
+</div>
+<!-- <p>send-email works!</p>
+<button routerLink="../edashboard">Back to Menu</button>
+<p>send-email works!</p>
+<button routerLink="../edashboard">Back to Menu</button> -->
+
+<!-- <div class="template-container">
+  <h2>Select an Email Template</h2>
+  <div class="card" *ngFor="let template of templates" (click)="selectTemplate(template)">
+    <div class="card-body">
+      <h5 class="card-title">{{ template.name }}</h5>
+      <p class="card-text">{{ template.subject }}</p>
+      <button class="btn btn-primary" (click)="previewTemplate(template,$event)">Preview</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedTemplate" class="preview-container">
+  <h2>Preview Template</h2>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ selectedTemplate.name }}</h5>
+      <p class="card-text">{{ selectedTemplate.subject }}</p>
+      <p class="card-text">{{ selectedTemplate.body }}</p>
+    </div>
+  </div>
+  <button class="btn btn-primary" (click)="sendEmail()">Send Email</button>
+</div>
+
+ -->
