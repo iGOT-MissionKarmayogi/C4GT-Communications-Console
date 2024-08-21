@@ -1,0 +1,756 @@
+{
+	"info": {
+		"_postman_id": "3e6f62c5-0c1b-4883-be29-c7e9bc03827d",
+		"name": "user-search-api",
+		"description": "# API for searching user data with flexible filtering.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28043463"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Response has correct structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(\"api.user.health\");\r",
+							"    pm.expect(jsonData.params.status).to.eql(\"successful\");\r",
+							"    pm.expect(jsonData.params.errmsg).to.eql(null);\r",
+							"});\r",
+							"var template = `\r",
+							"<style type=\"text/css\">\r",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+							"    .tftable tr {background-color:#ffffff;}\r",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+							"    .tftable tr:hover {background-color:#e0ffff;}\r",
+							"</style>\r",
+							"\r",
+							"<table class=\"tftable\" border=\"1\">\r",
+							"    <tr>\r",
+							"        <th>Property</th>\r",
+							"        <th>Value</th>\r",
+							"    </tr>\r",
+							"    <tr>\r",
+							"        <td>Status</td>\r",
+							"        <td>{{response.status}}</td>\r",
+							"    </tr>\r",
+							"    <tr>\r",
+							"        <td>Server</td>\r",
+							"        <td>{{response.server}}</td>\r",
+							"    </tr>\r",
+							"    <tr>\r",
+							"        <td>Database</td>\r",
+							"        <td>{{response.database}}</td>\r",
+							"    </tr>\r",
+							"</table>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    return { response: pm.response.json() }\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/health",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"health"
+					]
+				},
+				"description": "This endpoint sends an HTTP GET request to [http://localhost:3000/health](http://localhost:3000/health). The response of this request is documented as a JSON schema."
+			},
+			"response": []
+		},
+		{
+			"name": "specific fields not requested",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Response has correct structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(\"api.user.search\");\r",
+							"    pm.expect(jsonData.params.status).to.eql(\"successful\");\r",
+							"    pm.expect(jsonData.params.errmsg).to.eql(null);\r",
+							"    pm.expect(jsonData).to.have.property('result');\r",
+							"    pm.expect(jsonData.result).to.be.an('object');\r",
+							"    pm.expect(jsonData.result).to.have.property('count');\r",
+							"    pm.expect(jsonData.result).to.have.property('users');\r",
+							"    pm.expect(jsonData.result.users).to.be.an('array');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"request\": {\r\n        \"search\": {\r\n            \"filter\": {\r\n                \"location\": \"Delhi\",\r\n                \"courseId\": \"Python\",\r\n                \"progress\": {\r\n                    \"min\": 10,\r\n                    \"max\": 100\r\n                },\r\n                \"batchEnrollmentDate\": {\r\n                    \"min\": \"2023-08-25T08:00:00.000Z\",\r\n                    \"max\": \"2023-11-20T00:00:00.000Z\"\r\n                }\r\n            },\r\n            \"limit\": 10,\r\n            \"fields\": [],\r\n            \"sort_by\": {\r\n                \"batchEnrollmentDate\": \"asc\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/user/{{api_version}}/search",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"{{api_version}}",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "specific fields requested",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Response has correct structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(\"api.user.search\");\r",
+							"    pm.expect(jsonData.params.status).to.eql(\"successful\");\r",
+							"    pm.expect(jsonData.params.errmsg).to.eql(null);\r",
+							"    pm.expect(jsonData).to.have.property('result');\r",
+							"    pm.expect(jsonData.result).to.be.an('object');\r",
+							"    pm.expect(jsonData.result).to.have.property('count');\r",
+							"    pm.expect(jsonData.result).to.have.property('users');\r",
+							"    pm.expect(jsonData.result.users).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"request\": {\r\n        \"search\": {\r\n            \"filter\": {\r\n                \"location\": \"Delhi\",\r\n                \"courseId\": \"Python\",\r\n                \"progress\": {\r\n                    \"min\": 10,\r\n                    \"max\": 100\r\n                },\r\n                \"batchEnrollmentDate\": {\r\n                    \"min\": \"2023-08-25T08:00:00.000Z\",\r\n                    \"max\": \"2023-11-20T00:00:00.000Z\"\r\n                }\r\n            },\r\n            \"limit\": 5,\r\n            \"fields\": [\r\n                \"userId\",\r\n                \"courseId\",\r\n                \"location\",\r\n                \"progress\"\r\n            ],\r\n            \"sort_by\": {\r\n                \"batchEnrollmentDate\": \"asc\"\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/user/{{api_version}}/search",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"{{api_version}}",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all fields",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Response has correct structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(\"api.user.search\");\r",
+							"    pm.expect(jsonData.params.status).to.eql(\"successful\");\r",
+							"    pm.expect(jsonData.params.errmsg).to.eql(null);\r",
+							"    pm.expect(jsonData).to.have.property('result');\r",
+							"    pm.expect(jsonData.result).to.be.an('object');\r",
+							"    pm.expect(jsonData.result).to.have.property('count');\r",
+							"    pm.expect(jsonData.result).to.have.property('users');\r",
+							"    pm.expect(jsonData.result.users).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"request\": {\r\n        \"search\": {\r\n            \"filter\": {\r\n                \"location\": \"Delhi\",\r\n                \"courseId\": \"Python\",\r\n                \"progress\": {\r\n                    \"min\": 10,\r\n                    \"max\": 100\r\n                },\r\n                \"batchEnrollmentDate\": {\r\n                    \"min\": \"2023-08-25T08:00:00.000Z\",\r\n                    \"max\": \"2023-11-20T00:00:00.000Z\"\r\n                }\r\n            },\r\n            \"limit\": 5,\r\n            \"fields\": [\r\n                \r\n            ],\r\n            \"sort_by\": {\r\n                \"batchEnrollmentDate\": \"asc\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/user/{{api_version}}/search",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"{{api_version}}",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get specific number of records",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Response has correct structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(\"api.user.search\");\r",
+							"    pm.expect(jsonData.params.status).to.eql(\"successful\");\r",
+							"    pm.expect(jsonData.params.errmsg).to.eql(null);\r",
+							"    pm.expect(jsonData).to.have.property('result');\r",
+							"    pm.expect(jsonData.result).to.be.an('object');\r",
+							"    pm.expect(jsonData.result).to.have.property('count');\r",
+							"    pm.expect(jsonData.result).to.have.property('users');\r",
+							"    pm.expect(jsonData.result.users).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"request\": {\r\n        \"search\": {\r\n            \"filter\": {\r\n                \"location\": \"Delhi\",\r\n                \"courseId\": \"Python\",\r\n                \"progress\": {\r\n                    \"min\": 10,\r\n                    \"max\": 100\r\n                },\r\n                \"batchEnrollmentDate\": {\r\n                    \"min\": \"2023-08-25T08:00:00.000Z\",\r\n                    \"max\": \"2023-11-20T00:00:00.000Z\"\r\n                }\r\n            },\r\n            \"limit\": 5,\r\n            \"fields\": [\r\n                \"userId\",\r\n                \"courseId\",\r\n                \"location\"\r\n            ],\r\n            \"sort_by\": {\r\n                \"batchEnrollmentDate\": \"asc\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/user/{{api_version}}/search",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"{{api_version}}",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "number of records not specified",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Response has correct structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(\"api.user.search\");\r",
+							"    pm.expect(jsonData.params.status).to.eql(\"successful\");\r",
+							"    pm.expect(jsonData.params.errmsg).to.eql(null);\r",
+							"    pm.expect(jsonData).to.have.property('result');\r",
+							"    pm.expect(jsonData.result).to.be.an('object');\r",
+							"    pm.expect(jsonData.result).to.have.property('count');\r",
+							"    pm.expect(jsonData.result).to.have.property('users');\r",
+							"    pm.expect(jsonData.result.users).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"request\": {\r\n        \"search\": {\r\n            \"filter\": {\r\n                \"location\": \"Delhi\",\r\n                \"courseId\": \"Python\",\r\n                \"progress\": {\r\n                    \"min\": 10,\r\n                    \"max\": 100\r\n                },\r\n                \"batchEnrollmentDate\": {\r\n                    \"min\": \"2023-08-25T08:00:00.000Z\",\r\n                    \"max\": \"2023-11-20T00:00:00.000Z\"\r\n                }\r\n            },\r\n            \r\n            \"fields\": [\r\n                \"userId\",\r\n                \"courseId\",\r\n                \"location\",\r\n                \"batchEnrollmentDate\"\r\n            ],\r\n            \"sort_by\": {\r\n                \"batchEnrollmentDate\": \"asc\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/user/{{api_version}}/search",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"{{api_version}}",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get data based on progress range",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Response has correct structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(\"api.user.search\");\r",
+							"    pm.expect(jsonData.params.status).to.eql(\"successful\");\r",
+							"    pm.expect(jsonData.params.errmsg).to.eql(null);\r",
+							"    pm.expect(jsonData).to.have.property('result');\r",
+							"    pm.expect(jsonData.result).to.be.an('object');\r",
+							"    pm.expect(jsonData.result).to.have.property('count');\r",
+							"    pm.expect(jsonData.result).to.have.property('users');\r",
+							"    pm.expect(jsonData.result.users).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"request\": {\r\n        \"search\": {\r\n            \"filter\": {\r\n                \"location\": \"Delhi\",\r\n                \"courseId\": \"Python\",\r\n                \"progress\": {\r\n                    \"min\": 10,\r\n                    \"max\": 100\r\n                },\r\n                \"batchEnrollmentDate\": {\r\n                    \"min\": \"2023-08-25T08:00:00.000Z\",\r\n                    \"max\": \"2023-11-20T00:00:00.000Z\"\r\n                }\r\n            },\r\n            \"limit\": 5,\r\n            \"fields\": [\r\n                \"userId\",\r\n                \"courseId\",\r\n                \"location\",\r\n                \"progress\"\r\n            ],\r\n            \"sort_by\": {\r\n                \"batchEnrollmentDate\": \"asc\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/user/{{api_version}}/search",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"{{api_version}}",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get data based on progress number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Response has correct structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(\"api.user.search\");\r",
+							"    pm.expect(jsonData.params.status).to.eql(\"successful\");\r",
+							"    pm.expect(jsonData.params.errmsg).to.eql(null);\r",
+							"    pm.expect(jsonData).to.have.property('result');\r",
+							"    pm.expect(jsonData.result).to.be.an('object');\r",
+							"    pm.expect(jsonData.result).to.have.property('count');\r",
+							"    pm.expect(jsonData.result).to.have.property('users');\r",
+							"    pm.expect(jsonData.result.users).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"request\": {\r\n        \"search\": {\r\n            \"filter\": {\r\n                \"location\": \"Delhi\",\r\n                \"courseId\": \"Python\",\r\n                \"progress\": 80,\r\n                \"batchEnrollmentDate\": {\r\n                    \"min\": \"2023-08-25T08:00:00.000Z\",\r\n                    \"max\": \"2023-11-20T00:00:00.000Z\"\r\n                }\r\n            },\r\n            \"limit\": 5,\r\n            \"fields\": [\r\n                \"userId\",\r\n                \"courseId\",\r\n                \"location\",\r\n                \"progress\"\r\n            ],\r\n            \"sort_by\": {\r\n                \"batchEnrollmentDate\": \"asc\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/user/{{api_version}}/search",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"{{api_version}}",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get data based on enrollment date range",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Response has correct structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(\"api.user.search\");\r",
+							"    pm.expect(jsonData.params.status).to.eql(\"successful\");\r",
+							"    pm.expect(jsonData.params.errmsg).to.eql(null);\r",
+							"    pm.expect(jsonData).to.have.property('result');\r",
+							"    pm.expect(jsonData.result).to.be.an('object');\r",
+							"    pm.expect(jsonData.result).to.have.property('count');\r",
+							"    pm.expect(jsonData.result).to.have.property('users');\r",
+							"    pm.expect(jsonData.result.users).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"request\": {\r\n        \"search\": {\r\n            \"filter\": {\r\n                \"location\": \"Delhi\",\r\n                \"courseId\": \"Python\",\r\n                \"progress\": {\r\n                    \"min\": 10,\r\n                    \"max\": 100\r\n                },\r\n                \"batchEnrollmentDate\": {\r\n                    \"min\": \"2023-08-25T08:00:00.000Z\",\r\n                    \"max\": \"2023-11-20T00:00:00.000Z\"\r\n                }\r\n            },\r\n            \"limit\": 5,\r\n            \"fields\": [\r\n                \"userId\",\r\n                \"courseId\",\r\n                \"location\",\r\n                \"batchEnrollmentDate\"\r\n            ],\r\n            \"sort_by\": {\r\n                \"batchEnrollmentDate\": \"asc\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/user/{{api_version}}/search",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"{{api_version}}",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get data based on a specific enrollment date",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Response has correct structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(\"api.user.search\");\r",
+							"    pm.expect(jsonData.params.status).to.eql(\"successful\");\r",
+							"    pm.expect(jsonData.params.errmsg).to.eql(null);\r",
+							"    pm.expect(jsonData).to.have.property('result');\r",
+							"    pm.expect(jsonData.result).to.be.an('object');\r",
+							"    pm.expect(jsonData.result).to.have.property('count');\r",
+							"    pm.expect(jsonData.result).to.have.property('users');\r",
+							"    pm.expect(jsonData.result.users).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"request\": {\r\n        \"search\": {\r\n            \"filter\": {\r\n                \"location\": \"Delhi\",\r\n                \"courseId\": \"Python\",\r\n                \"progress\": {\r\n                    \"min\": 10,\r\n                    \"max\": 100\r\n                },\r\n                \"batchEnrollmentDate\": \"2023-09-20T09:00:00.000Z\"\r\n            },\r\n            \"limit\": 5,\r\n            \"fields\": [\r\n                \"userId\",\r\n                \"courseId\",\r\n                \"location\",\r\n                \"batchEnrollmentDate\"\r\n            ],\r\n            \"sort_by\": {\r\n                \"batchEnrollmentDate\": \"asc\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/user/{{api_version}}/search",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"{{api_version}}",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sort data by a field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Response has correct structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(\"api.user.search\");\r",
+							"    pm.expect(jsonData.params.status).to.eql(\"successful\");\r",
+							"    pm.expect(jsonData.params.errmsg).to.eql(null);\r",
+							"    pm.expect(jsonData).to.have.property('result');\r",
+							"    pm.expect(jsonData.result).to.be.an('object');\r",
+							"    pm.expect(jsonData.result).to.have.property('count');\r",
+							"    pm.expect(jsonData.result).to.have.property('users');\r",
+							"    pm.expect(jsonData.result.users).to.be.an('array');\r",
+							"});\r",
+							"pm.test(\"Results are sorted by batchEnrollmentDate in ascending order\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var users = jsonData.result.users;\r",
+							"    for (var i = 0; i < users.length - 1; i++) {\r",
+							"        var current = new Date(users[i].batchEnrollmentDate);\r",
+							"        var next = new Date(users[i + 1].batchEnrollmentDate);\r",
+							"        pm.expect(current <= next).to.be.true;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"request\": {\r\n        \"search\": {\r\n            \"filter\": {\r\n                \"location\": \"Delhi\",\r\n                \"courseId\": \"Python\",\r\n                \"progress\": {\r\n                    \"min\": 10,\r\n                    \"max\": 100\r\n                },\r\n                \"batchEnrollmentDate\": {\r\n                    \"min\": \"2023-08-25T08:00:00.000Z\",\r\n                    \"max\": \"2023-11-20T00:00:00.000Z\"\r\n                }\r\n            },\r\n            \"limit\": 5,\r\n            \"fields\": [\r\n                \"userId\",\r\n                \"courseId\",\r\n                \"progress\",\r\n                \"batchEnrollmentDate\"\r\n            ],\r\n            \"sort_by\": {\r\n                \"batchEnrollmentDate\": \"asc\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/user/{{api_version}}/search",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"{{api_version}}",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no records found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"pm.test(\"Response has correct structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(\"api.user.search\");\r",
+							"    pm.expect(jsonData.params.status).to.eql(\"failed\");\r",
+							"    pm.expect(jsonData.params.errmsg).to.not.eql(null);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"request\": {\r\n        \"search\": {\r\n            \"filter\": {\r\n                \"location\": \"Dehi\",\r\n                \"courseId\": \"Python\",\r\n                \"progress\": {\r\n                    \"min\": 10,\r\n                    \"max\": 100\r\n                },\r\n                \"batchEnrollmentDate\": {\r\n                    \"min\": \"2023-08-25T08:00:00.000Z\",\r\n                    \"max\": \"2023-11-20T00:00:00.000Z\"\r\n                }\r\n            },\r\n            \"limit\": 5,\r\n            \"fields\": [\r\n                \"userId\",\r\n                \"courseId\",\r\n                \"progress\",\r\n                \"batchEnrollmentDate\"\r\n            ],\r\n            \"sort_by\": {\r\n                \"batchEnrollmentDate\": \"asc\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/user/{{api_version}}/search",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"{{api_version}}",
+						"search"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "api_version",
+			"value": "v1",
+			"type": "string"
+		}
+	]
+}

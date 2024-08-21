@@ -1,2 +1,5 @@
 /node_modules
 .env
+
+# Coverage directory used by jest coverage
+coverage

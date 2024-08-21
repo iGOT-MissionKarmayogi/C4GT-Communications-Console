@@ -69,7 +69,9 @@
       }
     },
     "config": {
-      "response_fields_to_be_returned": ["userId courseId location"],
+      "response_fields_to_be_returned": [
+        "userId courseId location progress batchEnrollmentDate"
+      ],
       "fields_allowed_to_be_in_range": ["progress", "batchEnrollmentDate"]
     }
   }

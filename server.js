@@ -20,6 +20,10 @@ const connectDB = require("./db");
 const userSearchRoutes = require("./routes/userSearchRoutes");
 const healthRoutes = require("./routes/healthCheckRoute");
 
+// swagger
+const swaggerUi = require("swagger-ui-express");
+const swaggerFile = require("./docs/swagger-output.json");
+
 app.use(bodyParser.json());
 
 // Connect to MongoDB
@@ -36,3 +40,4 @@ app.listen(process.env.APPLICATION_PORT || 3000, () => {
 // Routes in the application
 app.use("/user/v1", userSearchRoutes);
 app.use("/health", healthRoutes);
+app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));

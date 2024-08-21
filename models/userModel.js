@@ -3,6 +3,8 @@ const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
 
+let cachedModel = null;
+
 const SCHEMA_PATH = process.env.SCHEMA_PATH;
 
 const convertJsonSchemaToMongooseSchema = (jsonSchema) => {
@@ -45,42 +47,55 @@ const convertJsonSchemaToMongooseSchema = (jsonSchema) => {
 async function fetchSchemaFromUrl(url) {
   try {
     const response = await axios.get(url);
-    return response.data;
+    return response.data.schema;
   } catch (error) {
     console.error("Error fetching schema from URL:", error);
     throw error;
   }
 }
 
-async function readSchemaFromLocalFile(SCHEMA_PATH) {
+async function readSchemaFromLocalFile(filePath) {
   try {
-    const data = fs.readFileSync(SCHEMA_PATH);
-    jsonSchema = JSON.parse(data).schema;
+    const data = fs.readFileSync(filePath);
+    return JSON.parse(data).schema;
   } catch (err) {
     console.error("Error reading or parsing the schema file:", err);
-    process.exit(1);
+    throw err;
   }
 }
 
-let jsonSchema;
-const getSchema = async () => {
-  console.log(SCHEMA_PATH);
+async function getSchema() {
+  if (!SCHEMA_PATH) {
+    throw new Error("SCHEMA_PATH is not defined");
+  }
+
+  let jsonSchema;
   if (SCHEMA_PATH.startsWith("http://") || SCHEMA_PATH.startsWith("https://")) {
     jsonSchema = await fetchSchemaFromUrl(SCHEMA_PATH);
   } else {
     const fullPath = path.resolve(__dirname, SCHEMA_PATH);
-    console.log(fullPath);
     jsonSchema = await readSchemaFromLocalFile(fullPath);
   }
-};
-getSchema();
 
-console.log(jsonSchema, "json schema");
+  return jsonSchema;
+}
 
-const mongooseSchema = new mongoose.Schema(
-  convertJsonSchemaToMongooseSchema(jsonSchema)
-);
+async function createUserModel() {
+  if (cachedModel) {
+    return cachedModel;
+  }
 
-const User = mongoose.model("User", mongooseSchema);
+  const jsonSchema = await getSchema();
+  if (!jsonSchema) {
+    throw new Error("Failed to load JSON schema");
+  }
 
-module.exports = User;
+  const mongooseSchema = new mongoose.Schema(
+    convertJsonSchemaToMongooseSchema(jsonSchema)
+  );
+
+  cachedModel = mongoose.model("User", mongooseSchema);
+  return cachedModel;
+}
+
+module.exports = createUserModel;

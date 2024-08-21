@@ -1,16 +1,18 @@
 const searchAsync = require("../utils/routerManager");
 const { v4: uuidv4 } = require("uuid");
-const User = require("../models/userModel");
+// const User = require("../models/userModel");
 const fs = require("fs");
 const path = require("path");
 const axios = require("axios");
 const { createErrorResponse } = require("../utils/errorResponse");
+const createUserModel = require("../models/userModel");
 
 let fields = [];
 let validFields = [];
 let config = null;
 let properties;
 
+// Function to fetch schema from a URL
 async function fetchSchemaFromUrl(url) {
   try {
     const response = await axios.get(url);
@@ -21,6 +23,7 @@ async function fetchSchemaFromUrl(url) {
   }
 }
 
+// Function to read schema from a local file
 function readSchemaFromLocalFile(filePath) {
   try {
     return JSON.parse(fs.readFileSync(filePath));
@@ -30,6 +33,7 @@ function readSchemaFromLocalFile(filePath) {
   }
 }
 
+// Function to fetch and process schema
 async function fetchAndProcessSchema() {
   const schemaPath = process.env.SCHEMA_PATH;
 
@@ -43,29 +47,29 @@ async function fetchAndProcessSchema() {
 
   fields = userSchemaJson.schema;
   properties = fields.properties;
-  console.log(properties, "properties");
+  // console.log(properties, "properties");
 
   validFields = Object.keys(properties);
   console.log("Valid Fields:", validFields);
 
   config = fields.config;
-  console.log(config, "values");
 }
 
+// Function to build query based on filter and config
 fetchAndProcessSchema()
   .then(() => {
-    console.log("Schema processing completed.");
-    console.log(fields, "fields");
+    // console.log("Schema processing completed.");
+    // console.log(fields, "fields");
     console.log("Valid Fields:", validFields);
-    console.log("Config:", config);
-    console.log(properties, "properties");
+    // console.log("Config:", config);
+    // console.log(properties, "properties");
   })
   .catch((error) => {
     console.error("Error during schema processing:", error);
   });
 
-// Helper Methods for Testing
-function buildQuery(filter, config) {
+// Function to build the query
+function buildQuery(filter, config, properties, validFields) {
   const query = {};
   const rangeFields = config["fields_allowed_to_be_in_range"];
 
@@ -82,8 +86,8 @@ function buildQuery(filter, config) {
 
           query[key] = {};
           if (fieldType === "date") {
-            if (min !== undefined) query[key].$gte = new Date(min);
-            if (max !== undefined) query[key].$lte = new Date(max);
+            if (min !== undefined) query[key].$gte = min;
+            if (max !== undefined) query[key].$lte = max;
           } else if (fieldType === "number") {
             if (min !== undefined) query[key].$gte = min;
             if (max !== undefined) query[key].$lte = max;
@@ -94,9 +98,9 @@ function buildQuery(filter, config) {
           if (fieldType === "date") {
             const minDate = filterValue + "T00:00:00.000Z";
             const maxDate = filterValue + "T23:59:59.999Z";
-            console.log(query[key], "key");
-            query[key].$gte = new Date(minDate);
-            query[key].$lte = new Date(maxDate);
+            // console.log(query[key], "key");
+            query[key].$gte = minDate;
+            query[key].$lte = maxDate;
           } else {
             query[key] = filterValue;
           }
@@ -111,6 +115,7 @@ function buildQuery(filter, config) {
   return query;
 }
 
+// Function to validate the request body
 async function validateRequestBody(req, res) {
   if (!req.body || !req.body.request || !req.body.request.search) {
     return res
@@ -129,17 +134,20 @@ async function validateRequestBody(req, res) {
   return null;
 }
 
-async function validateFields(fields) {
+// Function to validate the fields
+async function validateFields(fields, validFields) {
   if (fields && Array.isArray(fields) && fields.length > 0) {
     const invalidFields = fields.filter(
       (field) => !validFields.includes(field)
     );
+    console.log("Invalid Fields:", invalidFields);
     if (invalidFields.length > 0) {
       throw new Error(`Invalid fields: ${invalidFields.join(", ")}`);
     }
   }
 }
 
+// Main controller function for user search
 exports.userSearch = searchAsync(async (req, res, next) => {
   try {
     console.log("----REQUEST RECEIVED---- ", req.body);
@@ -150,13 +158,13 @@ exports.userSearch = searchAsync(async (req, res, next) => {
 
     const { filter, fields, limit, sort_by } = req.body.request.search;
 
-    const query = buildQuery(filter, config);
+    const query = buildQuery(filter, config, properties, validFields);
     console.log("----Query after processing filters:----", query);
 
     let fields_to_be_returned = config["response_fields_to_be_returned"];
 
     try {
-      await validateFields(fields);
+      await validateFields(fields, validFields);
     } catch (error) {
       return res
         .status(400)
@@ -176,10 +184,6 @@ exports.userSearch = searchAsync(async (req, res, next) => {
       fields.length > 0
         ? fields.join(" ") + " -_id"
         : fields_to_be_returned.join(" ") + " -_id";
-
-    console.log("----Selected fields from config:----", fields_to_be_returned);
-
-    console.log("----Projection:----", projection);
 
     // Handling limit
     let queryLimit = 0;
@@ -229,6 +233,8 @@ exports.userSearch = searchAsync(async (req, res, next) => {
     console.log("----Sort options:----", sortOptions);
 
     // Build and execute the query
+    const User = await createUserModel();
+
     const usersQuery = User.find(query).select(projection).sort(sortOptions);
     if (queryLimit > 0) {
       usersQuery.limit(queryLimit);
@@ -273,7 +279,7 @@ exports.userSearch = searchAsync(async (req, res, next) => {
       },
     };
 
-    console.log("----RESPONSE:----", response);
+    // console.log("----RESPONSE:----", response);
 
     res.status(200).json(response);
   } catch (error) {
@@ -294,3 +300,10 @@ exports.userSearch = searchAsync(async (req, res, next) => {
     });
   }
 });
+
+exports.validateRequestBody = validateRequestBody;
+exports.fetchSchemaFromUrl = fetchSchemaFromUrl;
+exports.readSchemaFromLocalFile = readSchemaFromLocalFile;
+exports.fetchAndProcessSchema = fetchAndProcessSchema;
+exports.validateFields = validateFields;
+exports.buildQuery = buildQuery;

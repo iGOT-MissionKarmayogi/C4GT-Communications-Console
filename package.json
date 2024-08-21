@@ -1,4 +1,10 @@
 {
+  "name": "c4gt",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "",
+  "license": "ISC",
+  "description": "User Search API with flexible filtering",
   "dependencies": {
     "axios": "^1.7.2",
     "body-parser": "^1.20.2",
@@ -7,24 +13,20 @@
     "express": "^4.19.2",
     "express-validator": "^7.1.0",
     "fs": "^0.0.1-security",
-    "mongodb-memory-server": "^9.4.1",
     "mongoose": "^8.4.4",
-    "node-fetch": "^3.3.2",
     "nodemon": "^3.1.4",
     "path": "^0.12.7",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1",
     "url": "^0.11.3",
     "uuid": "^10.0.0"
   },
   "scripts": {
     "start": "nodemon server.js",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "swagger-autogen": "node ./swagger.js"
   },
-  "name": "c4gt",
-  "version": "1.0.0",
-  "main": "db.js",
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "devDependencies": {
     "jest": "^29.7.0",
     "supertest": "^7.0.0"
