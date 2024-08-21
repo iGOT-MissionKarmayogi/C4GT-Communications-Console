@@ -1,7 +1,7 @@
 const { validateRequestBody } = require("../controllers/UserSearchController");
 const { fetchSchemaFromUrl } = require("../controllers/UserSearchController");
 const {
-  readSchemaFromLocalFile,
+  fetchSchemaFromLocalFile,
 } = require("../controllers/UserSearchController");
 const { validateFields } = require("../controllers/UserSearchController");
 const {
@@ -79,13 +79,13 @@ describe("fetchSchemaFromUrl", () => {
   });
 });
 
-describe("readSchemaFromLocalFile", () => {
+describe("fetchSchemaFromLocalFile", () => {
   it("should successfully read and parse schema from a local file", () => {
     const mockFilePath = "path/to/mock/file.json";
     const mockFileContent = JSON.stringify({ schema: "mock-schema" });
     fs.readFileSync.mockReturnValue(mockFileContent);
 
-    const result = readSchemaFromLocalFile(mockFilePath);
+    const result = fetchSchemaFromLocalFile(mockFilePath);
 
     expect(result).toEqual({ schema: "mock-schema" });
     expect(fs.readFileSync).toHaveBeenCalledWith(mockFilePath);
@@ -98,7 +98,7 @@ describe("readSchemaFromLocalFile", () => {
       throw mockError;
     });
 
-    expect(() => readSchemaFromLocalFile(mockFilePath)).toThrow(
+    expect(() => fetchSchemaFromLocalFile(mockFilePath)).toThrow(
       "File not found"
     );
     expect(fs.readFileSync).toHaveBeenCalledWith(mockFilePath);
@@ -114,7 +114,7 @@ describe("fetchAndProcessSchema", () => {
 
     readSchemaFromLocalFileSpy = jest.spyOn(
       require("../controllers/UserSearchController"),
-      "readSchemaFromLocalFile"
+      "fetchSchemaFromLocalFile"
     );
   });
 

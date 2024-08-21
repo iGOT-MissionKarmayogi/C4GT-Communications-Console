@@ -24,7 +24,7 @@ async function fetchSchemaFromUrl(url) {
 }
 
 // Function to read schema from a local file
-function readSchemaFromLocalFile(filePath) {
+function fetchSchemaFromLocalFile(filePath) {
   try {
     return JSON.parse(fs.readFileSync(filePath));
   } catch (error) {
@@ -42,7 +42,7 @@ async function fetchAndProcessSchema() {
     userSchemaJson = await fetchSchemaFromUrl(schemaPath);
   } else {
     const fullPath = path.join(__dirname, schemaPath);
-    userSchemaJson = readSchemaFromLocalFile(fullPath);
+    userSchemaJson = fetchSchemaFromLocalFile(fullPath);
   }
 
   fields = userSchemaJson.schema;
@@ -303,7 +303,7 @@ exports.userSearch = searchAsync(async (req, res, next) => {
 
 exports.validateRequestBody = validateRequestBody;
 exports.fetchSchemaFromUrl = fetchSchemaFromUrl;
-exports.readSchemaFromLocalFile = readSchemaFromLocalFile;
+exports.fetchSchemaFromLocalFile = fetchSchemaFromLocalFile;
 exports.fetchAndProcessSchema = fetchAndProcessSchema;
 exports.validateFields = validateFields;
 exports.buildQuery = buildQuery;
