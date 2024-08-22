@@ -1,0 +1,382 @@
+[
+  {
+    "_id": "machine_learning_batch21_arjun",
+    "courseId": "Machine Learning",
+    "batchId": "Batch21",
+    "userId": "Arjun",
+    "location": "Delhi",
+    "totalLeafNodecount": 140,
+    "completedContents": [
+      {
+        "identifier": "Content001",
+        "status": 1
+      },
+      {
+        "identifier": "Content002",
+        "status": 2
+      }
+    ],
+    "progress": 95,
+    "batchEnrollmentDate": {
+      "$date": "2023-11-20T00:00:00.000Z"
+    },
+    "lastAccessTime": {
+      "$date": "2023-11-30T12:34:56.000Z"
+    },
+    "lastCompletedTime": {
+      "$date": "2023-11-25T12:34:56.000Z"
+    },
+    "lastUpdatedTime": {
+      "$date": "2023-11-30T12:34:56.000Z"
+    },
+    "viewCount": 34,
+    "createdAt": {
+      "$date": "2023-11-20T00:00:00.000Z"
+    },
+    "updatedAt": {
+      "$date": "2023-11-30T12:34:56.000Z"
+    }
+  },
+  {
+    "_id": "python_batch10_soumya",
+    "courseId": "Python Programming",
+    "batchId": "Batch10",
+    "userId": "Soumya",
+    "location": "Bangalore",
+    "totalLeafNodecount": 120,
+    "completedContents": [
+      {
+        "identifier": "Content003",
+        "status": 1
+      },
+      {
+        "identifier": "Content004",
+        "status": 0
+      }
+    ],
+    "progress": 85,
+    "batchEnrollmentDate": {
+      "$date": "2023-10-15T10:00:00.000Z"
+    },
+    "lastAccessTime": {
+      "$date": "2023-11-01T11:30:00.000Z"
+    },
+    "lastCompletedTime": {
+      "$date": "2023-10-25T09:45:00.000Z"
+    },
+    "lastUpdatedTime": {
+      "$date": "2023-11-01T11:30:00.000Z"
+    },
+    "viewCount": 27,
+    "createdAt": {
+      "$date": "2023-10-15T10:00:00.000Z"
+    },
+    "updatedAt": {
+      "$date": "2023-11-01T11:30:00.000Z"
+    }
+  },
+  {
+    "_id": "data_science_batch30_ravi",
+    "courseId": "Data Science",
+    "batchId": "Batch30",
+    "userId": "Ravi",
+    "location": "Hyderabad",
+    "totalLeafNodecount": 200,
+    "completedContents": [
+      {
+        "identifier": "Content005",
+        "status": 2
+      },
+      {
+        "identifier": "Content006",
+        "status": 2
+      }
+    ],
+    "progress": 92,
+    "batchEnrollmentDate": {
+      "$date": "2023-09-20T09:00:00.000Z"
+    },
+    "lastAccessTime": {
+      "$date": "2023-10-15T14:00:00.000Z"
+    },
+    "lastCompletedTime": {
+      "$date": "2023-10-10T13:00:00.000Z"
+    },
+    "lastUpdatedTime": {
+      "$date": "2023-10-15T14:00:00.000Z"
+    },
+    "viewCount": 45,
+    "createdAt": {
+      "$date": "2023-09-20T09:00:00.000Z"
+    },
+    "updatedAt": {
+      "$date": "2023-10-15T14:00:00.000Z"
+    }
+  },
+  {
+    "_id": "web_development_batch15_ayesha",
+    "courseId": "Web Development",
+    "batchId": "Batch15",
+    "userId": "Ayesha",
+    "location": "Mumbai",
+    "totalLeafNodecount": 180,
+    "completedContents": [
+      {
+        "identifier": "Content007",
+        "status": 1
+      },
+      {
+        "identifier": "Content008",
+        "status": 1
+      }
+    ],
+    "progress": 80,
+    "batchEnrollmentDate": {
+      "$date": "2023-08-25T08:00:00.000Z"
+    },
+    "lastAccessTime": {
+      "$date": "2023-09-20T15:30:00.000Z"
+    },
+    "lastCompletedTime": {
+      "$date": "2023-09-18T11:00:00.000Z"
+    },
+    "lastUpdatedTime": {
+      "$date": "2023-09-20T15:30:00.000Z"
+    },
+    "viewCount": 38,
+    "createdAt": {
+      "$date": "2023-08-25T08:00:00.000Z"
+    },
+    "updatedAt": {
+      "$date": "2023-09-20T15:30:00.000Z"
+    }
+  },
+  {
+    "_id": "artificial_intelligence_batch40_neha",
+    "courseId": "Artificial Intelligence",
+    "batchId": "Batch40",
+    "userId": "Neha",
+    "location": "Chennai",
+    "totalLeafNodecount": 250,
+    "completedContents": [
+      {
+        "identifier": "Content009",
+        "status": 2
+      },
+      {
+        "identifier": "Content010",
+        "status": 2
+      }
+    ],
+    "progress": 98,
+    "batchEnrollmentDate": {
+      "$date": "2023-07-30T07:00:00.000Z"
+    },
+    "lastAccessTime": {
+      "$date": "2023-08-25T16:00:00.000Z"
+    },
+    "lastCompletedTime": {
+      "$date": "2023-08-20T12:00:00.000Z"
+    },
+    "lastUpdatedTime": {
+      "$date": "2023-08-25T16:00:00.000Z"
+    },
+    "viewCount": 52,
+    "createdAt": {
+      "$date": "2023-07-30T07:00:00.000Z"
+    },
+    "updatedAt": {
+      "$date": "2023-08-25T16:00:00.000Z"
+    }
+  },
+  {
+    "_id": "cloud_computing_batch50_sanjay",
+    "courseId": "Cloud Computing",
+    "batchId": "Batch50",
+    "userId": "Sanjay",
+    "location": "Noida",
+    "totalLeafNodecount": 160,
+    "completedContents": [
+      {
+        "identifier": "Content011",
+        "status": 1
+      },
+      {
+        "identifier": "Content012",
+        "status": 0
+      }
+    ],
+    "progress": 70,
+    "batchEnrollmentDate": {
+      "$date": "2024-01-15T10:00:00.000Z"
+    },
+    "lastAccessTime": {
+      "$date": "2024-02-01T10:00:00.000Z"
+    },
+    "lastCompletedTime": {
+      "$date": "2024-01-25T10:00:00.000Z"
+    },
+    "lastUpdatedTime": {
+      "$date": "2024-02-01T10:00:00.000Z"
+    },
+    "viewCount": 23,
+    "createdAt": {
+      "$date": "2024-01-15T10:00:00.000Z"
+    },
+    "updatedAt": {
+      "$date": "2024-02-01T10:00:00.000Z"
+    }
+  },
+  {
+    "_id": "Python_Batch1_Soumya",
+    "courseId": "Python",
+    "batchId": "Batch1",
+    "userId": "Soumya",
+    "location": "Delhi",
+    "totalLeafNodecount": 140,
+    "completedContents": [
+      {
+        "identifier": "Content001",
+        "status": 1
+      },
+      {
+        "identifier": "Content002",
+        "status": 2
+      }
+    ],
+    "progress": 95,
+    "batchEnrollmentDate": {
+      "$date": "2023-11-20T00:00:00.000Z"
+    },
+    "lastAccessTime": {
+      "$date": "2023-11-30T12:34:56.000Z"
+    },
+    "lastCompletedTime": {
+      "$date": "2023-11-25T12:34:56.000Z"
+    },
+    "lastUpdatedTime": {
+      "$date": "2023-11-30T12:34:56.000Z"
+    },
+    "viewCount": 34,
+    "createdAt": {
+      "$date": "2023-11-20T00:00:00.000Z"
+    },
+    "updatedAt": {
+      "$date": "2023-11-30T12:34:56.000Z"
+    }
+  },
+  {
+    "_id": "Python_Batch10_Vicky",
+    "courseId": "Python",
+    "batchId": "Batch10",
+    "userId": "Vicky",
+    "location": "Bangalore",
+    "totalLeafNodecount": 120,
+    "completedContents": [
+      {
+        "identifier": "Content003",
+        "status": 1
+      },
+      {
+        "identifier": "Content004",
+        "status": 0
+      }
+    ],
+    "progress": 85,
+    "batchEnrollmentDate": {
+      "$date": "2023-10-15T10:00:00.000Z"
+    },
+    "lastAccessTime": {
+      "$date": "2023-11-01T11:30:00.000Z"
+    },
+    "lastCompletedTime": {
+      "$date": "2023-10-25T09:45:00.000Z"
+    },
+    "lastUpdatedTime": {
+      "$date": "2023-11-01T11:30:00.000Z"
+    },
+    "viewCount": 27,
+    "createdAt": {
+      "$date": "2023-10-15T10:00:00.000Z"
+    },
+    "updatedAt": {
+      "$date": "2023-11-01T11:30:00.000Z"
+    }
+  },
+  {
+    "_id": "Python_Batch10_Vikram",
+    "courseId": "Python",
+    "batchId": "Batch10",
+    "userId": "Vikram",
+    "location": "Delhi",
+    "totalLeafNodecount": 120,
+    "completedContents": [
+      {
+        "identifier": "Content003",
+        "status": 1
+      },
+      {
+        "identifier": "Content004",
+        "status": 0
+      }
+    ],
+    "progress": 85,
+    "batchEnrollmentDate": {
+      "$date": "2023-10-15T10:00:00.000Z"
+    },
+    "lastAccessTime": {
+      "$date": "2023-11-01T11:30:00.000Z"
+    },
+    "lastCompletedTime": {
+      "$date": "2023-10-25T09:45:00.000Z"
+    },
+    "lastUpdatedTime": {
+      "$date": "2023-11-01T11:30:00.000Z"
+    },
+    "viewCount": 27,
+    "createdAt": {
+      "$date": "2023-10-15T10:00:00.000Z"
+    },
+    "updatedAt": {
+      "$date": "2023-11-01T11:30:00.000Z"
+    }
+  },
+  {
+    "_id": "Python_Batch30_Anuj",
+    "courseId": "Python",
+    "batchId": "Batch30",
+    "userId": "Anuj",
+    "location": "Delhi",
+    "totalLeafNodecount": 20,
+    "completedContents": [
+      {
+        "identifier": "Content005",
+        "status": 2
+      },
+      {
+        "identifier": "Content006",
+        "status": 2
+      }
+    ],
+    "progress": 92,
+    "batchEnrollmentDate": {
+      "$date": "2023-09-20T09:00:00.000Z"
+    },
+    "lastAccessTime": {
+      "$date": "2023-10-15T14:00:00.000Z"
+    },
+    "lastCompletedTime": {
+      "$date": "2023-10-10T13:00:00.000Z"
+    },
+    "lastUpdatedTime": {
+      "$date": "2023-10-15T14:00:00.000Z"
+    },
+    "viewCount": 45,
+    "createdAt": {
+      "$date": "2023-09-20T09:00:00.000Z"
+    },
+    "updatedAt": {
+      "$date": "2023-10-15T14:00:00.000Z"
+    }
+  }
+]

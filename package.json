@@ -1,0 +1,33 @@
+{
+  "name": "user-search",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "Soumya Maheshwari",
+  "description": "User Search API with flexible filtering",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.1.0",
+    "fs": "^0.0.1-security",
+    "mongoose": "^8.4.4",
+    "nodemon": "^3.1.4",
+    "path": "^0.12.7",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1",
+    "url": "^0.11.3",
+    "uuid": "^10.0.0"
+  },
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "swagger-autogen": "node ./swagger.js"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  }
+}

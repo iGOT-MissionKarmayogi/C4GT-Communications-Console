@@ -1,0 +1,638 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "User Search API",
+    "description": "API for searching user data with flexible filtering.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "",
+  "schemes": ["http"],
+  "paths": {
+    "/user/v1/search": {
+      "post": {
+        "summary": "Search for user data",
+        "description": "Search records based on various fields with support for filtering, limit and sorting.",
+        "parameters": [
+          {
+            "name": "x-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "A unique identifier for the request. This ID can help in troubleshooting issues by tracking the flow of a specific request through the system. It is recommended to generate this ID as a UUID to ensure uniqueness, but any unique string value can be used. If not provided, the server may generate one automatically.",
+            "example": "12345-abcde"
+          },
+          {
+            "name": "Request Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "request": {
+                  "type": "object",
+                  "properties": {
+                    "search": {
+                      "type": "object",
+                      "properties": {
+                        "filter": {
+                          "type": "object",
+                          "description": "Filter criteria for the search.",
+                          "properties": {
+                            "courseId": {
+                              "type": "string",
+                              "description": "The unique identifier for the course.",
+                              "example": "course123"
+                            },
+                            "batchId": {
+                              "type": "string",
+                              "description": "The unique identifier for the batch.",
+                              "example": "batch456"
+                            },
+                            "userId": {
+                              "type": "string",
+                              "description": "The unique identifier for the user.",
+                              "example": "user789"
+                            },
+                            "location": {
+                              "type": "string",
+                              "description": "The geographical location associated with the user.",
+                              "example": "New York"
+                            },
+                            "totalLeafNodecount": {
+                              "type": "number",
+                              "description": "The total count of contents in the course.",
+                              "example": 100
+                            },
+                            "completedContents": {
+                              "type": "array",
+                              "description": "List of completed contents by the user with their statuses.",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "identifier": {
+                                    "type": "string",
+                                    "description": "The unique identifier of the completed content.",
+                                    "example": "content123"
+                                  },
+                                  "status": {
+                                    "type": "number",
+                                    "description": "The status of the completed content (0: not started, 1: in progress, 2: completed).",
+                                    "enum": [0, 1, 2],
+                                    "example": 2
+                                  }
+                                }
+                              }
+                            },
+
+                            "progress": {
+                              "oneOf": [
+                                {
+                                  "type": "number",
+                                  "description": "The progress percentage of the user in the course.",
+                                  "example": 85
+                                },
+                                {
+                                  "type": "object",
+                                  "description": "Range for progress percentage.",
+                                  "properties": {
+                                    "min": {
+                                      "type": "number",
+                                      "description": "Minimum progress percentage.",
+                                      "example": 10
+                                    },
+                                    "max": {
+                                      "type": "number",
+                                      "description": "Maximum progress percentage.",
+                                      "example": 100
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            "batchEnrollmentDate": {
+                              "oneOf": [
+                                {
+                                  "type": "string",
+                                  "format": "date",
+                                  "description": "The date when the user was enrolled in the batch.",
+                                  "example": "2024-01-15"
+                                },
+                                {
+                                  "type": "object",
+                                  "description": "Range for batch enrollment date.",
+                                  "properties": {
+                                    "min": {
+                                      "type": "string",
+                                      "format": "date",
+                                      "description": "Minimum batch enrollment date.",
+                                      "example": "2023-08-25"
+                                    },
+                                    "max": {
+                                      "type": "string",
+                                      "format": "date",
+                                      "description": "Maximum batch enrollment date.",
+                                      "example": "2023-11-20"
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+
+                            "lastAccessTime": {
+                              "type": "string",
+                              "format": "date",
+                              "description": "The last date and time when the user accessed the content.",
+                              "example": "2024-08-11"
+                            },
+                            "lastCompletedTime": {
+                              "type": "string",
+                              "format": "date",
+                              "description": "The last date and time when the user completed content.",
+                              "example": "2024-08-10"
+                            },
+                            "lastUpdatedTime": {
+                              "type": "string",
+                              "format": "date",
+                              "description": "The last date and time when the user data was updated.",
+                              "example": "2024-08-10"
+                            },
+                            "viewCount": {
+                              "type": "number",
+                              "description": "The number of times the user has viewed the content.",
+                              "example": 50
+                            }
+                          }
+                        },
+                        "fields": {
+                          "type": "array",
+                          "description": "List of fields to be included in the response.",
+                          "items": {
+                            "type": "string",
+                            "description": "Field to be returned in the response."
+                          },
+                          "example": [
+                            "userId",
+                            "courseId",
+                            "location",
+                            "progress"
+                          ]
+                        },
+                        "limit": {
+                          "type": "integer",
+                          "description": "The maximum number of results to return.",
+                          "example": 10
+                        },
+                        "sort_by": {
+                          "type": "object",
+                          "description": "Sorting options for the search results.",
+                          "properties": {
+                            "progress": {
+                              "type": "string",
+                              "description": "Sort order for the progress field.",
+                              "example": "desc"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "request": {
+                  "search": {
+                    "filter": {
+                      "location": "Delhi",
+                      "courseId": "Python",
+                      "progress": {
+                        "min": 10,
+                        "max": 100
+                      },
+                      "batchEnrollmentDate": {
+                        "min": "2023-08-25T08:00:00.000Z",
+                        "max": "2023-11-20T00:00:00.000Z"
+                      }
+                    },
+                    "limit": 5,
+                    "fields": ["userId", "courseId", "location", "progress"],
+                    "sort_by": {
+                      "batchEnrollmentDate": "asc"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "The request body containing search parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful search result",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "API identifier for the request.",
+                  "example": "api.user.search"
+                },
+                "ver": {
+                  "type": "string",
+                  "description": "Version of the API.",
+                  "example": "1.0"
+                },
+                "ts": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Timestamp of the response."
+                },
+                "params": {
+                  "type": "object",
+                  "properties": {
+                    "resmsgid": {
+                      "type": "string",
+                      "description": "Response message ID for tracing.",
+                      "example": "1051c7de-b5ee-473c-a4cf-83ee3dc0ffa1"
+                    },
+                    "msgid": {
+                      "type": "string",
+                      "description": "Message ID from the request."
+                    },
+                    "err": {
+                      "type": "string",
+                      "description": "Error message, if any.",
+                      "example": null
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Status of the response.",
+                      "example": "successful"
+                    },
+                    "errmsg": {
+                      "type": "string",
+                      "description": "Detailed error message, if any.",
+                      "example": null
+                    }
+                  }
+                },
+                "responseCode": {
+                  "type": "integer",
+                  "description": "Response code indicating success or failure.",
+                  "example": 200
+                },
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "description": "Number of records found.",
+                      "example": 1
+                    },
+                    "users": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "description": "Unique identifier for the user."
+                          },
+                          "courseId": {
+                            "type": "string",
+                            "description": "The unique identifier for the course."
+                          },
+                          "batchId": {
+                            "type": "string",
+                            "description": "The unique identifier for the batch."
+                          },
+                          "userId": {
+                            "type": "string",
+                            "description": "The unique identifier for the user."
+                          },
+                          "location": {
+                            "type": "string",
+                            "description": "The geographical location associated with the user."
+                          },
+                          "totalLeafNodecount": {
+                            "type": "number",
+                            "description": "The total count of contents in the course."
+                          },
+                          "completedContents": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "identifier": {
+                                  "type": "string",
+                                  "description": "The unique identifier of the completed content."
+                                },
+                                "status": {
+                                  "type": "number",
+                                  "description": "The status of the completed content (0: not started, 1: in progress, 2: completed)."
+                                }
+                              }
+                            },
+                            "description": "List of completed contents by the user with their statuses."
+                          },
+                          "progress": {
+                            "type": "number",
+                            "description": "The progress percentage of the user in the course."
+                          },
+                          "batchEnrollmentDate": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The date when the user was enrolled in the batch."
+                          },
+                          "lastAccessTime": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The last date and time when the user accessed the content."
+                          },
+                          "lastCompletedTime": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The last date and time when the user completed content."
+                          },
+                          "lastUpdatedTime": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The last date and time when the user data was updated."
+                          },
+                          "viewCount": {
+                            "type": "number",
+                            "description": "The number of times the user has viewed the content."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No users found matching the search criteria",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "API identifier for the request.",
+                  "example": "api.user.search"
+                },
+                "ver": {
+                  "type": "string",
+                  "description": "Version of the API.",
+                  "example": "1.0"
+                },
+                "ts": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Timestamp of the response."
+                },
+                "params": {
+                  "type": "object",
+                  "properties": {
+                    "resmsgid": {
+                      "type": "string",
+                      "description": "Response message ID for tracing.",
+                      "example": "b4880d35-3e53-40a8-8f50-31f134a0ab0b"
+                    },
+                    "msgid": {
+                      "type": "string",
+                      "description": "Message ID from the request."
+                    },
+                    "err": {
+                      "type": "string",
+                      "description": "Error message, if any.",
+                      "example": "NOT_FOUND"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Status of the response.",
+                      "example": "failed"
+                    },
+                    "errmsg": {
+                      "type": "string",
+                      "description": "Detailed error message, if any.",
+                      "example": "No users found matching the search criteria"
+                    }
+                  }
+                },
+                "responseCode": {
+                  "type": "integer",
+                  "description": "Response code indicating success or failure.",
+                  "example": "404"
+                },
+                "result": {
+                  "type": "null",
+                  "description": "No data found.",
+                  "example": {}
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "API identifier for the request.",
+                  "example": "api.user.search"
+                },
+                "ver": {
+                  "type": "string",
+                  "description": "Version of the API.",
+                  "example": "1.0"
+                },
+                "ts": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Timestamp of the response."
+                },
+                "params": {
+                  "type": "object",
+                  "properties": {
+                    "resmsgid": {
+                      "type": "string",
+                      "description": "Response message ID for tracing.",
+                      "example": "e1f7a9d3-c4a8-4c7d-8a29-2c4b154a8d59"
+                    },
+                    "msgid": {
+                      "type": "string",
+                      "description": "Message ID from the request."
+                    },
+                    "err": {
+                      "type": "string",
+                      "description": "Error message, if any.",
+                      "example": "INTERNAL_SERVER_ERROR"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Status of the response.",
+                      "example": "failed"
+                    },
+                    "errmsg": {
+                      "type": "string",
+                      "description": "Detailed error message, if any."
+                    }
+                  }
+                },
+                "responseCode": {
+                  "type": "integer",
+                  "description": "Response code indicating success or failure.",
+                  "example": "500"
+                },
+                "result": {
+                  "type": "null",
+                  "description": "No data returned due to an error.",
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Get Health Status",
+        "description": "Retrieve the current health status of the service.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Service is healthy",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The API identifier for the health check response.",
+                  "example": "api.user.health"
+                },
+                "ver": {
+                  "type": "string",
+                  "description": "The version of the API.",
+                  "example": "1.0"
+                },
+                "ts": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The timestamp when the health check was performed.",
+                  "example": "2024-08-11T15:30:00Z"
+                },
+                "params": {
+                  "type": "object",
+                  "properties": {
+                    "resmsgid": {
+                      "type": "string",
+                      "description": "A unique identifier for the response.",
+                      "example": "e1f7a9d3-c4a8-4c7d-8a29-2c4b154a8d56"
+                    },
+                    "msgid": {
+                      "type": "string",
+                      "description": "Message ID, if any.",
+                      "example": "null"
+                    },
+                    "err": {
+                      "type": "string",
+                      "description": "Error message, if any.",
+                      "example": null
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Status of the health check.",
+                      "example": "successful"
+                    },
+                    "errmsg": {
+                      "type": "string",
+                      "description": "Detailed error message, if any.",
+                      "example": null
+                    }
+                  }
+                },
+                "responseCode": {
+                  "type": "integer",
+                  "description": "HTTP response code.",
+                  "example": 200
+                },
+                "result": {
+                  "type": "object",
+                  "description": "Additional result data.",
+                  "example": {}
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Service is not healthy",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The API identifier for the health check response.",
+                  "example": "api.user.health"
+                },
+                "ver": {
+                  "type": "string",
+                  "description": "The version of the API.",
+                  "example": "1.0"
+                },
+                "ts": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The timestamp when the health check was performed.",
+                  "example": "2024-08-11T15:30:00Z"
+                },
+                "params": {
+                  "type": "object",
+                  "properties": {
+                    "resmsgid": {
+                      "type": "string",
+                      "description": "A unique identifier for the response.",
+                      "example": "e1f7a9d3-c4a8-4c7d-8a29-2c4b154a8d56"
+                    },
+                    "msgid": {
+                      "type": "string",
+                      "description": "Message ID, if any.",
+                      "example": "null"
+                    },
+                    "err": {
+                      "type": "string",
+                      "description": "Error message, if any.",
+                      "example": "DB_CONNECTION_ERROR"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Status of the health check.",
+                      "example": "failed"
+                    },
+                    "errmsg": {
+                      "type": "string",
+                      "description": "Detailed error message, if any.",
+                      "example": "Database connection failed"
+                    }
+                  }
+                },
+                "responseCode": {
+                  "type": "integer",
+                  "description": "HTTP response code.",
+                  "example": 500
+                },
+                "result": {
+                  "type": "object",
+                  "description": "Additional result data.",
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

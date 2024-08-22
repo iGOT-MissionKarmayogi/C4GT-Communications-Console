@@ -1,0 +1,78 @@
+{
+  "schema": {
+    "type": "object",
+    "properties": {
+      "_id": {
+        "type": "string"
+      },
+      "courseId": {
+        "type": "string",
+        "required": true
+      },
+      "batchId": {
+        "type": "string",
+        "required": true
+      },
+      "userId": {
+        "type": "string",
+        "required": true
+      },
+      "location": {
+        "type": "string",
+        "required": true
+      },
+      "totalLeafNodecount": {
+        "type": "number",
+        "required": true
+      },
+      "completedContents": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "identifier": {
+              "type": "string",
+              "required": true
+            },
+            "status": {
+              "type": "number",
+              "required": true,
+              "enum": [0, 1, 2]
+            }
+          }
+        }
+      },
+      "progress": {
+        "type": "number",
+        "required": true
+      },
+      "batchEnrollmentDate": {
+        "type": "date"
+      },
+      "lastAccessTime": {
+        "type": "date"
+      },
+      "lastCompletedTime": {
+        "type": "date"
+      },
+      "lastUpdatedTime": {
+        "type": "date"
+      },
+      "viewCount": {
+        "type": "number"
+      },
+      "createdAt": {
+        "type": "date"
+      },
+      "updatedAt": {
+        "type": "date"
+      }
+    },
+    "config": {
+      "response_fields_to_be_returned": [
+        "userId courseId location progress batchEnrollmentDate"
+      ],
+      "fields_allowed_to_be_in_range": ["progress", "batchEnrollmentDate"]
+    }
+  }
+}
