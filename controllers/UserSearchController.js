@@ -201,6 +201,8 @@ exports.userSearch = searchAsync(async (req, res, next) => {
       usersQuery.limit(queryLimit);
     }
 
+    console.log("final query: ", usersQuery);
+
     const users = await usersQuery;
 
     console.log("----Query result:----", users);

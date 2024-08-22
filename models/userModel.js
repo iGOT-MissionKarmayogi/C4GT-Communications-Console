@@ -102,4 +102,6 @@ async function createUserModel() {
 module.exports = {
   createUserModel,
   getSchema,
+  fetchSchemaFromLocalFile,
+  fetchSchemaFromUrl,
 };

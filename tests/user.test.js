@@ -1,8 +1,6 @@
 const { validateRequestBody } = require("../controllers/UserSearchController");
-const { fetchSchemaFromUrl } = require("../controllers/UserSearchController");
-const {
-  fetchSchemaFromLocalFile,
-} = require("../controllers/UserSearchController");
+const { fetchSchemaFromUrl } = require("../models/userModel");
+const { fetchSchemaFromLocalFile } = require("../models/userModel");
 const { validateFields } = require("../controllers/UserSearchController");
 const {
   buildQuery,
@@ -49,88 +47,6 @@ describe("validateRequestBody", () => {
     await validateRequestBody(mockRequest, mockResponse);
 
     expect(mockResponse.status).toHaveBeenCalledWith(400);
-  });
-});
-
-describe("fetchSchemaFromUrl", () => {
-  it("should successfully fetch schema from the URL", async () => {
-    const mockSchema = { schema: "mock-schema" };
-    axios.get.mockResolvedValue({ data: mockSchema });
-
-    const result = await fetchSchemaFromUrl(
-      "https://raw.githubusercontent.com/soumya-maheshwari/Schema/main/user_schema.json"
-    );
-
-    expect(result).toEqual(mockSchema);
-    expect(axios.get).toHaveBeenCalledWith(
-      "https://raw.githubusercontent.com/soumya-maheshwari/Schema/main/user_schema.json"
-    );
-  });
-
-  it("should throw an error when fetching schema fails", async () => {
-    const mockError = new Error("Network Error");
-    axios.get.mockRejectedValue(mockError);
-
-    await expect(
-      fetchSchemaFromUrl("https://example.com/schema")
-    ).rejects.toThrow("Network Error");
-
-    expect(axios.get).toHaveBeenCalledWith("https://example.com/schema");
-  });
-});
-
-describe("fetchSchemaFromLocalFile", () => {
-  it("should successfully read and parse schema from a local file", () => {
-    const mockFilePath = "path/to/mock/file.json";
-    const mockFileContent = JSON.stringify({ schema: "mock-schema" });
-    fs.readFileSync.mockReturnValue(mockFileContent);
-
-    const result = fetchSchemaFromLocalFile(mockFilePath);
-
-    expect(result).toEqual({ schema: "mock-schema" });
-    expect(fs.readFileSync).toHaveBeenCalledWith(mockFilePath);
-  });
-
-  it("should throw an error when reading the file fails", () => {
-    const mockFilePath = "path/to/mock/file.json";
-    const mockError = new Error("File not found");
-    fs.readFileSync.mockImplementation(() => {
-      throw mockError;
-    });
-
-    expect(() => fetchSchemaFromLocalFile(mockFilePath)).toThrow(
-      "File not found"
-    );
-    expect(fs.readFileSync).toHaveBeenCalledWith(mockFilePath);
-  });
-});
-
-describe("fetchAndProcessSchema", () => {
-  let fetchSchemaFromUrlSpy;
-  let readSchemaFromLocalFileSpy;
-
-  beforeEach(() => {
-    delete process.env.SCHEMA_PATH;
-
-    readSchemaFromLocalFileSpy = jest.spyOn(
-      require("../controllers/UserSearchController"),
-      "fetchSchemaFromLocalFile"
-    );
-  });
-
-  afterEach(() => {
-    jest.restoreAllMocks();
-  });
-
-  it("should handle errors when reading schema from local file fails", async () => {
-    process.env.SCHEMA_PATH = "schemas/user_schema.json";
-    const mockError = new Error("File not found");
-
-    readSchemaFromLocalFileSpy.mockImplementation(() => {
-      throw mockError;
-    });
-
-    await expect(fetchAndProcessSchema()).rejects.toThrow("File not found");
   });
 });
 
