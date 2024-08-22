@@ -47,17 +47,17 @@ const convertJsonSchemaToMongooseSchema = (jsonSchema) => {
 async function fetchSchemaFromUrl(url) {
   try {
     const response = await axios.get(url);
-    return response.data.schema;
+    return response.data;
   } catch (error) {
     console.error("Error fetching schema from URL:", error);
     throw error;
   }
 }
 
-async function readSchemaFromLocalFile(filePath) {
+async function fetchSchemaFromLocalFile(filePath) {
   try {
     const data = fs.readFileSync(filePath);
-    return JSON.parse(data).schema;
+    return JSON.parse(data);
   } catch (err) {
     console.error("Error reading or parsing the schema file:", err);
     throw err;
@@ -74,7 +74,7 @@ async function getSchema() {
     jsonSchema = await fetchSchemaFromUrl(SCHEMA_PATH);
   } else {
     const fullPath = path.resolve(__dirname, SCHEMA_PATH);
-    jsonSchema = await readSchemaFromLocalFile(fullPath);
+    jsonSchema = await fetchSchemaFromLocalFile(fullPath);
   }
 
   return jsonSchema;
@@ -86,16 +86,20 @@ async function createUserModel() {
   }
 
   const jsonSchema = await getSchema();
+
   if (!jsonSchema) {
     throw new Error("Failed to load JSON schema");
   }
 
   const mongooseSchema = new mongoose.Schema(
-    convertJsonSchemaToMongooseSchema(jsonSchema)
+    convertJsonSchemaToMongooseSchema(jsonSchema.schema)
   );
 
-  cachedModel = mongoose.model("User", mongooseSchema);
+  cachedModel = mongoose.models.User || mongoose.model("User", mongooseSchema);
   return cachedModel;
 }
 
-module.exports = createUserModel;
+module.exports = {
+  createUserModel,
+  getSchema,
+};

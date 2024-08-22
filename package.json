@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "server.js",
   "author": "Soumya Maheshwari",
-  "license": "ISC",
   "description": "User Search API with flexible filtering",
   "dependencies": {
     "axios": "^1.7.2",
