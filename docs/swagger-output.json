@@ -234,11 +234,13 @@
               "properties": {
                 "id": {
                   "type": "string",
-                  "description": "API identifier for the request."
+                  "description": "API identifier for the request.",
+                  "example": "api.user.search"
                 },
                 "ver": {
                   "type": "string",
-                  "description": "Version of the API."
+                  "description": "Version of the API.",
+                  "example": "1.0"
                 },
                 "ts": {
                   "type": "string",
@@ -250,7 +252,8 @@
                   "properties": {
                     "resmsgid": {
                       "type": "string",
-                      "description": "Response message ID for tracing."
+                      "description": "Response message ID for tracing.",
+                      "example": "1051c7de-b5ee-473c-a4cf-83ee3dc0ffa1"
                     },
                     "msgid": {
                       "type": "string",
@@ -258,22 +261,25 @@
                     },
                     "err": {
                       "type": "string",
-                      "description": "Error message, if any."
+                      "description": "Error message, if any.",
+                      "example": null
                     },
                     "status": {
                       "type": "string",
-                      "description": "Status of the response."
+                      "description": "Status of the response.",
+                      "example": "successful"
                     },
                     "errmsg": {
                       "type": "string",
-                      "description": "Detailed error message, if any."
+                      "description": "Detailed error message, if any.",
+                      "example": null
                     }
                   }
                 },
                 "responseCode": {
-                  "type": "string",
+                  "type": "integer",
                   "description": "Response code indicating success or failure.",
-                  "example": "200"
+                  "example": 200
                 },
                 "result": {
                   "type": "object",
@@ -372,11 +378,13 @@
               "properties": {
                 "id": {
                   "type": "string",
-                  "description": "API identifier for the request."
+                  "description": "API identifier for the request.",
+                  "example": "api.user.search"
                 },
                 "ver": {
                   "type": "string",
-                  "description": "Version of the API."
+                  "description": "Version of the API.",
+                  "example": "1.0"
                 },
                 "ts": {
                   "type": "string",
@@ -388,7 +396,8 @@
                   "properties": {
                     "resmsgid": {
                       "type": "string",
-                      "description": "Response message ID for tracing."
+                      "description": "Response message ID for tracing.",
+                      "example": "b4880d35-3e53-40a8-8f50-31f134a0ab0b"
                     },
                     "msgid": {
                       "type": "string",
@@ -396,15 +405,18 @@
                     },
                     "err": {
                       "type": "string",
-                      "description": "Error message, if any."
+                      "description": "Error message, if any.",
+                      "example": "NOT_FOUND"
                     },
                     "status": {
                       "type": "string",
-                      "description": "Status of the response."
+                      "description": "Status of the response.",
+                      "example": "failed"
                     },
                     "errmsg": {
                       "type": "string",
-                      "description": "Detailed error message, if any."
+                      "description": "Detailed error message, if any.",
+                      "example": "No users found matching the search criteria"
                     }
                   }
                 },
@@ -428,11 +440,13 @@
               "properties": {
                 "id": {
                   "type": "string",
-                  "description": "API identifier for the request."
+                  "description": "API identifier for the request.",
+                  "example": "api.user.search"
                 },
                 "ver": {
                   "type": "string",
-                  "description": "Version of the API."
+                  "description": "Version of the API.",
+                  "example": "1.0"
                 },
                 "ts": {
                   "type": "string",
@@ -444,7 +458,8 @@
                   "properties": {
                     "resmsgid": {
                       "type": "string",
-                      "description": "Response message ID for tracing."
+                      "description": "Response message ID for tracing.",
+                      "example": "e1f7a9d3-c4a8-4c7d-8a29-2c4b154a8d59"
                     },
                     "msgid": {
                       "type": "string",
@@ -452,11 +467,13 @@
                     },
                     "err": {
                       "type": "string",
-                      "description": "Error message, if any."
+                      "description": "Error message, if any.",
+                      "example": "INTERNAL_SERVER_ERROR"
                     },
                     "status": {
                       "type": "string",
-                      "description": "Status of the response."
+                      "description": "Status of the response.",
+                      "example": "failed"
                     },
                     "errmsg": {
                       "type": "string",
@@ -523,7 +540,7 @@
                     "err": {
                       "type": "string",
                       "description": "Error message, if any.",
-                      "example": "null"
+                      "example": null
                     },
                     "status": {
                       "type": "string",
@@ -533,14 +550,14 @@
                     "errmsg": {
                       "type": "string",
                       "description": "Detailed error message, if any.",
-                      "example": "null"
+                      "example": null
                     }
                   }
                 },
                 "responseCode": {
-                  "type": "string",
+                  "type": "integer",
                   "description": "HTTP response code.",
-                  "example": "200"
+                  "example": 200
                 },
                 "result": {
                   "type": "object",
@@ -602,9 +619,9 @@
                   }
                 },
                 "responseCode": {
-                  "type": "string",
+                  "type": "integer",
                   "description": "HTTP response code.",
-                  "example": "500"
+                  "example": 500
                 },
                 "result": {
                   "type": "object",

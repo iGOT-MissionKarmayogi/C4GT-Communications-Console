@@ -1,8 +1,8 @@
 {
-  "name": "c4gt",
+  "name": "user-search",
   "version": "1.0.0",
   "main": "server.js",
-  "author": "",
+  "author": "Soumya Maheshwari",
   "license": "ISC",
   "description": "User Search API with flexible filtering",
   "dependencies": {
