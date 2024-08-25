@@ -61,3 +61,5 @@ SCHEMA_PATH=../schema/user_schema.json
 npm start
 
 ```
+
+This will launch the server on http://localhost:3000 (or the port specified in APPLICATION_PORT).
