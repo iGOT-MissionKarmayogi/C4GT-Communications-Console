@@ -63,3 +63,7 @@ npm start
 ```
 
 This will launch the server on http://localhost:3000 (or the port specified in APPLICATION_PORT).
+
+### 8. Access the API Documentation
+
+You can access the API documentation by navigating to the /doc route on your server. Alternatively, you can paste the `swagger.yaml` file into a Swagger editor to view the documentation.
