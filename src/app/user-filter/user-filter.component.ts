@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../user-service.service';
 
 @Component({
   selector: 'app-user-filter',
@@ -16,47 +17,56 @@ import { CommonModule } from '@angular/common';
 })
 export class UserFilterComponent {
   userFilterForm: FormGroup;
+  selectedFields: string[] = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private userService: UserService) {
     this.userFilterForm = this.fb.group({
-      _id: [''],
       courseId: [''],
       batchId: [''],
       userId: [''],
       location: [''],
       totalLeafNodecount: [''],
-      completedContents: this.fb.array([this.createCompletedContent()]),
       progress: [''],
       batchEnrollmentDate: [''],
       lastAccessTime: [''],
       lastCompletedTime: [''],
       lastUpdatedTime: [''],
-      viewCount: [''],
-      createdAt: [''],
-      updatedAt: [''],
     });
   }
 
-  createCompletedContent(): FormGroup {
-    return this.fb.group({
-      identifier: [''],
-      status: [''],
-    });
-  }
-
-  get completedContents(): FormArray {
-    return this.userFilterForm.get('completedContents') as FormArray;
-  }
-
-  addCompletedContent() {
-    this.completedContents.push(this.createCompletedContent());
-  }
-
-  removeCompletedContent(index: number) {
-    this.completedContents.removeAt(index);
+  onFieldChange(event: any) {
+    const field = event.target.value;
+    if (event.target.checked) {
+      this.selectedFields.push(field);
+    } else {
+      this.selectedFields = this.selectedFields.filter((f) => f !== field);
+    }
   }
 
   onSubmit(): void {
-    console.log(this.userFilterForm.value);
+    console.log(this.userFilterForm);
+
+    if (this.userFilterForm) {
+      const filters = this.userFilterForm.value;
+      const requestBody = {
+        request: {
+          search: {
+            filter: filters,
+            fields: this.selectedFields,
+          },
+        },
+      };
+      console.log(this.userFilterForm.value);
+      this.userService.searchUsers(requestBody).subscribe(
+        (response) => {
+          console.log('API Response:', response);
+        },
+        (error) => {
+          console.error('Error:', error);
+        }
+      );
+    } else {
+      console.error('Form is invalid');
+    }
   }
 }

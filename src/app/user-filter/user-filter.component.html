@@ -1,197 +1,246 @@
 <div class="user-filter-container">
-  <form [formGroup]="userFilterForm">
-    <!-- _id -->
-    <div class="form-group">
-      <label for="_id">User ID</label>
-      <input
-        id="_id"
-        formControlName="_id"
-        type="text"
-        class="form-control"
-        placeholder="Enter User ID"
-      />
-    </div>
+  <form [formGroup]="userFilterForm" class="form-class">
+    <!-- Row 1 -->
+    <div class="form-row">
+      <!-- courseId -->
+      <div class="form-group">
+        <label for="courseId">Course ID</label>
+        <input
+          id="courseId"
+          formControlName="courseId"
+          type="text"
+          class="form-control"
+          placeholder="Enter Course ID"
+          required
+        />
+      </div>
 
-    <!-- courseId -->
-    <div class="form-group">
-      <label for="courseId">Course ID</label>
-      <input
-        id="courseId"
-        formControlName="courseId"
-        type="text"
-        class="form-control"
-        placeholder="Enter Course ID"
-        required
-      />
-    </div>
-
-    <!-- batchId -->
-    <div class="form-group">
-      <label for="batchId">Batch ID</label>
-      <input
-        id="batchId"
-        formControlName="batchId"
-        type="text"
-        class="form-control"
-        placeholder="Enter Batch ID"
-        required
-      />
-    </div>
-
-    <!-- userId -->
-    <div class="form-group">
-      <label for="userId">User ID</label>
-      <input
-        id="userId"
-        formControlName="userId"
-        type="text"
-        class="form-control"
-        placeholder="Enter User ID"
-        required
-      />
-    </div>
-
-    <!-- location -->
-    <div class="form-group">
-      <label for="location">Location</label>
-      <input
-        id="location"
-        formControlName="location"
-        type="text"
-        class="form-control"
-        placeholder="Enter Location"
-        required
-      />
-    </div>
-
-    <!-- totalLeafNodecount -->
-    <div class="form-group">
-      <label for="totalLeafNodecount">Total Leaf Node Count</label>
-      <input
-        id="totalLeafNodecount"
-        formControlName="totalLeafNodecount"
-        type="number"
-        class="form-control"
-        placeholder="Enter Total Leaf Node Count"
-        required
-      />
-    </div>
-
-    <!-- completedContents -->
-    <div class="form-group">
-      <label for="completedContents">Completed Contents</label>
-      <div
-        formArrayName="completedContents"
-        *ngFor="let content of completedContents.controls; let i = index"
-      >
-        <div [formGroupName]="i" class="content-group">
-          <input
-            formControlName="identifier"
-            type="text"
-            class="form-control"
-            placeholder="Enter Identifier"
-            required
-          />
-          <select formControlName="status" class="form-control" required>
-            <option value="0">Not Started</option>
-            <option value="1">In Progress</option>
-            <option value="2">Completed</option>
-          </select>
-        </div>
+      <!-- batchId -->
+      <div class="form-group">
+        <label for="batchId">Batch ID</label>
+        <input
+          id="batchId"
+          formControlName="batchId"
+          type="text"
+          class="form-control"
+          placeholder="Enter Batch ID"
+          required
+        />
       </div>
     </div>
 
-    <!-- progress -->
-    <div class="form-group">
-      <label for="progress">Progress</label>
-      <input
-        id="progress"
-        formControlName="progress"
-        type="number"
-        class="form-control"
-        placeholder="Enter Progress"
-        required
-      />
+    <!-- Row 2 -->
+    <div class="form-row">
+      <!-- userId -->
+      <div class="form-group">
+        <label for="userId">User ID</label>
+        <input
+          id="userId"
+          formControlName="userId"
+          type="text"
+          class="form-control"
+          placeholder="Enter User ID"
+          required
+        />
+      </div>
+
+      <!-- location -->
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input
+          id="location"
+          formControlName="location"
+          type="text"
+          class="form-control"
+          placeholder="Enter Location"
+          required
+        />
+      </div>
     </div>
 
-    <!-- batchEnrollmentDate -->
-    <div class="form-group">
-      <label for="batchEnrollmentDate">Batch Enrollment Date</label>
-      <input
-        id="batchEnrollmentDate"
-        formControlName="batchEnrollmentDate"
-        type="date"
-        class="form-control"
-      />
+    <!-- Row 3 -->
+    <div class="form-row">
+      <!-- totalLeafNodecount -->
+      <div class="form-group">
+        <label for="totalLeafNodecount">Total Leaf Node Count</label>
+        <input
+          id="totalLeafNodecount"
+          formControlName="totalLeafNodecount"
+          type="number"
+          class="form-control"
+          placeholder="Enter Total Leaf Node Count"
+          required
+        />
+      </div>
+
+      <!-- progress -->
+      <div class="form-group">
+        <label for="progress">Progress</label>
+        <input
+          id="progress"
+          formControlName="progress"
+          type="number"
+          class="form-control"
+          placeholder="Enter Progress"
+          required
+        />
+      </div>
     </div>
 
-    <!-- lastAccessTime -->
-    <div class="form-group">
-      <label for="lastAccessTime">Last Access Time</label>
-      <input
-        id="lastAccessTime"
-        formControlName="lastAccessTime"
-        type="date"
-        class="form-control"
-      />
+    <!-- Row 4 -->
+    <div class="form-row">
+      <!-- batchEnrollmentDate -->
+      <div class="form-group">
+        <label for="batchEnrollmentDate">Batch Enrollment Date</label>
+        <input
+          id="batchEnrollmentDate"
+          formControlName="batchEnrollmentDate"
+          type="date"
+          class="form-control"
+        />
+      </div>
+
+      <!-- lastAccessTime -->
+      <div class="form-group">
+        <label for="lastAccessTime">Last Access Time</label>
+        <input
+          id="lastAccessTime"
+          formControlName="lastAccessTime"
+          type="date"
+          class="form-control"
+        />
+      </div>
     </div>
 
-    <!-- lastCompletedTime -->
-    <div class="form-group">
-      <label for="lastCompletedTime">Last Completed Time</label>
-      <input
-        id="lastCompletedTime"
-        formControlName="lastCompletedTime"
-        type="date"
-        class="form-control"
-      />
+    <!-- Row 5 -->
+    <div class="form-row">
+      <!-- lastCompletedTime -->
+      <div class="form-group">
+        <label for="lastCompletedTime">Last Completed Time</label>
+        <input
+          id="lastCompletedTime"
+          formControlName="lastCompletedTime"
+          type="date"
+          class="form-control"
+        />
+      </div>
+
+      <!-- lastUpdatedTime -->
+      <div class="form-group">
+        <label for="lastUpdatedTime">Last Updated Time</label>
+        <input
+          id="lastUpdatedTime"
+          formControlName="lastUpdatedTime"
+          type="date"
+          class="form-control"
+        />
+      </div>
     </div>
 
-    <!-- lastUpdatedTime -->
-    <div class="form-group">
-      <label for="lastUpdatedTime">Last Updated Time</label>
-      <input
-        id="lastUpdatedTime"
-        formControlName="lastUpdatedTime"
-        type="date"
-        class="form-control"
-      />
+    <!-- Fields to include in the response -->
+    <div class="form-group2">
+      <label>Fields to Include in Response:</label>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            (change)="onFieldChange($event)"
+            value="userId"
+          />
+          User ID
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            (change)="onFieldChange($event)"
+            value="courseId"
+          />
+          Course ID
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            (change)="onFieldChange($event)"
+            value="location"
+          />
+          Location
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            (change)="onFieldChange($event)"
+            value="progress"
+          />
+          Progress
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            (change)="onFieldChange($event)"
+            value="batchid"
+          />
+          Batch ID
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            (change)="onFieldChange($event)"
+            value="totalLeafNodecount"
+          />
+          total Leaf Node count
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            (change)="onFieldChange($event)"
+            value="completedContents"
+          />
+          completedContents
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            (change)="onFieldChange($event)"
+            value="batchEnrollmentDate"
+          />
+          batch Enrollment Date
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            (change)="onFieldChange($event)"
+            value="lastAccessTime"
+          />
+          lastAccessTime
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            (change)="onFieldChange($event)"
+            value="lastCompletedTime"
+          />
+          lastCompletedTime
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            (change)="onFieldChange($event)"
+            value="lastUpdatedTime"
+          />
+          lastUpdatedTime
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            (change)="onFieldChange($event)"
+            value="viewCount"
+          />
+          viewCount
+        </label>
+      </div>
     </div>
-
-    <!-- viewCount -->
-    <div class="form-group">
-      <label for="viewCount">View Count</label>
-      <input
-        id="viewCount"
-        formControlName="viewCount"
-        type="number"
-        class="form-control"
-        placeholder="Enter View Count"
-      />
-    </div>
-
-    <!-- createdAt -->
-    <div class="form-group">
-      <label for="createdAt">Created At</label>
-      <input
-        id="createdAt"
-        formControlName="createdAt"
-        type="date"
-        class="form-control"
-      />
-    </div>
-
-    <!-- updatedAt -->
-    <div class="form-group">
-      <label for="updatedAt">Updated At</label>
-      <input
-        id="updatedAt"
-        formControlName="updatedAt"
-        type="date"
-        class="form-control"
-      />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+      Submit
+    </button>
   </form>
 </div>
