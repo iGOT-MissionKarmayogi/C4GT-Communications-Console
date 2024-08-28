@@ -1,0 +1,103 @@
+/* Container styling */
+.form-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Grid layout for the form */
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.form-group:last-child {
+  margin-right: 0;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Styling for the array field section */
+.completed-content-group {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+/* Button styling */
+button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ccc;
+}
+
+button.remove-button {
+  background-color: #dc3545;
+  margin-left: 10px;
+}
+
+button.add-button {
+  background-color: #28a745;
+}
+
+button.remove-button:hover,
+button.add-button:hover,
+button:hover {
+  opacity: 0.8;
+}
+
+/* Submit button styling */
+button[type="submit"] {
+  background-color: #28a745;
+  margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+/* Responsive styling */
+@media (max-width: 900px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-group {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+}
