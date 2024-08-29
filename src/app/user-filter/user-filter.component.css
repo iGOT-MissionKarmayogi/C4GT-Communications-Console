@@ -75,6 +75,47 @@ button:disabled {
   background-color: #ccc;
 }
 
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 1px 0;
+}
+
+.custom-checkbox input {
+  display: none;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  margin-right: 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.checkbox::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: #007bff;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 3px;
+  transition: transform 0.2s ease;
+}
+
+.custom-checkbox input:checked + .checkbox::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+.custom-checkbox:hover .checkbox {
+  border-color: #0056b3;
+}
+
 /* Submit button styling */
 button[type="submit"] {
   background-color: #28a745;

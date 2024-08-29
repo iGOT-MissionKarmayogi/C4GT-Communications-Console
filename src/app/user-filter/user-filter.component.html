@@ -1,8 +1,6 @@
 <div class="user-filter-container">
   <form [formGroup]="userFilterForm" class="form-class">
-    <!-- Row 1 -->
     <div class="form-row">
-      <!-- courseId -->
       <div class="form-group">
         <label for="courseId">Course ID</label>
         <input
@@ -15,7 +13,6 @@
         />
       </div>
 
-      <!-- batchId -->
       <div class="form-group">
         <label for="batchId">Batch ID</label>
         <input
@@ -29,9 +26,7 @@
       </div>
     </div>
 
-    <!-- Row 2 -->
     <div class="form-row">
-      <!-- userId -->
       <div class="form-group">
         <label for="userId">User ID</label>
         <input
@@ -44,7 +39,6 @@
         />
       </div>
 
-      <!-- location -->
       <div class="form-group">
         <label for="location">Location</label>
         <input
@@ -58,9 +52,7 @@
       </div>
     </div>
 
-    <!-- Row 3 -->
     <div class="form-row">
-      <!-- totalLeafNodecount -->
       <div class="form-group">
         <label for="totalLeafNodecount">Total Leaf Node Count</label>
         <input
@@ -73,7 +65,6 @@
         />
       </div>
 
-      <!-- progress -->
       <div class="form-group">
         <label for="progress">Progress</label>
         <input
@@ -87,9 +78,7 @@
       </div>
     </div>
 
-    <!-- Row 4 -->
     <div class="form-row">
-      <!-- batchEnrollmentDate -->
       <div class="form-group">
         <label for="batchEnrollmentDate">Batch Enrollment Date</label>
         <input
@@ -100,7 +89,6 @@
         />
       </div>
 
-      <!-- lastAccessTime -->
       <div class="form-group">
         <label for="lastAccessTime">Last Access Time</label>
         <input
@@ -112,9 +100,7 @@
       </div>
     </div>
 
-    <!-- Row 5 -->
     <div class="form-row">
-      <!-- lastCompletedTime -->
       <div class="form-group">
         <label for="lastCompletedTime">Last Completed Time</label>
         <input
@@ -125,7 +111,6 @@
         />
       </div>
 
-      <!-- lastUpdatedTime -->
       <div class="form-group">
         <label for="lastUpdatedTime">Last Updated Time</label>
         <input
@@ -137,127 +122,169 @@
       </div>
     </div>
 
-    <!-- Fields to include in the response -->
     <div class="form-group2">
       <label>Fields to Include in Response:</label>
       <div>
-        <label>
-          <input
-            type="checkbox"
-            (change)="onFieldChange($event)"
-            value="userId"
-          />
-          User ID
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            (change)="onFieldChange($event)"
-            value="courseId"
-          />
-          Course ID
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            (change)="onFieldChange($event)"
-            value="location"
-          />
-          Location
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            (change)="onFieldChange($event)"
-            value="progress"
-          />
-          Progress
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            (change)="onFieldChange($event)"
-            value="batchid"
-          />
-          Batch ID
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            (change)="onFieldChange($event)"
-            value="totalLeafNodecount"
-          />
-          total Leaf Node count
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            (change)="onFieldChange($event)"
-            value="completedContents"
-          />
-          completedContents
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            (change)="onFieldChange($event)"
-            value="batchEnrollmentDate"
-          />
-          batch Enrollment Date
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            (change)="onFieldChange($event)"
-            value="lastAccessTime"
-          />
-          lastAccessTime
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            (change)="onFieldChange($event)"
-            value="lastCompletedTime"
-          />
-          lastCompletedTime
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            (change)="onFieldChange($event)"
-            value="lastUpdatedTime"
-          />
-          lastUpdatedTime
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            (change)="onFieldChange($event)"
-            value="viewCount"
-          />
-          viewCount
-        </label>
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="toggleSelectAll($event)"
+              [checked]="allFieldsSelected"
+            />
+            <span class="checkbox"></span>
+            Select All Fields
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="userId"
+            />
+            <span class="checkbox"></span>
+            User ID
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="courseId"
+            />
+            <span class="checkbox"></span>
+            Course ID
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="location"
+            />
+            <span class="checkbox"></span>
+            Location
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="progress"
+            />
+            <span class="checkbox"></span>
+            Progress
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="batchId"
+            />
+            <span class="checkbox"></span>
+            Batch ID
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="totalLeafNodecount"
+            />
+            <span class="checkbox"></span>
+            Total Leaf Node Count
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="completedContents"
+            />
+            <span class="checkbox"></span>
+            Completed Contents
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="batchEnrollmentDate"
+            />
+            <span class="checkbox"></span>
+            Batch Enrollment Date
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="lastAccessTime"
+            />
+            <span class="checkbox"></span>
+            Last Access Time
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="lastCompletedTime"
+            />
+            <span class="checkbox"></span>
+            Last Completed Time
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="lastUpdatedTime"
+            />
+            <span class="checkbox"></span>
+            Last Updated Time
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="viewCount"
+            />
+            <span class="checkbox"></span>
+            View Count
+          </label>
+        </div>
       </div>
     </div>
+
     <button type="submit" class="btn btn-primary" (click)="onSubmit()">
       Submit
     </button>
   </form>
-
-  <div *ngIf="apiResponse">
-    <h3>Users Found: {{ apiResponse.result.count }}</h3>
-    <ul>
-      <li *ngFor="let user of apiResponse.result.users">
-        <ng-container *ngFor="let key of getObjectKeys(user)">
-          <p>
-            <strong>{{ key }}:</strong> {{ user[key] }}
-          </p>
-        </ng-container>
-        <hr />
-      </li>
-    </ul>
-  </div>
-  <div *ngIf="errorMessage" class="error">
-    <p>{{ errorMessage }}</p>
-  </div>
 </div>

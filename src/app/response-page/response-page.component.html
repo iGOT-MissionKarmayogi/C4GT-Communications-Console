@@ -1,0 +1,21 @@
+<div *ngIf="responseData">
+  <h3>Users Found: {{ responseData.result.count }}</h3>
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let key of getObjectKeys(responseData.result.users[0])">
+          {{ key }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of responseData.result.users">
+        <td *ngFor="let key of getObjectKeys(user)">{{ user[key] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="errorMessage" class="error">
+  <p>{{ errorMessage }}</p>
+</div>

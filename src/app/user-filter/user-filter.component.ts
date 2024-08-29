@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../user-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-filter',
@@ -12,11 +13,30 @@ import { UserService } from '../user-service.service';
 })
 export class UserFilterComponent {
   userFilterForm: FormGroup;
+  responseFields: string[] = [
+    'userId',
+    'courseId',
+    'location',
+    'progress',
+    'batchId',
+    'totalLeafNodecount',
+    'completedContents',
+    'batchEnrollmentDate',
+    'lastAccessTime',
+    'lastCompletedTime',
+    'lastUpdatedTime',
+    'viewCount',
+  ];
   selectedFields: string[] = [];
+  allFieldsSelected: boolean = false;
   apiResponse: any;
   errorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private router: Router
+  ) {
     this.userFilterForm = this.fb.group({
       courseId: [''],
       batchId: [''],
@@ -31,6 +51,13 @@ export class UserFilterComponent {
     });
   }
 
+  toggleSelectAll(event: any) {
+    this.allFieldsSelected = event.target.checked;
+    this.selectedFields = this.allFieldsSelected
+      ? [...this.responseFields]
+      : [];
+  }
+
   getObjectKeys(obj: any): string[] {
     return Object.keys(obj);
   }
@@ -41,6 +68,8 @@ export class UserFilterComponent {
     } else {
       this.selectedFields = this.selectedFields.filter((f) => f !== field);
     }
+    this.allFieldsSelected =
+      this.selectedFields.length === this.responseFields.length;
   }
 
   onSubmit(): void {
@@ -72,10 +101,13 @@ export class UserFilterComponent {
           this.apiResponse = response;
           this.errorMessage = null;
           console.log('API Response:', response);
+          this.userService.setResponseData(this.apiResponse);
+          this.router.navigate(['/users']);
         },
         (error) => {
           this.errorMessage = 'Failed to fetch data. Please try again later.';
           console.error('Error:', error);
+          this.router.navigate(['/users']);
         }
       );
     } else {
