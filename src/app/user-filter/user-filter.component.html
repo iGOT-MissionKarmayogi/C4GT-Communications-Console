@@ -243,4 +243,21 @@
       Submit
     </button>
   </form>
+
+  <div *ngIf="apiResponse">
+    <h3>Users Found: {{ apiResponse.result.count }}</h3>
+    <ul>
+      <li *ngFor="let user of apiResponse.result.users">
+        <ng-container *ngFor="let key of getObjectKeys(user)">
+          <p>
+            <strong>{{ key }}:</strong> {{ user[key] }}
+          </p>
+        </ng-container>
+        <hr />
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="errorMessage" class="error">
+    <p>{{ errorMessage }}</p>
+  </div>
 </div>
