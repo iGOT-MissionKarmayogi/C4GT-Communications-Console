@@ -5,41 +5,53 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Arial", sans-serif;
+  background-color: #f4f4f9;
   padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .app-head {
   margin-bottom: 20px;
   text-align: center;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: #333;
-  padding: 10px;
-  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #0073e6;
 }
 
 .product-head {
   text-align: center;
   margin-bottom: 15px;
-  font-size: 1.5rem;
-  color: #555;
+  font-size: 1.8rem;
+  color: #0073e6;
 }
 
 .org-head {
   text-align: center;
   margin-bottom: 20px;
-  font-size: 1.2rem;
-  color: #777;
+  font-size: 1.3rem;
+  color: #555;
 }
 
 .icon {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   margin-top: 20px;
 }
 
 .icon img {
+  width: 24px;
+  height: auto;
   margin-right: 8px;
 }
 
@@ -50,8 +62,10 @@ body {
   font-weight: bold;
   display: flex;
   align-items: center;
+  transition: color 0.3s;
 }
 
 .icon a:hover {
+  color: #005bb5;
   text-decoration: underline;
 }

@@ -33,7 +33,6 @@ export class UserFilterComponent {
   allFieldsSelected: boolean = false;
   apiResponse: any;
   errorMessage: string | null = null;
-
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
@@ -56,6 +55,9 @@ export class UserFilterComponent {
       lastAccessTime: [''],
       lastCompletedTime: [''],
       lastUpdatedTime: [''],
+      limit: [''],
+      sortByField: [''],
+      sortByOrder: ['asc'],
     });
 
     this.onProgressTypeChange('single');
@@ -144,7 +146,10 @@ export class UserFilterComponent {
             key !== 'progressRangeEnd' &&
             key !== 'batchEnrollmentDateStart' &&
             key !== 'batchEnrollmentDateEnd' &&
-            key != 'progressType'
+            key != 'progressType' &&
+            key != 'limit' &&
+            key != 'sortByField' &&
+            key != 'sortByOrder'
           ) {
             obj[key] = this.userFilterForm.value[key];
           }
@@ -154,11 +159,21 @@ export class UserFilterComponent {
       console.log(filters, 'filters');
       console.log(this.selectedFields, 'this.selectedFields');
 
+      const limit = formValues.limit
+        ? parseInt(formValues.limit, 10)
+        : undefined;
+      const sortByField = formValues.sortByField;
+      const sortByOrder = formValues.sortByOrder;
+
+      const sortBy = sortByField ? { [sortByField]: sortByOrder } : undefined;
+
       const requestBody = {
         request: {
           search: {
             filter: filters,
             fields: this.selectedFields,
+            limit: limit,
+            sort_by: sortBy,
           },
         },
       };
@@ -172,12 +187,12 @@ export class UserFilterComponent {
           this.errorMessage = null;
           console.log('API Response:', response);
           this.userService.setResponseData(this.apiResponse);
-          this.router.navigate(['/users']);
+          this.router.navigate(['/records']);
         },
         (error) => {
           this.errorMessage = 'Failed to fetch data. Please try again later.';
           console.error('Error:', error);
-          this.router.navigate(['/users']);
+          this.router.navigate(['/records']);
         }
       );
     } else {

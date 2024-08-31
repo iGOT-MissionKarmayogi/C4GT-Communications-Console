@@ -4,5 +4,5 @@ import { ResponsePageComponent } from './response-page/response-page.component';
 
 export const routes: Routes = [
   { path: '', component: UserFilterComponent },
-  { path: 'users', component: ResponsePageComponent },
+  { path: 'records', component: ResponsePageComponent },
 ];
