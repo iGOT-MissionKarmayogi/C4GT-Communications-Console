@@ -190,7 +190,12 @@ export class UserFilterComponent {
           this.router.navigate(['/records']);
         },
         (error) => {
-          this.errorMessage = 'Failed to fetch data. Please try again later.';
+          if (error?.responseCode === 404) {
+            console.log('kk');
+            this.errorMessage = 'No users found matching the search criteria.';
+          } else {
+            this.errorMessage = 'Failed to fetch data. Please try again later.';
+          }
           console.error('Error:', error);
           this.router.navigate(['/records']);
         }

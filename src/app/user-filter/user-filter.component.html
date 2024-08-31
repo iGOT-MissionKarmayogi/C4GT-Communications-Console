@@ -53,9 +53,11 @@
     </div>
 
     <div class="form-row">
-      <div class="form-group-progress">
-        <label for="dateType">Batch Enrollment Date Type</label>
-        <div>
+      <div class="form-group">
+        <label for="dateType" style="text-decoration: underline"
+          >Batch Enrollment Date Type</label
+        >
+        <div class="radio-progress">
           <label>
             <input
               type="radio"
@@ -63,6 +65,7 @@
               value="single"
               (change)="onDateTypeChange('single')"
               checked
+              class="form-control"
             />
             Single Date
           </label>
@@ -71,6 +74,7 @@
               type="radio"
               formControlName="dateType"
               value="range"
+              class="form-control"
               (change)="onDateTypeChange('range')"
             />
             Date Range
@@ -78,13 +82,12 @@
         </div>
 
         <!-- Single Date Input -->
-        <div *ngIf="isSingleDate" class="form-group">
+        <div *ngIf="isSingleDate" class="form-group-progress">
           <label for="batchEnrollmentDate">Batch Enrollment Date</label>
           <input
             id="batchEnrollmentDate"
             formControlName="batchEnrollmentDate"
             type="date"
-            class="form-control"
             required
           />
         </div>
@@ -114,10 +117,13 @@
           />
         </div>
       </div>
-
-      <div class="form-group-progress">
-        <label for="progress">Progress</label>
-        <div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="progress" style="text-decoration: underline"
+          >Progress Type</label
+        >
+        <div class="radio-progress">
           <label>
             <input
               type="radio"
@@ -237,30 +243,6 @@
             />
             <span class="checkbox"></span>
             Select All Fields
-          </label>
-        </div>
-
-        <div class="form-group">
-          <label class="custom-checkbox">
-            <input
-              type="checkbox"
-              (change)="onFieldChange($event)"
-              value="userId"
-            />
-            <span class="checkbox"></span>
-            User ID
-          </label>
-        </div>
-
-        <div class="form-group">
-          <label class="custom-checkbox">
-            <input
-              type="checkbox"
-              (change)="onFieldChange($event)"
-              value="courseId"
-            />
-            <span class="checkbox"></span>
-            Course ID
           </label>
         </div>
 
@@ -397,12 +379,16 @@
           </option>
         </select>
       </div>
+    </div>
 
-      <label for="sortByOrder">Sort Order</label>
-      <select id="sortByOrder" formControlName="sortByOrder">
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
-      </select>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="sortByOrder">Sort Order</label>
+        <select id="sortByOrder" formControlName="sortByOrder">
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </div>
     </div>
 
     <div class="form-group">
