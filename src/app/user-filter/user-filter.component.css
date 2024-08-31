@@ -1,6 +1,5 @@
 /* Container styling */
 .user-filter-container {
-  /* max-width: 1200px; */
   margin: 40px auto;
   padding: 10px;
   border: 1px solid #ddd;
@@ -27,19 +26,25 @@
   margin-right: 10px;
   padding: 10px;
 }
+.form-group-progress {
+  flex: 1;
+  margin-right: 10px;
+  padding: 10px;
+}
 
 .form-group:last-child {
   margin-right: 0;
 }
 
-.form-group label {
+.form-group label,
+.form-group-progress label {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
 .form-group input,
-.form-group select {
+.form-group select .form-group-progress input .form-group-progress select {
   width: 90%;
   padding: 8px;
   border: 1px solid #ccc;

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { UserService } from '../user-service.service';
+import { UserService } from '../services/user-service.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 })
 export class UserFilterComponent {
   userFilterForm: FormGroup;
+  isSingleValue: boolean = true;
+  isSingleDate: boolean = true;
   responseFields: string[] = [
     'userId',
     'courseId',
@@ -43,12 +45,21 @@ export class UserFilterComponent {
       userId: [''],
       location: [''],
       totalLeafNodecount: [''],
+      progressType: ['single'],
       progress: [''],
+      progressRangeStart: [''],
+      progressRangeEnd: [''],
+      dateType: ['single'],
       batchEnrollmentDate: [''],
+      batchEnrollmentDateStart: [''],
+      batchEnrollmentDateEnd: [''],
       lastAccessTime: [''],
       lastCompletedTime: [''],
       lastUpdatedTime: [''],
     });
+
+    this.onProgressTypeChange('single');
+    this.onDateTypeChange('single');
   }
 
   toggleSelectAll(event: any) {
@@ -61,6 +72,7 @@ export class UserFilterComponent {
   getObjectKeys(obj: any): string[] {
     return Object.keys(obj);
   }
+
   onFieldChange(event: any) {
     const field = event.target.value;
     if (event.target.checked) {
@@ -72,16 +84,75 @@ export class UserFilterComponent {
       this.selectedFields.length === this.responseFields.length;
   }
 
+  onProgressTypeChange(type: string): void {
+    this.isSingleValue = type === 'single';
+    this.userFilterForm.patchValue({
+      progress: '',
+      progressRangeStart: '',
+      progressRangeEnd: '',
+    });
+  }
+
+  onDateTypeChange(type: string): void {
+    this.isSingleDate = type === 'single';
+    this.userFilterForm.patchValue({
+      batchEnrollmentDate: '',
+      batchEnrollmentDateStart: '',
+      batchEnrollmentDateEnd: '',
+    });
+  }
+
   onSubmit(): void {
+    const formValues = this.userFilterForm.value;
+    console.log(formValues, 'formvalues');
+
     if (this.userFilterForm) {
       const filters: { [key: string]: any } = Object.keys(
         this.userFilterForm.value
       )
-        .filter((key) => this.userFilterForm.value[key])
+        .filter(
+          (key) =>
+            this.userFilterForm.value[key] !== '' &&
+            this.userFilterForm.value[key] !== undefined
+        )
         .reduce((obj, key) => {
-          obj[key] = this.userFilterForm.value[key];
+          console.log(formValues[key], ' ');
+          console.log(this.userFilterForm.value[key], ' ');
+
+          if (key === 'batchEnrollmentDate' && this.userFilterForm.value[key]) {
+            obj[key] = this.userFilterForm.value[key];
+          } else if (key === 'dateType') {
+            if (this.isSingleDate) {
+              if (this.userFilterForm.value['batchEnrollmentDate']) {
+                obj['batchEnrollmentDate'] =
+                  this.userFilterForm.value['batchEnrollmentDate'];
+              }
+            } else {
+              if (
+                this.userFilterForm.value['batchEnrollmentDateStart'] &&
+                this.userFilterForm.value['batchEnrollmentDateEnd']
+              ) {
+                obj['batchEnrollmentDate'] = {
+                  min: this.userFilterForm.value['batchEnrollmentDateStart'],
+                  max: this.userFilterForm.value['batchEnrollmentDateEnd'],
+                };
+              }
+            }
+          } else if (
+            key !== 'progress' &&
+            key !== 'progressRangeStart' &&
+            key !== 'progressRangeEnd' &&
+            key !== 'batchEnrollmentDateStart' &&
+            key !== 'batchEnrollmentDateEnd' &&
+            key != 'progressType'
+          ) {
+            obj[key] = this.userFilterForm.value[key];
+          }
           return obj;
         }, {} as { [key: string]: any });
+
+      console.log(filters, 'filters');
+      console.log(this.selectedFields, 'this.selectedFields');
 
       const requestBody = {
         request: {
@@ -97,7 +168,6 @@ export class UserFilterComponent {
       this.userService.searchUsers(requestBody).subscribe(
         (response) => {
           console.log(response, 'response');
-
           this.apiResponse = response;
           this.errorMessage = null;
           console.log('API Response:', response);

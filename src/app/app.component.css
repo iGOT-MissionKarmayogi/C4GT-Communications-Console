@@ -1,4 +1,57 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.app-head {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  padding: 10px;
+  border-bottom: 2px solid #ccc;
+}
+
+.product-head {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  color: #555;
+}
+
+.org-head {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  color: #777;
+}
+
+.icon {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.icon img {
+  margin-right: 8px;
+}
+
+.icon a {
+  text-decoration: none;
+  color: #0073e6;
+  font-size: 1.3rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.icon a:hover {
+  text-decoration: underline;
 }

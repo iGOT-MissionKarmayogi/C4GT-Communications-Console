@@ -1,5 +1,5 @@
 <div class="user-filter-container">
-  <form [formGroup]="userFilterForm" class="form-class">
+  <form [formGroup]="userFilterForm" class="form-class" (ngSubmit)="onSubmit()">
     <div class="form-row">
       <div class="form-group">
         <label for="courseId">Course ID</label>
@@ -53,6 +53,133 @@
     </div>
 
     <div class="form-row">
+      <div class="form-group-progress">
+        <label for="dateType">Batch Enrollment Date Type</label>
+        <div>
+          <label>
+            <input
+              type="radio"
+              formControlName="dateType"
+              value="single"
+              (change)="onDateTypeChange('single')"
+              checked
+            />
+            Single Date
+          </label>
+          <label>
+            <input
+              type="radio"
+              formControlName="dateType"
+              value="range"
+              (change)="onDateTypeChange('range')"
+            />
+            Date Range
+          </label>
+        </div>
+
+        <!-- Single Date Input -->
+        <div *ngIf="isSingleDate" class="form-group">
+          <label for="batchEnrollmentDate">Batch Enrollment Date</label>
+          <input
+            id="batchEnrollmentDate"
+            formControlName="batchEnrollmentDate"
+            type="date"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <!-- Date Range Inputs -->
+        <div *ngIf="!isSingleDate" class="form-group">
+          <label for="batchEnrollmentDateStart"
+            >Batch Enrollment Date Start</label
+          >
+          <input
+            id="batchEnrollmentDateStart"
+            formControlName="batchEnrollmentDateStart"
+            type="date"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div *ngIf="!isSingleDate" class="form-group">
+          <label for="batchEnrollmentDateEnd">Batch Enrollment Date End</label>
+          <input
+            id="batchEnrollmentDateEnd"
+            formControlName="batchEnrollmentDateEnd"
+            type="date"
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-group-progress">
+        <label for="progress">Progress</label>
+        <div>
+          <label>
+            <input
+              type="radio"
+              formControlName="progressType"
+              value="single"
+              (change)="onProgressTypeChange('single')"
+              checked
+            />
+            Single Value
+          </label>
+          <label>
+            <input
+              type="radio"
+              formControlName="progressType"
+              value="range"
+              (change)="onProgressTypeChange('range')"
+            />
+            Range Value
+          </label>
+        </div>
+
+        <!-- Single Value Input -->
+        <div *ngIf="isSingleValue" class="form-group">
+          <label for="progress">Progress</label>
+          <input
+            id="progress"
+            formControlName="progress"
+            type="number"
+            class="form-control"
+            placeholder="Enter Progress"
+            required
+          />
+        </div>
+
+        <!-- Range Value Inputs -->
+        <div *ngIf="!isSingleValue" class="form-group">
+          <label for="progressRangeStart">Progress Range Start</label>
+          <input
+            id="progressRangeStart"
+            formControlName="progressRangeStart"
+            type="number"
+            class="form-control"
+            placeholder="Enter Progress Range Start"
+            required
+          />
+        </div>
+
+        <div *ngIf="!isSingleValue" class="form-group">
+          <label for="progressRangeEnd">Progress Range End</label>
+          <input
+            id="progressRangeEnd"
+            formControlName="progressRangeEnd"
+            type="number"
+            class="form-control"
+            placeholder="Enter Progress Range End"
+            required
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
       <div class="form-group">
         <label for="totalLeafNodecount">Total Leaf Node Count</label>
         <input
@@ -62,30 +189,6 @@
           class="form-control"
           placeholder="Enter Total Leaf Node Count"
           required
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="progress">Progress</label>
-        <input
-          id="progress"
-          formControlName="progress"
-          type="number"
-          class="form-control"
-          placeholder="Enter Progress"
-          required
-        />
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label for="batchEnrollmentDate">Batch Enrollment Date</label>
-        <input
-          id="batchEnrollmentDate"
-          formControlName="batchEnrollmentDate"
-          type="date"
-          class="form-control"
         />
       </div>
 
@@ -268,23 +371,11 @@
             Last Updated Time
           </label>
         </div>
-
-        <div class="form-group">
-          <label class="custom-checkbox">
-            <input
-              type="checkbox"
-              (change)="onFieldChange($event)"
-              value="viewCount"
-            />
-            <span class="checkbox"></span>
-            View Count
-          </label>
-        </div>
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary" (click)="onSubmit()">
-      Submit
-    </button>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
   </form>
 </div>
