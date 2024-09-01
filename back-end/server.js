@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import ConnectDB from './DB/index.js';
 import { errorHandler,notfound } from './middlewares/error.js';
+import AuthRouter from './Routes/Auth.routes.js';
 // "start": "concurrently \"nodemon server.js\" \"nodemon Email/backend/server.js\""
 
 // Import routes
@@ -30,7 +31,7 @@ app.use(bodyParser.json());
 
 
 // Routes
-
+app.use('/api/auth', AuthRouter);
 
 
 // Error handling middlewares
