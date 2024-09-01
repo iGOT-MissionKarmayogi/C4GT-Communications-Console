@@ -1,7 +1,10 @@
 module.exports = {
-  testMatch: ["**/tests/user.test.js"],
+  testMatch: ["**/tests/userSearch.test.js", "**/tests/userModel.test.js"],
   collectCoverage: true,
 
-  collectCoverageFrom: ["controllers/UserSearchController.js"],
+  collectCoverageFrom: [
+    "controllers/UserSearchController.js",
+    "models/**/*.js",
+  ],
   coverageDirectory: "coverage",
 };

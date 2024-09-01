@@ -5,8 +5,6 @@ const path = require("path");
 
 let cachedModel = null;
 
-const SCHEMA_PATH = process.env.SCHEMA_PATH;
-
 const convertJsonSchemaToMongooseSchema = (jsonSchema) => {
   const mongooseSchema = {};
 
@@ -65,6 +63,8 @@ async function fetchSchemaFromLocalFile(filePath) {
 }
 
 async function getSchema() {
+  const SCHEMA_PATH = process.env.SCHEMA_PATH;
+
   if (!SCHEMA_PATH) {
     throw new Error("SCHEMA_PATH is not defined");
   }

@@ -294,74 +294,25 @@
                       "items": {
                         "type": "object",
                         "properties": {
-                          "_id": {
-                            "type": "string",
-                            "description": "Unique identifier for the user."
-                          },
                           "courseId": {
                             "type": "string",
-                            "description": "The unique identifier for the course."
-                          },
-                          "batchId": {
-                            "type": "string",
-                            "description": "The unique identifier for the batch."
+                            "description": "The unique identifier for the course.",
+                            "example": "Python"
                           },
                           "userId": {
                             "type": "string",
-                            "description": "The unique identifier for the user."
+                            "description": "The unique identifier for the user.",
+                            "example": "Soumya"
                           },
                           "location": {
                             "type": "string",
-                            "description": "The geographical location associated with the user."
-                          },
-                          "totalLeafNodecount": {
-                            "type": "number",
-                            "description": "The total count of contents in the course."
-                          },
-                          "completedContents": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "identifier": {
-                                  "type": "string",
-                                  "description": "The unique identifier of the completed content."
-                                },
-                                "status": {
-                                  "type": "number",
-                                  "description": "The status of the completed content (0: not started, 1: in progress, 2: completed)."
-                                }
-                              }
-                            },
-                            "description": "List of completed contents by the user with their statuses."
+                            "description": "The geographical location associated with the user.",
+                            "example": "Delhi"
                           },
                           "progress": {
                             "type": "number",
-                            "description": "The progress percentage of the user in the course."
-                          },
-                          "batchEnrollmentDate": {
-                            "type": "string",
-                            "format": "date",
-                            "description": "The date when the user was enrolled in the batch."
-                          },
-                          "lastAccessTime": {
-                            "type": "string",
-                            "format": "date",
-                            "description": "The last date and time when the user accessed the content."
-                          },
-                          "lastCompletedTime": {
-                            "type": "string",
-                            "format": "date",
-                            "description": "The last date and time when the user completed content."
-                          },
-                          "lastUpdatedTime": {
-                            "type": "string",
-                            "format": "date",
-                            "description": "The last date and time when the user data was updated."
-                          },
-                          "viewCount": {
-                            "type": "number",
-                            "description": "The number of times the user has viewed the content."
+                            "description": "The progress percentage of the user in the course.",
+                            "example": 95
                           }
                         }
                       }
@@ -426,7 +377,7 @@
                   "example": "404"
                 },
                 "result": {
-                  "type": "null",
+                  "type": "object",
                   "description": "No data found.",
                   "example": {}
                 }
@@ -487,7 +438,7 @@
                   "example": "500"
                 },
                 "result": {
-                  "type": "null",
+                  "type": "object",
                   "description": "No data returned due to an error.",
                   "example": {}
                 }

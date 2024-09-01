@@ -148,10 +148,15 @@ exports.userSearch = searchAsync(async (req, res, next) => {
         : fields_to_be_returned.join(" ") + " -_id";
 
     // Handling limit
-    let queryLimit = 0;
+
+    let queryLimit;
+    if (limit == 0) {
+      queryLimit = 0;
+    }
     if (limit) {
       queryLimit = parseInt(limit, 10);
-      if (isNaN(queryLimit) || queryLimit <= 0) {
+
+      if (isNaN(queryLimit) || queryLimit < 0) {
         return res
           .status(400)
           .json(
@@ -206,6 +211,30 @@ exports.userSearch = searchAsync(async (req, res, next) => {
     const users = await usersQuery;
 
     console.log("----Query result:----", users);
+
+    if (queryLimit === 0) {
+      const userCount = await user.countDocuments(query);
+
+      const response = {
+        id: "api.user.search",
+        ver: "1.0",
+        ts: new Date().toISOString(),
+        params: {
+          resmsgid: resmsgid,
+          msgid: null,
+          err: null,
+          status: "successful",
+          errmsg: null,
+        },
+        responseCode: "ok",
+        result: {
+          count: userCount,
+          users: [],
+        },
+      };
+
+      return res.status(200).json(response);
+    }
 
     if (users.length === 0) {
       return res
