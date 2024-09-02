@@ -1,14 +1,21 @@
-/* css for response records */
 table {
-  width: 100%;
+  width: 96%;
   border-collapse: collapse;
-  margin-top: 15px;
+  margin: 15px auto;
+  align-items: center;
+}
+.records {
+  font-size: 27px;
+  text-align: center;
+}
+th {
+  font-size: 20px;
 }
 
 th,
 td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 14px;
   text-align: left;
 }
 
@@ -22,6 +29,19 @@ tr:nth-child(even) {
 }
 
 .error {
-  color: red;
-  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  color: #ff4d4f;
+  border: 1px solid #f5c2c7;
+  border-radius: 8px;
+  padding: 20px;
+  font-size: 1.9rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.error p {
+  margin: 0;
 }

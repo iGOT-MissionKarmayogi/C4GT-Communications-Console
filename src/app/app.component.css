@@ -5,7 +5,6 @@
 }
 
 body {
-  font-family: "Arial", sans-serif;
   background-color: #f4f4f9;
   padding: 20px;
 }
@@ -26,46 +25,4 @@ body {
   color: #333;
   padding-bottom: 10px;
   border-bottom: 2px solid #0073e6;
-}
-
-.product-head {
-  text-align: center;
-  margin-bottom: 15px;
-  font-size: 1.8rem;
-  color: #0073e6;
-}
-
-.org-head {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.3rem;
-  color: #555;
-}
-
-.icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.icon img {
-  width: 24px;
-  height: auto;
-  margin-right: 8px;
-}
-
-.icon a {
-  text-decoration: none;
-  color: #0073e6;
-  font-size: 1.3rem;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  transition: color 0.3s;
-}
-
-.icon a:hover {
-  color: #005bb5;
-  text-decoration: underline;
 }

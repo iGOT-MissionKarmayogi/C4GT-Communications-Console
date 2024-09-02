@@ -54,45 +54,42 @@
 
     <div class="form-row">
       <div class="form-group">
-        <label for="dateType" style="text-decoration: underline"
-          >Batch Enrollment Date Type</label
+        <label for="dateType" class="label-underline">
+          Batch Enrollment Date Type</label
         >
-        <div class="radio-progress">
-          <label>
+        <div class="radio-group">
+          <label class="radio-inline">
             <input
               type="radio"
               formControlName="dateType"
               value="single"
               (change)="onDateTypeChange('single')"
               checked
-              class="form-control"
             />
             Single Date
           </label>
-          <label>
+          <label class="radio-inline">
             <input
               type="radio"
               formControlName="dateType"
               value="range"
-              class="form-control"
               (change)="onDateTypeChange('range')"
             />
             Date Range
           </label>
         </div>
 
-        <!-- Single Date Input -->
-        <div *ngIf="isSingleDate" class="form-group-progress">
+        <div *ngIf="isSingleDate" class="form-group single-date">
           <label for="batchEnrollmentDate">Batch Enrollment Date</label>
           <input
             id="batchEnrollmentDate"
             formControlName="batchEnrollmentDate"
             type="date"
+            class="form-control"
             required
           />
         </div>
 
-        <!-- Date Range Inputs -->
         <div *ngIf="!isSingleDate" class="form-group">
           <label for="batchEnrollmentDateStart"
             >Batch Enrollment Date Start</label
@@ -106,7 +103,7 @@
           />
         </div>
 
-        <div *ngIf="!isSingleDate" class="form-group">
+        <div *ngIf="!isSingleDate" class="form-group" style="margin-top: 10px">
           <label for="batchEnrollmentDateEnd">Batch Enrollment Date End</label>
           <input
             id="batchEnrollmentDateEnd"
@@ -117,14 +114,10 @@
           />
         </div>
       </div>
-    </div>
-    <div class="form-row">
       <div class="form-group">
-        <label for="progress" style="text-decoration: underline"
-          >Progress Type</label
-        >
-        <div class="radio-progress">
-          <label>
+        <label for="progressType" class="label-underline">Progress Type</label>
+        <div class="radio-group">
+          <label class="radio-inline">
             <input
               type="radio"
               formControlName="progressType"
@@ -134,7 +127,7 @@
             />
             Single Value
           </label>
-          <label>
+          <label class="radio-inline">
             <input
               type="radio"
               formControlName="progressType"
@@ -145,8 +138,7 @@
           </label>
         </div>
 
-        <!-- Single Value Input -->
-        <div *ngIf="isSingleValue" class="form-group">
+        <div *ngIf="isSingleValue" class="form-group single-progress">
           <label for="progress">Progress</label>
           <input
             id="progress"
@@ -158,7 +150,6 @@
           />
         </div>
 
-        <!-- Range Value Inputs -->
         <div *ngIf="!isSingleValue" class="form-group">
           <label for="progressRangeStart">Progress Range Start</label>
           <input
@@ -171,8 +162,8 @@
           />
         </div>
 
-        <div *ngIf="!isSingleValue" class="form-group">
-          <label for="progressRangeEnd">Progress Range End</label>
+        <div *ngIf="!isSingleValue" class="form-group" style="margin-top: 10px">
+          <label for="progressRangeEnd">Progress Range Start</label>
           <input
             id="progressRangeEnd"
             formControlName="progressRangeEnd"
@@ -184,6 +175,7 @@
         </div>
       </div>
     </div>
+    <div class="form-row"></div>
 
     <div class="form-row">
       <div class="form-group">
@@ -231,9 +223,10 @@
       </div>
     </div>
 
-    <div class="form-group2">
-      <label>Fields to Include in Response:</label>
-      <div>
+    <div class="form-group">
+      <h1 class="response-title">Fields to Include in Response:</h1>
+
+      <div class="response">
         <div class="form-group">
           <label class="custom-checkbox">
             <input
@@ -353,6 +346,18 @@
             Last Updated Time
           </label>
         </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="viewCount"
+            />
+            <span class="checkbox"></span>
+            View Count
+          </label>
+        </div>
       </div>
     </div>
 
@@ -372,9 +377,17 @@
     <div class="form-row">
       <div class="form-group">
         <label for="sortByField">Sort By Field</label>
-        <select id="sortByField" formControlName="sortByField">
+        <select
+          id="sortByField"
+          formControlName="sortByField"
+          class="form-control"
+        >
           <option value="" disabled>Select a field</option>
-          <option *ngFor="let field of responseFields" [value]="field">
+          <option
+            *ngFor="let field of responseFields"
+            [value]="field"
+            class="form-control"
+          >
             {{ field }}
           </option>
         </select>
@@ -390,9 +403,9 @@
         </select>
       </div>
     </div>
-
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="form-row">
+      <button type="submit" class="submit-btn">Submit</button>
+      <button type="reset" class="reset-btn" (click)="onReset()">Reset</button>
     </div>
   </form>
 </div>

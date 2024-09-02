@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../services/user-service.service';
 import { Router } from '@angular/router';
@@ -45,9 +50,9 @@ export class UserFilterComponent {
       location: [''],
       totalLeafNodecount: [''],
       progressType: ['single'],
-      progress: [''],
-      progressRangeStart: [''],
-      progressRangeEnd: [''],
+      progress: ['', [Validators.min(0), Validators.max(100)]],
+      progressRangeStart: ['', [Validators.min(0), Validators.max(100)]],
+      progressRangeEnd: ['', [Validators.min(0), Validators.max(100)]],
       dateType: ['single'],
       batchEnrollmentDate: [''],
       batchEnrollmentDateStart: [''],
@@ -55,7 +60,7 @@ export class UserFilterComponent {
       lastAccessTime: [''],
       lastCompletedTime: [''],
       lastUpdatedTime: [''],
-      limit: [''],
+      limit: ['', [Validators.min(0)]],
       sortByField: [''],
       sortByOrder: ['asc'],
     });
@@ -190,18 +195,32 @@ export class UserFilterComponent {
           this.router.navigate(['/records']);
         },
         (error) => {
-          if (error?.responseCode === 404) {
-            console.log('kk');
+          console.error('Error:', error);
+          if (error.status === 404) {
+            console.log('404 Error');
             this.errorMessage = 'No users found matching the search criteria.';
+            this.userService.setErrorMessage(this.errorMessage);
+            console.log(this.errorMessage);
           } else {
             this.errorMessage = 'Failed to fetch data. Please try again later.';
           }
-          console.error('Error:', error);
           this.router.navigate(['/records']);
         }
       );
     } else {
       console.error('Form is invalid');
     }
+  }
+
+  onReset(): void {
+    this.userFilterForm.reset({
+      progressType: 'single',
+      dateType: 'single',
+      sortByOrder: 'asc',
+    });
+    this.selectedFields = [];
+    this.allFieldsSelected = false;
+    this.onProgressTypeChange('single');
+    this.onDateTypeChange('single');
   }
 }

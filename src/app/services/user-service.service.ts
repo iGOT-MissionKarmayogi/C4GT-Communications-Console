@@ -9,7 +9,7 @@ import { environment } from '../environments/environment';
 export class UserService {
   private apiUrl: string = environment.apiUrl;
   private responseData: any;
-  private errorMessageSubject = new BehaviorSubject<string | null>(null);
+  private errorMessageSubject: any;
 
   constructor(private http: HttpClient) {}
 
@@ -22,11 +22,11 @@ export class UserService {
   }
 
   setErrorMessage(message: string | null) {
-    this.errorMessageSubject.next(message);
+    this.errorMessageSubject = message;
   }
 
   getErrorMessage() {
-    return this.errorMessageSubject.getValue();
+    return this.errorMessageSubject;
   }
 
   getResponseData() {

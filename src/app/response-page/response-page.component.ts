@@ -17,6 +17,9 @@ export class ResponsePageComponent implements OnInit {
 
   ngOnInit() {
     this.responseData = this.userService.getResponseData();
+    console.log(this.responseData, '  this.responseData ');
+    this.errorMessage = this.userService.getErrorMessage();
+    console.log(this.errorMessage, 'this.errorMessage');
   }
 
   getObjectKeys(obj: any): string[] {
