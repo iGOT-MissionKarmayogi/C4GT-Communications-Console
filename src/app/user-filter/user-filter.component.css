@@ -28,6 +28,8 @@
 
 .form-group label {
   font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
   color: #333;
   margin-bottom: 0.5rem;
 }
@@ -37,6 +39,8 @@
   padding: 0.5rem;
   border-radius: 4px;
   border: 1px solid #ccc;
+  font-family: "Roboto", sans-serif;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .radio-group {
@@ -97,6 +101,7 @@
   font-weight: 600;
   color: white;
   cursor: pointer;
+  font-size: 15px;
 }
 
 .submit-btn {
@@ -115,4 +120,10 @@
 .single-date,
 .single-progress {
   grid-column: span 2;
+}
+
+@media (max-width: 500px) {
+  .form-row {
+    flex-direction: column;
+  }
 }

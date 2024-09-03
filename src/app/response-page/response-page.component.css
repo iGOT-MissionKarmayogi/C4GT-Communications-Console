@@ -3,6 +3,7 @@ table {
   border-collapse: collapse;
   margin: 15px auto;
   align-items: center;
+  font-family: "Roboto", sans-serif;
 }
 .records {
   font-size: 27px;
