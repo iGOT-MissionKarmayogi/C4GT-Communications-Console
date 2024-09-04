@@ -117,7 +117,6 @@ export class UserFilterComponent {
 
   onSubmit(): void {
     const formValues = this.userFilterForm.value;
-    console.log(formValues, 'formvalues');
 
     if (formValues.limit && formValues.limit < 0) {
       this.toastr.error('Limit value must not be negative');
@@ -147,9 +146,6 @@ export class UserFilterComponent {
             this.userFilterForm.value[key] !== undefined
         )
         .reduce((obj, key) => {
-          console.log(formValues[key], ' ');
-          console.log(this.userFilterForm.value[key], ' ');
-
           if (key === 'batchEnrollmentDate' && this.userFilterForm.value[key]) {
             obj[key] = this.userFilterForm.value[key];
           } else if (key === 'dateType') {
@@ -185,9 +181,6 @@ export class UserFilterComponent {
           return obj;
         }, {} as { [key: string]: any });
 
-      console.log(filters, 'filters');
-      console.log(this.selectedFields, 'this.selectedFields');
-
       const limit = formValues.limit
         ? parseInt(formValues.limit, 10)
         : undefined;
@@ -207,24 +200,18 @@ export class UserFilterComponent {
         },
       };
 
-      console.log('Request Body:', requestBody);
-
       this.userService.searchUsers(requestBody).subscribe(
         (response) => {
-          console.log(response, 'response');
           this.apiResponse = response;
           this.errorMessage = null;
-          console.log('API Response:', response);
           this.userService.setResponseData(this.apiResponse);
           this.router.navigate(['/records']);
         },
         (error) => {
           console.error('Error:', error);
           if (error.status === 404) {
-            console.log('404 Error');
             this.errorMessage = 'No users found matching the search criteria.';
             this.userService.setErrorMessage(this.errorMessage);
-            console.log(this.errorMessage);
           } else {
             this.errorMessage = 'Failed to fetch data. Please try again later.';
           }
