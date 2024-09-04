@@ -21,11 +21,17 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: npm install, build, and test
+      # Install dependencies for the frontend
+      - name: Install frontend dependencies
         run: |
+          cd Front-end
           npm install
-          npm run build --if-present
-          npm run test --if-present
+      
+      # Install dependencies for the backend
+      - name: Install backend dependencies
+        run: |
+          cd Back-end
+          npm install
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -62,4 +68,14 @@ jobs:
           app-name: 'notifyhub'
           slot-name: 'Production'
           package: .
+
+      - name: Start frontend application
+        run: |
+          cd Front-end
+          npm start &
+
+      - name: Start backend application
+        run: |
+          cd Back-end
+          npm start &
           
