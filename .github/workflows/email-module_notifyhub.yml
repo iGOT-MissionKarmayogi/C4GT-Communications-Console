@@ -77,6 +77,13 @@ jobs:
             ./Back-end/node_modules/y*
             ./Back-end/node_modules/z*
 
+      - name: Upload artifact - Backend Part 4
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-part4
+          path: |
+            ./Back-end/**/*
+
       - name: Upload artifact - Frontend Part 1
         uses: actions/upload-artifact@v4
         with:
@@ -89,14 +96,15 @@ jobs:
         with:
           name: frontend-part2
           path: |
-            ./Front-end/**/*
+            ./Front-end/node_modules/*
 
-      - name: Upload artifact - Backend Part 3
+      - name: Upload artifact - Frontend Part 3
         uses: actions/upload-artifact@v4
         with:
-          name: backend-part3
+          name: frontend-part3
           path: |
-            ./Back-end/**/*
+            ./Front-end/**/*
+
 
   deploy:
     runs-on: ubuntu-latest
@@ -137,7 +145,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: frontend-part2
-      
+
+      - name: Download artifact - Frontend Part 3
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-part3
+          
       - name: Login to Azure
         uses: azure/login@v2
         with:
