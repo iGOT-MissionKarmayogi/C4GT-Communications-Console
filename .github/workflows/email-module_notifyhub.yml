@@ -59,6 +59,9 @@ jobs:
             ./Back-end/node_modules/n*
             ./Back-end/node_modules/o*
             ./Back-end/node_modules/p*
+            ./Back-end/node_modules/.*
+            ./Back-end/node_modules/@*
+            
             
 
       - name: Upload artifact - Backend Part 3
@@ -82,7 +85,7 @@ jobs:
         with:
           name: backend-part4
           path: |
-            ./Back-end/**/*
+            ./Back-end/!(node_modules)/**/*
 
       - name: Upload artifact - Frontend Part 1
         uses: actions/upload-artifact@v4
@@ -103,7 +106,7 @@ jobs:
         with:
           name: frontend-part3
           path: |
-            ./Front-end/**/*
+            ./Front-end/!(node_modules)/**/*
 
 
   deploy:
