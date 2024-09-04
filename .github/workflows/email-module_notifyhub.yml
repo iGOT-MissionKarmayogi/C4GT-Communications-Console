@@ -38,7 +38,7 @@ jobs:
         with:
           name: backend-part1
           path: |
-            ./Back-end/node_modules/a*  # Batch by starting letter
+            ./Back-end/node_modules/a* 
             ./Back-end/node_modules/b*
 
       - name: Upload artifact - Backend Part 2
@@ -54,21 +54,21 @@ jobs:
         with:
           name: backend-part3
           path: |
-            ./Back-end/**/*  # Remaining files
+            ./Back-end/**/*
 
       - name: Upload artifact - Frontend Part 1
         uses: actions/upload-artifact@v4
         with:
           name: frontend-part1
           path: |
-            ./Front-end/src/app/**/*.ts # Upload TypeScript files
+            ./Front-end/src/app/**/*.ts
 
       - name: Upload artifact - Frontend Part 2
         uses: actions/upload-artifact@v4
         with:
           name: frontend-part2
           path: |
-            ./Front-end/**/*  # Remaining files
+            ./Front-end/**/*
 
   deploy:
     runs-on: ubuntu-latest
