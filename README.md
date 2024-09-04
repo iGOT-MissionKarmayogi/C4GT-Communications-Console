@@ -1,29 +1,52 @@
-# Contributions-to-Karmayogi-Bharat
+# C4GT Communications Console
 
-## C4GT Communications Console
+## User Search UI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.3.
+Get Started on the Local Machine: To run the application on your local machine, follow these steps:
 
-## Development server
+### 1. Install Node.js
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Ensure that Node.js is installed on your machine. If you haven’t installed it yet, you can follow the official [Node.js installation guide](https://nodejs.org/) to download and install it.
 
-## Code scaffolding
+### 2. Install Angular CLI
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Make sure the Angular CLI is installed globally on your machine. If you haven’t installed it yet, you can do so by running the following command:
 
-## Build
+```bash
+npm install -g @angular/cli
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
 
-## Running unit tests
+### 3. Clone the GitHub Repository
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Clone the repository to your local machine using the following command:
 
-## Running end-to-end tests
+```bash
+git clone https://github.com/iGOT-MissionKarmayogi/C4GT-Communications-Console.git
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
 
-## Further help
+### 4. Checkout the following branch
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+git checkout user-search-ui
+
+```
+
+### 5. Install Project Dependencies
+
+Run the following command to install all required dependencies for the project:
+
+```bash
+npm install
+
+```
+
+### 7. Build and serves your application, rebuilding on file changes.
+
+```bash
+ng serve
+
+```
+
+This will launch the server on http://localhost:4200
