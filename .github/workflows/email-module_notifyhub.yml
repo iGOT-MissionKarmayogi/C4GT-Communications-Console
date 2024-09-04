@@ -92,19 +92,50 @@ jobs:
         with:
           name: frontend-part1
           path: |
-            ./Front-end/src/app/**/*.ts
+            ./Front-end/node_modules/a* 
+            ./Front-end/node_modules/b*
+            ./Front-end/node_modules/c*
+            ./Front-end/node_modules/d*
+            ./Front-end/node_modules/e*
+            ./Front-end/node_modules/f*
+            ./Front-end/node_modules/g*
+            ./Front-end/node_modules/h*
+            ./Front-end/node_modules/i*
+            ./Front-end/node_modules/k*
+            ./Front-end/node_modules/l*
 
       - name: Upload artifact - Frontend Part 2
         uses: actions/upload-artifact@v4
         with:
           name: frontend-part2
           path: |
-            ./Front-end/node_modules/*
+            ./Front-end/node_modules/m*
+            ./Front-end/node_modules/n*
+            ./Front-end/node_modules/o*
+            ./Front-end/node_modules/p*
+            ./Front-end/node_modules/.*
+            ./Front-end/node_modules/@*
 
       - name: Upload artifact - Frontend Part 3
         uses: actions/upload-artifact@v4
         with:
           name: frontend-part3
+          path: |
+            ./Front-end/node_modules/q*
+            ./Front-end/node_modules/r*
+            ./Front-end/node_modules/s*
+            ./Front-end/node_modules/t*
+            ./Front-end/node_modules/u*
+            ./Front-end/node_modules/v*
+            ./Front-end/node_modules/w*
+            ./Front-end/node_modules/x*
+            ./Front-end/node_modules/y*
+            ./Front-end/node_modules/z*
+
+      - name: Upload artifact - Frontend Part 4
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-part4
           path: |
             ./Front-end/!(node_modules)/**/*
 
