@@ -184,6 +184,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: frontend-part3
+
+      - name: Download artifact - Frontend Part 4
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-part4
           
       - name: Login to Azure
         uses: azure/login@v2
