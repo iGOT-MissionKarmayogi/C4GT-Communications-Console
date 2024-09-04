@@ -49,6 +49,12 @@
           placeholder="Enter Location"
           required
         />
+        <div
+          *ngIf="userFilterForm.get('location')?.hasError('noNumbers')"
+          style="color: red; margin-top: 2px"
+        >
+          Location should not contain numbers.
+        </div>
       </div>
     </div>
 
@@ -234,7 +240,6 @@
               (change)="toggleSelectAll($event)"
               [checked]="allFieldsSelected"
             />
-            <span class="checkbox"></span>
             Select All Fields
           </label>
         </div>
@@ -246,7 +251,6 @@
               (change)="onFieldChange($event)"
               value="location"
             />
-            <span class="checkbox"></span>
             Location
           </label>
         </div>
@@ -258,7 +262,6 @@
               (change)="onFieldChange($event)"
               value="progress"
             />
-            <span class="checkbox"></span>
             Progress
           </label>
         </div>
@@ -270,7 +273,6 @@
               (change)="onFieldChange($event)"
               value="batchId"
             />
-            <span class="checkbox"></span>
             Batch ID
           </label>
         </div>
@@ -282,7 +284,6 @@
               (change)="onFieldChange($event)"
               value="totalLeafNodecount"
             />
-            <span class="checkbox"></span>
             Total Leaf Node Count
           </label>
         </div>
@@ -294,7 +295,6 @@
               (change)="onFieldChange($event)"
               value="completedContents"
             />
-            <span class="checkbox"></span>
             Completed Contents
           </label>
         </div>
@@ -306,7 +306,6 @@
               (change)="onFieldChange($event)"
               value="batchEnrollmentDate"
             />
-            <span class="checkbox"></span>
             Batch Enrollment Date
           </label>
         </div>
@@ -318,7 +317,6 @@
               (change)="onFieldChange($event)"
               value="lastAccessTime"
             />
-            <span class="checkbox"></span>
             Last Access Time
           </label>
         </div>
@@ -330,7 +328,6 @@
               (change)="onFieldChange($event)"
               value="lastCompletedTime"
             />
-            <span class="checkbox"></span>
             Last Completed Time
           </label>
         </div>
@@ -342,7 +339,6 @@
               (change)="onFieldChange($event)"
               value="lastUpdatedTime"
             />
-            <span class="checkbox"></span>
             Last Updated Time
           </label>
         </div>
@@ -354,7 +350,6 @@
               (change)="onFieldChange($event)"
               value="viewCount"
             />
-            <span class="checkbox"></span>
             View Count
           </label>
         </div>

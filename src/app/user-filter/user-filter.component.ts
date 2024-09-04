@@ -8,6 +8,8 @@ import {
 import { CommonModule } from '@angular/common';
 import { UserService } from '../services/user-service.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { dateRangeValidator, noNumbersValidator } from '../utils/validations';
 
 @Component({
   selector: 'app-user-filter',
@@ -41,29 +43,33 @@ export class UserFilterComponent {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
-    this.userFilterForm = this.fb.group({
-      courseId: [''],
-      batchId: [''],
-      userId: [''],
-      location: [''],
-      totalLeafNodecount: [''],
-      progressType: ['single'],
-      progress: ['', [Validators.min(0), Validators.max(100)]],
-      progressRangeStart: ['', [Validators.min(0), Validators.max(100)]],
-      progressRangeEnd: ['', [Validators.min(0), Validators.max(100)]],
-      dateType: ['single'],
-      batchEnrollmentDate: [''],
-      batchEnrollmentDateStart: [''],
-      batchEnrollmentDateEnd: [''],
-      lastAccessTime: [''],
-      lastCompletedTime: [''],
-      lastUpdatedTime: [''],
-      limit: ['', [Validators.min(0)]],
-      sortByField: [''],
-      sortByOrder: ['asc'],
-    });
+    this.userFilterForm = this.fb.group(
+      {
+        courseId: [''],
+        batchId: [''],
+        userId: [''],
+        location: ['', [Validators.required, noNumbersValidator()]],
+        totalLeafNodecount: [''],
+        progressType: ['single'],
+        progress: ['', [Validators.min(0), Validators.max(100)]],
+        progressRangeStart: ['', [Validators.min(0), Validators.max(100)]],
+        progressRangeEnd: ['', [Validators.min(0), Validators.max(100)]],
+        dateType: ['single'],
+        batchEnrollmentDate: [''],
+        batchEnrollmentDateStart: [''],
+        batchEnrollmentDateEnd: [''],
+        lastAccessTime: [''],
+        lastCompletedTime: [''],
+        lastUpdatedTime: [''],
+        limit: ['', [Validators.min(0)]],
+        sortByField: [''],
+        sortByOrder: ['asc'],
+      },
+      { validators: dateRangeValidator() }
+    );
 
     this.onProgressTypeChange('single');
     this.onDateTypeChange('single');
@@ -112,6 +118,24 @@ export class UserFilterComponent {
   onSubmit(): void {
     const formValues = this.userFilterForm.value;
     console.log(formValues, 'formvalues');
+
+    if (formValues.limit && formValues.limit < 0) {
+      this.toastr.error('Limit value must not be negative');
+      return;
+    }
+
+    if (
+      (formValues.progress &&
+        (formValues.progress < 0 || formValues.progress > 100)) ||
+      (formValues.progressRangeStart &&
+        (formValues.progressRangeStart < 0 ||
+          formValues.progressRangeStart > 100)) ||
+      (formValues.progressRangeEnd &&
+        (formValues.progressRangeEnd < 0 || formValues.progressRangeEnd > 100))
+    ) {
+      this.toastr.error('Progress values must be between 0 and 100');
+      return;
+    }
 
     if (this.userFilterForm) {
       const filters: { [key: string]: any } = Object.keys(
