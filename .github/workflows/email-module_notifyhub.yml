@@ -40,21 +40,35 @@ jobs:
           path: |
             ./Back-end/node_modules/a* 
             ./Back-end/node_modules/b*
+            ./Back-end/node_modules/c*
+            ./Back-end/node_modules/d*
+            ./Back-end/node_modules/e*
+            ./Back-end/node_modules/f*
+            ./Back-end/node_modules/g*
+            ./Back-end/node_modules/h*
+            ./Back-end/node_modules/i*
+            ./Back-end/node_modules/k*
+            ./Back-end/node_modules/l*
+            ./Back-end/node_modules/m*
 
       - name: Upload artifact - Backend Part 2
         uses: actions/upload-artifact@v4
         with:
           name: backend-part2
           path: |
-            ./Back-end/node_modules/c*
-            ./Back-end/node_modules/d*
-
-      - name: Upload artifact - Backend Part 3
-        uses: actions/upload-artifact@v4
-        with:
-          name: backend-part3
-          path: |
-            ./Back-end/**/*
+            ./Back-end/node_modules/n*
+            ./Back-end/node_modules/o*
+            ./Back-end/node_modules/p*
+            ./Back-end/node_modules/q*
+            ./Back-end/node_modules/r*
+            ./Back-end/node_modules/s*
+            ./Back-end/node_modules/t*
+            ./Back-end/node_modules/u*
+            ./Back-end/node_modules/v*
+            ./Back-end/node_modules/w*
+            ./Back-end/node_modules/x*
+            ./Back-end/node_modules/y*
+            ./Back-end/node_modules/z*
 
       - name: Upload artifact - Frontend Part 1
         uses: actions/upload-artifact@v4
@@ -69,6 +83,13 @@ jobs:
           name: frontend-part2
           path: |
             ./Front-end/**/*
+
+      - name: Upload artifact - Backend Part 3
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-part3
+          path: |
+            ./Back-end/**/*
 
   deploy:
     runs-on: ubuntu-latest
