@@ -33,11 +33,42 @@ jobs:
           cd Back-end
           npm install
       
-      - name: Upload artifact for deployment job
+      - name: Upload artifact - Backend Part 1
         uses: actions/upload-artifact@v4
         with:
-          name: node-app
-          path: .
+          name: backend-part1
+          path: |
+            ./Back-end/node_modules/a*  # Batch by starting letter
+            ./Back-end/node_modules/b*
+
+      - name: Upload artifact - Backend Part 2
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-part2
+          path: |
+            ./Back-end/node_modules/c*
+            ./Back-end/node_modules/d*
+
+      - name: Upload artifact - Backend Part 3
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-part3
+          path: |
+            ./Back-end/**/*  # Remaining files
+
+      - name: Upload artifact - Frontend Part 1
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-part1
+          path: |
+            ./Front-end/src/app/**/*.ts # Upload TypeScript files
+
+      - name: Upload artifact - Frontend Part 2
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-part2
+          path: |
+            ./Front-end/**/*  # Remaining files
 
   deploy:
     runs-on: ubuntu-latest
@@ -49,10 +80,30 @@ jobs:
       id-token: write #This is required for requesting the JWT
 
     steps:
-      - name: Download artifact from build job
+      - name: Download artifact - Backend Part 1
         uses: actions/download-artifact@v4
         with:
-          name: node-app
+          name: backend-part1
+      
+      - name: Download artifact - Backend Part 2
+        uses: actions/download-artifact@v4
+        with:
+          name: backend-part2
+      
+      - name: Download artifact - Backend Part 3
+        uses: actions/download-artifact@v4
+        with:
+          name: backend-part3
+
+      - name: Download artifact - Frontend Part 1
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-part1
+      
+      - name: Download artifact - Frontend Part 2
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-part2
       
       - name: Login to Azure
         uses: azure/login@v2
