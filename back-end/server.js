@@ -5,6 +5,9 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import ConnectDB from './DB/index.js';
 import { errorHandler,notfound } from './middlewares/error.js';
+import AuthRouter from './Routes/Auth.routes.js';
+import TemplateRouter from './Routes/Template.routes.js';
+import userRouter from './Routes/User.routes.js';
 // "start": "concurrently \"nodemon server.js\" \"nodemon Email/backend/server.js\""
 
 // Import routes
