@@ -2,8 +2,11 @@ import express from 'express';
 import getEmailService from '../config/emailConfig.js';
 import { getTemplateById } from '../controllers/templateController.js'; // Import the function to fetch template by ID
 import EmailHistory from '../models/emailHistory.js';
+import multer from 'multer';
+import fs from 'fs';
 
 const router = express.Router();
+const upload = multer({ dest: 'uploads/' });
 
 //To log email history
 export const saveEmailStatus = async (emailData) => {
@@ -11,8 +14,9 @@ export const saveEmailStatus = async (emailData) => {
   await emailHistory.save();
 };
 // Route to send an email with selected or default template
-router.post('/', async (req, res) => {
-  const { to,username,body, templateId } = req.body;
+router.post('/', upload.single('attachment'), async (req, res) => {
+  const { to, username, body, templateId } = req.body;
+  const attachment = req.file;
 
   try {
     let emailContent = {};
@@ -40,6 +44,15 @@ router.post('/', async (req, res) => {
         text: 'This is a default test email, no template selected',
         html: '<p>This is a default test email, no template selected.</p>',
       };
+    }
+
+    if (attachment) {
+      emailContent.attachments = [
+        {
+          filename: attachment.originalname,
+          path: attachment.path,
+        },
+      ];
     }
 
     const emailService = getEmailService();
@@ -73,7 +86,15 @@ router.post('/', async (req, res) => {
     await saveEmailStatus(emailData);
 
 
-
+    if (attachment) {
+      fs.unlink(attachment.path, (err) => {
+        if (err) {
+          console.error('Failed to delete attachment:', err);
+        } else {
+          console.log('Attachment deleted successfully');
+        }
+      });
+    }
 
     res.status(200).json({ message: 'Email sent successfully' });
   } catch (error) {
@@ -86,7 +107,7 @@ router.post('/', async (req, res) => {
     const recipient = to ;
 
     const emailData = {
-      username: recipient,
+      username: username,
       email: recipient,
       status: 'Fail',
       time: new Date().toLocaleTimeString(),

@@ -19,6 +19,7 @@ export class SendEmailComponent implements OnInit {
   selectedTemplate: any = null;
   showSuccessMessage : Boolean | undefined;
   selectedUsers: any[] = [];
+  selectedFile: File | null = null;
 
   constructor(private http: HttpClient, private userSelectionService: UserSelectionService) {
     this.selectedUsers = this.userSelectionService.selectedUsers;
@@ -54,6 +55,10 @@ export class SendEmailComponent implements OnInit {
     }, 0);
   }
 
+  onFileSelected(event: any) { 
+    this.selectedFile = event.target.files[0];
+  }
+
   sendEmail() {
     
     let successfulSends = 0;
@@ -80,14 +85,17 @@ export class SendEmailComponent implements OnInit {
           
 
 
-        const emailData = {
-          to: user.email,
-          username: user.name,
-          body:emailBody,
-          templateId: this.selectedTemplate._id // Assuming the template has an _id field
-        };
+          const formData = new FormData();
+          formData.append('to', user.email);
+          formData.append('username', user.name);
+          formData.append('body', emailBody);
+          formData.append('templateId', this.selectedTemplate._id);
 
-    this.http.post('http://localhost:5000/api/email/send-email', emailData)
+          if (this.selectedFile) {
+            formData.append('attachment', this.selectedFile, this.selectedFile.name);
+          }
+
+    this.http.post('http://localhost:5000/api/email/send-email', formData)
       .subscribe({
         next: (response) => {
           console.log('Email sent successfully:', response);

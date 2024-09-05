@@ -28,6 +28,12 @@
       <p class="card-text">{{ selectedTemplate.body }}</p>
     </div>
   </div>
+
+  <div class="form-group">
+    <label for="attachment">Upload Attachment</label>
+    <input type="file" id="attachment" (change)="onFileSelected($event)" class="form-control">
+  </div>
+  
   <button class="btn btn-primary" (click)="sendEmail()">Send Email</button>
   <div *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
     Email sent successfully!

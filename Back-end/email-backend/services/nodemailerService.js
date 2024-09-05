@@ -25,15 +25,17 @@ class NodemailerService extends EmailService{
      * @param {string} options.subject - The email subject.
      * @param {string} options.text - The plain text version of the email.
      * @param {string} options.html - The HTML version of the email.
+     * @param {Array} [options.attachments] - The email attachments.
      * @returns {Promise} A promise that resolves when the email is sent.
      */
-    async sendEmail({ to, subject, text, html }){
+    async sendEmail({ to, subject, text, html, attachments=[] }) {
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to,
             subject,
             text,
-            html
+            html,
+            attachments
         };
         return this.transporter.sendMail(mailOptions);
     }
