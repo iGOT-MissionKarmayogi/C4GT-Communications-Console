@@ -106,6 +106,7 @@ body {
 
   input[type="radio"] {
     box-sizing: border-box;
+    border-radius: 10px;
     appearance: none;
     background: white;
     outline: 2px solid #7e7e7e;

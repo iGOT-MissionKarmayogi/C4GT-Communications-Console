@@ -3,6 +3,7 @@ import { EmailHistoryService } from '../services/email-history.service';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-history',
@@ -16,7 +17,10 @@ export class HistoryComponent implements OnInit {
   emailHistory: any[] = [];
   filterStatus: string = '';
 
-  constructor(private emailHistoryService: EmailHistoryService) {}
+  constructor(
+    private emailHistoryService: EmailHistoryService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.fetchEmailHistory();
@@ -24,7 +28,7 @@ export class HistoryComponent implements OnInit {
 
   fetchEmailHistory(): void {
     this.emailHistoryService.getEmailHistory().subscribe((data: any[]) => {
-      this.emailHistory = data;
+      this.emailHistory = data.reverse();
     });
   }
 
@@ -36,7 +40,6 @@ export class HistoryComponent implements OnInit {
   }
 
   resendEmail(history: any): void {
-    // Logic to resend email
-    console.log('Resending email to:', history.email);
+    // Navigate to the "View User Data" menu
   }
 }
