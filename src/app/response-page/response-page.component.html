@@ -1,3 +1,5 @@
+<button class="back-button" (click)="goBack()">Back to Form</button>
+
 <div *ngIf="responseData">
   <h3 class="records">Records Found: {{ responseData.result.count }}</h3>
   <table>

@@ -10,6 +10,7 @@ export class UserService {
   private apiUrl: string = environment.apiUrl;
   private responseData: any;
   private errorMessageSubject: any;
+  private formData: any;
 
   constructor(private http: HttpClient) {}
 
@@ -31,5 +32,15 @@ export class UserService {
 
   getResponseData() {
     return this.responseData;
+  }
+
+  saveFormData(data: any): void {
+    this.formData = data;
+    console.log('Form data saved:', this.formData);
+  }
+
+  getSavedFormData(): any {
+    return this.formData;
+    console.log('Form data retrieved:', this.formData);
   }
 }

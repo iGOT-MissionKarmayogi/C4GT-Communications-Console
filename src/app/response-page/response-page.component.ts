@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user-service.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-response-page',
@@ -13,7 +14,7 @@ export class ResponsePageComponent implements OnInit {
   responseData: any;
   errorMessage: any;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
     this.responseData = this.userService.getResponseData();
@@ -22,5 +23,9 @@ export class ResponsePageComponent implements OnInit {
 
   getObjectKeys(obj: any): string[] {
     return Object.keys(obj);
+  }
+
+  goBack(): void {
+    this.router.navigate(['/'], {});
   }
 }

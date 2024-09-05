@@ -46,3 +46,21 @@ tr:nth-child(even) {
 .error p {
   margin: 0;
 }
+
+.back-button {
+  display: block;
+  margin: 15px auto;
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}

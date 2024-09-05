@@ -71,6 +71,12 @@ export class UserFilterComponent {
       { validators: dateRangeValidator() }
     );
 
+    const savedFormData = this.userService.getSavedFormData();
+    if (savedFormData) {
+      console.log('Patching form with saved data:', savedFormData);
+      this.userFilterForm.patchValue(savedFormData);
+    }
+
     this.onProgressTypeChange('single');
     this.onDateTypeChange('single');
   }
@@ -137,6 +143,7 @@ export class UserFilterComponent {
     }
 
     if (this.userFilterForm) {
+      this.userService.saveFormData(this.userFilterForm.value);
       const filters: { [key: string]: any } = Object.keys(
         this.userFilterForm.value
       )
@@ -166,9 +173,32 @@ export class UserFilterComponent {
               }
             }
           } else if (
-            key !== 'progress' &&
-            key !== 'progressRangeStart' &&
-            key !== 'progressRangeEnd' &&
+            key === 'progress' ||
+            key === 'progressRangeStart' ||
+            key === 'progressRangeEnd'
+          ) {
+            if (key === 'progress') {
+              obj[key] = this.userFilterForm.value[key];
+            } else if (
+              key === 'progressRangeStart' ||
+              key === 'progressRangeEnd'
+            ) {
+              const progressRangeStart =
+                this.userFilterForm.value['progressRangeStart'];
+              const progressRangeEnd =
+                this.userFilterForm.value['progressRangeEnd'];
+
+              if (
+                progressRangeStart !== undefined &&
+                progressRangeEnd !== undefined
+              ) {
+                obj['progress'] = {
+                  min: progressRangeStart,
+                  max: progressRangeEnd,
+                };
+              }
+            }
+          } else if (
             key !== 'batchEnrollmentDateStart' &&
             key !== 'batchEnrollmentDateEnd' &&
             key != 'progressType' &&
