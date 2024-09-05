@@ -6,6 +6,8 @@ import bodyParser from 'body-parser';
 import ConnectDB from './DB/index.js';
 import { errorHandler,notfound } from './middlewares/error.js';
 import AuthRouter from './Routes/Auth.routes.js';
+import userRouter from './Routes/User.routes.js';
+import TemplateRouter from './Routes/Template.routes.js';
 // "start": "concurrently \"nodemon server.js\" \"nodemon Email/backend/server.js\""
 
 // Import routes
@@ -32,6 +34,8 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/api/auth', AuthRouter);
+app.use('/api/user', userRouter);
+app.use('/api/template', TemplateRouter);
 
 
 // Error handling middlewares
