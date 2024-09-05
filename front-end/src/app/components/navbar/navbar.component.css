@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif; /* Default font for the entire body */
+}
+
+.Container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px;
+    padding-inline: 25px;
+    width: vw;
+    background-color: white;
+    height: 13vh;
+    border-bottom: solid rgba(128, 128, 128, 0.236) 1px;
+}
+
+.Container img {
+    mix-blend-mode: multiply;
+    cursor: pointer;
+}
+.Search{
+    width: 50%;
+    border: solid gray 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    background-color: white;
+}
+.Search input{
+ width: 80%;
+ height: 3rem;
+ border-radius: 25px;
+ border: none;
+ padding-inline: 20px;
+ font-size: 1.1rem;
+}
+.Search input:focus{
+    outline: none;
+    
+}
+.LogOut{
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    padding-inline: 10px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    color: #184486;
+    font-weight: bold;
+    border: solid gray 2px;
+    background-color: transparent;
+    cursor: pointer;
+}
+ button {
+    height: 2.8rem;
+    border-radius: 30px;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    background-color: transparent;
+    font-size: 17px;
+    cursor: pointer;
+}
+.LogOut:hover{
+    color: white;
+    border: solid #184486 2px;
+}

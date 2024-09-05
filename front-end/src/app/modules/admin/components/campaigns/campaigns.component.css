@@ -1,0 +1,55 @@
+body {
+  font-family: Arial, sans-serif; /* Default font for the entire body */
+}
+.Container {
+  min-height: 90vh;
+}
+
+.Content {
+  padding: 3rem;
+  padding-inline: 10rem;
+  background-color: #fde5cd;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 40px;
+}
+
+.CampaignBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 10px;
+    overflow: hidden;
+    align-items: center;
+    cursor: pointer;
+    background-color: white;
+}
+
+.CampaignBox div{
+    padding-block: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.CampaignBox h3{
+    margin: 0 0.5rem 0 0.5rem;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.CampaignBox p{
+    margin:0 0.5rem 0 0.5rem;
+    font-size: 0.7rem;
+    color: #333;
+}
+
+
+
+.CampaignBox img{
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+}
