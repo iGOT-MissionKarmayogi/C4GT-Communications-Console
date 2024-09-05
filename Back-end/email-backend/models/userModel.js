@@ -1,21 +1,49 @@
 import mongoose from 'mongoose';
 
-/**
- * Represents the user schema.
- *
- * @typedef {Object} UserSchema
- * @property {string} name - The name of the user.
- * @property {string} email - The email of the user.
- * @property {number} age - The age of the user.
- * @property {string} address - The address of the user.
- */
 const userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  age: Number,
-  address: String
+  id: {
+    type: Number,
+    required: true,
+    unique: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  age: {
+    type: Number,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  mobile_no: {
+    type: String,
+    required: true
+  },
+  address: {
+    type: String,
+    required: true
+  },
+  occupation: {
+    type: String,
+    required: true
+  },
+  company: {
+    type: String,
+    required: true
+  },
+  join_date: {
+    type: Date,
+    required: true
+  },
+  last_login: {
+    type: Date,
+    required: true
+  }
 });
 
 const User = mongoose.model('User', userSchema,'emailUsers');
-
 export default User;

@@ -1,4 +1,9 @@
 import User from '../models/userModel.js';
+import multer from 'multer';
+import csv from 'csv-parser';
+import fs from 'fs';
+
+const upload = multer({ dest: 'uploads/' });
 
 // Controller to fetch all users
 /**
@@ -47,17 +52,30 @@ export const createUser = async (req, res) => {
 };
 
 
-// Controller to upload user data
-/**
- * Uploads user data to the database.
- * @param {Object} req - The request object.
- * @param {Object} res - The response object.
- * @returns {Promise<void>} - A Promise that resolves when the user data is uploaded.
-*/
-
 export const uploadUserData = async (req, res) => {
   try {
-    const users = req.body;  // Assuming req.body is an array of users
+    let users = [];
+
+    if (req.file) {
+      // Handle file upload
+      const filePath = req.file.path;
+      const fileExtension = req.file.mimetype;
+
+      if (fileExtension === 'application/json') {
+        // Parse JSON file
+        const fileData = fs.readFileSync(filePath, 'utf8');
+        users = JSON.parse(fileData);
+      } else if (fileExtension === 'text/csv') {
+        // Parse CSV file
+        users = await parseCSV(filePath);
+      } else {
+        return res.status(400).json({ message: 'Unsupported file format' });
+      }
+
+      fs.unlinkSync(filePath);
+    } else {
+      users = req.body; 
+    }
 
     const savedUsers = await User.insertMany(users);
     res.status(201).json(savedUsers);
@@ -65,5 +83,21 @@ export const uploadUserData = async (req, res) => {
     console.error('Error uploading users:', error);
     res.status(500).json({ message: 'Failed to upload users' });
   }
+};
+
+/**
+ * Parse CSV file to extract user data.
+ * @param {string} filePath - The path to the CSV file.
+ * @returns {Promise<Array>} - A Promise that resolves to an array of user objects.
+ */
+const parseCSV = (filePath) => {
+  return new Promise((resolve, reject) => {
+    const users = [];
+    fs.createReadStream(filePath)
+      .pipe(csv())
+      .on('data', (data) => users.push(data))
+      .on('end', () => resolve(users))
+      .on('error', (error) => reject(error));
+  });
 };
 

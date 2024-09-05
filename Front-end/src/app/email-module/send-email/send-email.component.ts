@@ -57,18 +57,32 @@ export class SendEmailComponent implements OnInit {
   sendEmail() {
     
     let successfulSends = 0;
+    
 
     this.selectedUsers.forEach(user => {
       this.http.get(`http://localhost:5000/api/email/templates/${this.selectedTemplate._id}`)
       .subscribe({
         next: (templateResponse: any) => {
-          // Replace [User] with user.name in the email body
-          const emailBody = templateResponse.body.replace('[User]', user.name);
-          console.log(emailBody);
+          // Replace [User] with user.name in the email body and so on
+          const variables = {
+            User: user.name,
+            Email: user.email,
+            Age: user.age,
+            Mobile: user.mobile_no,
+            Address: user.address,
+            // Add more variables as needed
+          };
+          
+          const replaceVariables = (template: string, variables: { [key: string]: string }) => {
+            return template.replace(/\[([^\]]+)\]/g, (match, p1) => variables[p1] || match);
+          };
+          const emailBody = replaceVariables(templateResponse.body, variables);
+          
 
 
         const emailData = {
           to: user.email,
+          username: user.name,
           body:emailBody,
           templateId: this.selectedTemplate._id // Assuming the template has an _id field
         };

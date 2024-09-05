@@ -6,6 +6,7 @@ import path from 'path';
 import { fileURLToPath } from 'url'; 
 import { getUsers, createUser, uploadUserData } from '../controllers/userController.js'; 
 import userRoutes from './userRoutes.js'; 
+import multer from 'multer';
 
 // Get the filename and directory name of the current module
 const __filename = fileURLToPath(import.meta.url);
@@ -13,6 +14,7 @@ const __dirname = path.dirname(__filename);
 
 // Create a new router instance
 const router = express.Router();
+const upload = multer({ dest: 'uploads/' });
 
 // Route to serve the index.html file
 router.get('/', (req, res) => {
@@ -33,7 +35,7 @@ router.get('/users', getUsers);
 router.post('/users', createUser);
 
 // Route to upload user data
-router.post('/upload-users', uploadUserData);
+router.post('/upload-user-data', upload.single('file'), uploadUserData);
 
 // Route to fetch email history
 router.get('/history', emailHistoryRouter);

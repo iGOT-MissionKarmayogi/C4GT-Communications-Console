@@ -12,7 +12,7 @@ export const saveEmailStatus = async (emailData) => {
 };
 // Route to send an email with selected or default template
 router.post('/', async (req, res) => {
-  const { to,body, templateId } = req.body;
+  const { to,username,body, templateId } = req.body;
 
   try {
     let emailContent = {};
@@ -63,7 +63,7 @@ router.post('/', async (req, res) => {
      * @property {string} date - The date the email was sent in the format 'MM/DD/YYYY'.
      */
     const emailData = {
-      username: recipient,
+      username: username,
       email: recipient,
       status: 'Success',
       time: new Date().toLocaleTimeString(),
