@@ -35,7 +35,7 @@ app.use(bodyParser.json());
 // Routes
 app.use('/api/auth', AuthRouter);
 app.use('/api/user', userRouter);
-app.use('/api/template', TemplateRouter);
+app.use('/api/templates', TemplateRouter);
 
 
 // Error handling middlewares

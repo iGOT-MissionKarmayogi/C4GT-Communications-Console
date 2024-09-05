@@ -8,11 +8,18 @@ const routes: Routes = [
     path: '',
     component: AdminDashboardComponent,
     children: [
-      {path: 'campaigns', component: CampaignsComponent },
-      {path: '', redirectTo: '/dashboard/campaigns', pathMatch: 'full'},
+      { path: 'campaigns', component: CampaignsComponent },
+      { path: '', redirectTo: '/dashboard/campaigns', pathMatch: 'full' },
 
       //sms routes
-
+      //sms routes
+      {
+        path: 'sms',
+        loadChildren: () =>
+          import('../../sms-module/sms-module.module').then(
+            (m) => m.SMSModuleModule
+          ),
+      },
     ],
   },
 ];

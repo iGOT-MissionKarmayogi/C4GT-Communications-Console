@@ -1,0 +1,13 @@
+<div class="template-popup">
+    <div class="popup-content">
+      <h3>Select Template</h3>
+      <div class="template-cards">
+        <div class="template-card" *ngFor="let template of templates" (click)="selectTemplate(template)">
+          <h4>{{ template.templateId }}</h4>
+          <p [innerHTML]="template.Content"></p>
+        </div>
+      </div>
+      <button class="close" (click)="closePopup()">Close</button>
+    </div>
+  </div>
+  
