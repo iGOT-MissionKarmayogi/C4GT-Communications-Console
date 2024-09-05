@@ -1,0 +1,217 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy Node.js app to Azure Web App - notifyhub
+
+on:
+  push:
+    branches:
+      - email-module
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      # Install dependencies for the frontend
+      - name: Install frontend dependencies
+        run: |
+          cd Front-end
+          npm install
+      
+      # Install dependencies for the backend
+      - name: Install backend dependencies
+        run: |
+          cd Back-end
+          npm install
+      
+      - name: Upload artifact - Backend Part 1
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-part1
+          path: |
+            ./Back-end/node_modules/a* 
+            ./Back-end/node_modules/b*
+            ./Back-end/node_modules/c*
+            ./Back-end/node_modules/d*
+            ./Back-end/node_modules/e*
+            ./Back-end/node_modules/f*
+            ./Back-end/node_modules/g*
+            ./Back-end/node_modules/h*
+            ./Back-end/node_modules/i*
+            ./Back-end/node_modules/k*
+            ./Back-end/node_modules/l*
+
+      - name: Upload artifact - Backend Part 2
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-part2
+          path: |
+            ./Back-end/node_modules/m*
+            ./Back-end/node_modules/n*
+            ./Back-end/node_modules/o*
+            ./Back-end/node_modules/p*
+            ./Back-end/node_modules/.*
+            ./Back-end/node_modules/@*
+            
+            
+
+      - name: Upload artifact - Backend Part 3
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-part3
+          path: |
+            ./Back-end/node_modules/q*
+            ./Back-end/node_modules/r*
+            ./Back-end/node_modules/s*
+            ./Back-end/node_modules/t*
+            ./Back-end/node_modules/u*
+            ./Back-end/node_modules/v*
+            ./Back-end/node_modules/w*
+            ./Back-end/node_modules/x*
+            ./Back-end/node_modules/y*
+            ./Back-end/node_modules/z*
+
+      - name: Upload artifact - Backend Part 4
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-part4
+          path: |
+            ./Back-end/!(node_modules)/**/*
+
+      - name: Upload artifact - Frontend Part 1
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-part1
+          path: |
+            ./Front-end/node_modules/a* 
+            ./Front-end/node_modules/b*
+            ./Front-end/node_modules/c*
+            ./Front-end/node_modules/d*
+            ./Front-end/node_modules/e*
+            ./Front-end/node_modules/f*
+            ./Front-end/node_modules/g*
+            ./Front-end/node_modules/h*
+            ./Front-end/node_modules/i*
+            ./Front-end/node_modules/k*
+            ./Front-end/node_modules/l*
+
+      - name: Upload artifact - Frontend Part 2
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-part2
+          path: |
+            ./Front-end/node_modules/m*
+            ./Front-end/node_modules/n*
+            ./Front-end/node_modules/o*
+            ./Front-end/node_modules/p*
+            ./Front-end/node_modules/.*
+            ./Front-end/node_modules/@*
+
+      - name: Upload artifact - Frontend Part 3
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-part3
+          path: |
+            ./Front-end/node_modules/q*
+            ./Front-end/node_modules/r*
+            ./Front-end/node_modules/s*
+            ./Front-end/node_modules/t*
+            ./Front-end/node_modules/u*
+            ./Front-end/node_modules/v*
+            ./Front-end/node_modules/w*
+            ./Front-end/node_modules/x*
+            ./Front-end/node_modules/y*
+            ./Front-end/node_modules/z*
+
+      - name: Upload artifact - Frontend Part 4
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-part4
+          path: |
+            ./Front-end/!(node_modules)/**/*
+
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write #This is required for requesting the JWT
+
+    steps:
+      - name: Download artifact - Backend Part 1
+        uses: actions/download-artifact@v4
+        with:
+          name: backend-part1
+      
+      - name: Download artifact - Backend Part 2
+        uses: actions/download-artifact@v4
+        with:
+          name: backend-part2
+      
+      - name: Download artifact - Backend Part 3
+        uses: actions/download-artifact@v4
+        with:
+          name: backend-part3
+
+      - name: Download artifact - Backend Part 4
+        uses: actions/download-artifact@v4
+        with:
+          name: backend-part4
+
+      - name: Download artifact - Frontend Part 1
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-part1
+      
+      - name: Download artifact - Frontend Part 2
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-part2
+
+      - name: Download artifact - Frontend Part 3
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-part3
+
+      - name: Download artifact - Frontend Part 4
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-part4
+          
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_417173D2BA124B6EA0A4A482E1F421E7 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_4717C74CA0F84BFE9DBC66E48BF7D9BA }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_9BF9C38490434729A237F514D167C4C8 }}
+
+      - name: 'Deploy to Azure Web App'
+        uses: azure/webapps-deploy@v3
+        id: deploy-to-webapp
+        with:
+          app-name: 'notifyhub'
+          slot-name: 'Production'
+          package: .
+
+      - name: Start frontend application
+        run: |
+          cd Front-end
+          npm start &
+
+      - name: Start backend application
+        run: |
+          cd Back-end
+          npm start &
+          
