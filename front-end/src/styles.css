@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+/* Reset margin and padding for html and body */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+@import "primeicons/primeicons.css";
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Make sure the app-root takes full height and width */
+app-root {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
