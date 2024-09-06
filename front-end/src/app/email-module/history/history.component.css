@@ -1,0 +1,22 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr.success {
+    background-color: lightgreen;
+}
+
+tr.fail {
+    background-color: lightcoral;
+}
+
+select {
+    margin-bottom: 10px;
+}

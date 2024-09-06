@@ -1,0 +1,98 @@
+<div class="menu">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'create-template'" (click)="selectMenu('create-template')">
+                                <svg width="16" height="16" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
+                                    <path d="M8 6a.5.5 0 0 1 .5.5V8h1.5a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V9H6a.5.5 0 0 1 0-1h1.5V6.5A.5.5 0 0 1 8 6z"/>
+                                    <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zM10 3a1 1 0 0 1-1-1V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4h-2a1 1 0 0 1-1-1z"/>
+                                </svg>
+                                Create Template
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'configure-template'" (click)="selectMenu('configure-template')">
+                                <svg width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                                    <path d="M8 4.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM8 1a7 7 0 0 0-1.528.176l-.342-.342a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414l.342.342A7 7 0 0 0 1 8a7 7 0 0 0 .176 1.528l-.342.342a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0l.342-.342A7 7 0 0 0 8 15a7 7 0 0 0 1.528-.176l.342.342a1 1 0 0 0 1.414 0l.707-.707a1 1 0 0 0 0-1.414l-.342-.342A7 7 0 0 0 15 8a7 7 0 0 0-.176-1.528l.342-.342a1 1 0 0 0 0-1.414l-.707-.707a1 1 0 0 0-1.414 0l-.342.342A7 7 0 0 0 8 1zm0 1a6 6 0 1 1 0 12A6 6 0 0 1 8 2z"/>
+                                </svg>
+                                Configure Template
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'view-user-data'" (click)="selectMenu('view-user-data')">
+                                <svg width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM8 13c-3.866 0-7-4-7-5s3.134-5 7-5 7 4 7 5-3.134 5-7 5z"/>
+                                    <path d="M8 5a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+                                    <path d="M8 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/>
+                                </svg>
+                                View User Data
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'upload-user-data'" (click)="selectMenu('upload-user-data')">
+                                <svg width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                                    <path d="M.5 9.9a.5.5 0 0 1 .5-.5h4.5V1.5a.5.5 0 0 1 1 0v7.9h4.5a.5.5 0 0 1 .5.5v.5a.5.5 0 0 1-.5.5H6.5v4.5a.5.5 0 0 1-1 0V10.9H1a.5.5 0 0 1-.5-.5v-.5z"/>
+                                    <path d="M7.646 1.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8 2.707 5.354 5.354a.5.5 0 1 1-.708-.708l3-3z"/>
+                                </svg>
+                                Upload User Data
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'send-email'" (click)="selectMenu('send-email')">
+                                <svg width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.803 2.882L15 11.383V5.383zM1 5.383v6l4.803-2.882L1 5.383zM14.803 12.617L8 8.383l-6.803 4.234A1 1 0 0 0 2 13h12a1 1 0 0 0 .803-.383z"/>
+                                </svg>
+                                Send Email
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'history'" (click)="selectMenu('history')">
+                                <svg width="16" height="16" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16">
+                                    <path d="M8.515 3.879a.5.5 0 0 1 .485.621l-.5 2a.5.5 0 0 1-.97-.242l.5-2a.5.5 0 0 1 .485-.379z"/>
+                                    <path d="M8 1a7 7 0 1 0 7 7 7 7 0 0 0-7-7zm0 13a6 6 0 1 1 6-6 6 6 0 0 1-6 6z"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3.5h2.5a.5.5 0 0 1 0 1H8a.5.5 0 0 1-.5-.5V4.5A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                                History
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'docs'" (click)="selectMenu('docs')">
+                                <svg width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                    <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zM10 3a1 1 0 0 1-1-1V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4h-2a1 1 0 0 1-1-1z"/>
+                                    <path d="M5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                                </svg>
+                                Docs
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+            <!-- Main content -->
+            <main class="main-content">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <div *ngIf="selectedMenu === 'default'">Welcome to Smart Email Notifier</div>
+                    <app-create-template *ngIf="selectedMenu === 'create-template'"></app-create-template>
+                    <app-configure-template *ngIf="selectedMenu === 'configure-template'"></app-configure-template>
+                    <app-view-user-data *ngIf="selectedMenu === 'view-user-data'"></app-view-user-data>
+                    <app-upload-user-data *ngIf="selectedMenu === 'upload-user-data'"></app-upload-user-data>
+                    <app-send-email *ngIf="selectedMenu === 'send-email'"></app-send-email>
+                    <app-history *ngIf="selectedMenu === 'history'"></app-history>
+                    <app-docs *ngIf="selectedMenu === 'docs'"></app-docs>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+

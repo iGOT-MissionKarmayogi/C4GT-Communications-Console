@@ -1,0 +1,33 @@
+<div>
+  <h2>Email History</h2>
+  <label for="filter">Filter by Status:</label>
+  <select id="filter" [(ngModel)]="filterStatus">
+	<option value="">All</option>
+	<option value="Success">Success</option>
+	<option value="Fail">Fail</option>
+  </select>
+  <table>
+	<thead>
+	  <tr>
+		<th>Username</th>
+		<th>Email</th>
+		<th>Status</th>
+		<th>Time</th>
+		<th>Date</th>
+		<th>Action</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr *ngFor="let history of filteredHistory()" [ngClass]="{'success': history.status === 'Success', 'fail': history.status === 'Fail'}">
+		<td>{{ history.username }}</td>
+		<td>{{ history.email }}</td>
+		<td>{{ history.status }}</td>
+		<td>{{ history.time }}</td>
+		<td>{{ history.date }}</td>
+		<td>
+		  <button *ngIf="history.status === 'Fail'" (click)="resendEmail(history)">Resend</button>
+		</td>
+	  </tr>
+	</tbody>
+  </table>
+</div>
