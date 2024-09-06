@@ -40,7 +40,7 @@ export class UserService {
   }
 
   getSavedFormData(): any {
-    return this.formData;
     console.log('Form data retrieved:', this.formData);
+    return this.formData;
   }
 }

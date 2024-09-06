@@ -105,20 +105,26 @@ export class UserFilterComponent {
 
   onProgressTypeChange(type: string): void {
     this.isSingleValue = type === 'single';
-    this.userFilterForm.patchValue({
-      progress: '',
-      progressRangeStart: '',
-      progressRangeEnd: '',
-    });
+    if (type === 'single') {
+      this.userFilterForm.patchValue({
+        progressRangeStart: '',
+        progressRangeEnd: '',
+      });
+    } else {
+      this.userFilterForm.patchValue({ progress: '' });
+    }
   }
 
   onDateTypeChange(type: string): void {
     this.isSingleDate = type === 'single';
-    this.userFilterForm.patchValue({
-      batchEnrollmentDate: '',
-      batchEnrollmentDateStart: '',
-      batchEnrollmentDateEnd: '',
-    });
+    if (type === 'single') {
+      this.userFilterForm.patchValue({
+        batchEnrollmentDateStart: '',
+        batchEnrollmentDateEnd: '',
+      });
+    } else {
+      this.userFilterForm.patchValue({ batchEnrollmentDate: '' });
+    }
   }
 
   onSubmit(): void {
