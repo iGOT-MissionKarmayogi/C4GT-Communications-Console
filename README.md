@@ -49,4 +49,4 @@ ng serve
 
 ```
 
-This will launch the server on http://localhost:4200
+This will launch the application on http://localhost:4200
