@@ -1,0 +1,61 @@
+<div class="create-template">
+  <h2>Create SMS Template</h2>
+  <form [formGroup]="templateForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+
+      <label for="name">Template Name</label>
+      <div style="display: flex;gap: 15px;align-items: center;">
+        <input type="text" id="name" formControlName="name" class="form-control" required>
+        <img style="height: 20px;width: 20px;margin-top: 10px;" src="question.png" alt=""
+          pTooltip="Enter the name of the template" tooltipPosition="right">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="subject">Template Id</label>
+      <div style="display: flex;gap: 15px;align-items: center;">
+
+        <input type="text" id="subject" formControlName="subject" class="form-control" required>
+        <img style="height: 20px;width: 20px;margin-top: 10px;" src="question.png" alt=""
+          pTooltip="You will get the template Id from your DLT Platform once your template gets Approved"
+          tooltipPosition="right">
+      </div>
+
+    </div>
+    <div class="textmain" style="display: flex">
+      <div class="form-group" style="width: 60%;">
+        <label for="body">Body</label>
+        <div style="display: flex;gap: 15px">
+          <textarea id="body" style="width: 100%;" formControlName="body" class="form-control" rows="10" required
+            (input)="onBodyChange($event)"></textarea>
+          <img style="height: 20px;width: 20px;margin-top: 20px;" src="question.png" alt="" pTooltip="{{tooltipText}}">
+        </div>
+      </div>
+
+      <div formArrayName="variables" class="variables">
+        <div *ngFor="let variable of variablesArray.controls; let i = index" [formGroupName]="i">
+          <div class="form-g">
+            <label>{{ variable.get('name')?.value }} :</label>
+            <select formControlName="type" (change)="onVariableTypeChange(i, $event)">
+              <option value="predefined">Predefined</option>
+              <option value="userDefined">User Defined</option>
+            </select>
+            <ng-container *ngIf="variable.get('type')?.value === 'predefined'">
+              <select formControlName="value">
+                <option *ngFor="let predefinedVar of predefinedVariables" [value]="predefinedVar">{{ predefinedVar }}
+                </option>
+              </select>
+            </ng-container>
+            <ng-container *ngIf="variable.get('type')?.value === 'userDefined'">
+              <input type="text" formControlName="value" class="form-control">
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Template</button>
+  </form>
+  <div *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
+    Template created successfully!
+  </div>
+</div>

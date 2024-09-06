@@ -1,0 +1,21 @@
+<div class="backdrop">
+
+    <div class="popup">
+        <div class="popup-content">
+            <h3>Fill Variables(User defined)</h3>
+            <form (ngSubmit)="onSubmit()">
+                <div *ngFor="let variable of variables">
+                    <div *ngIf="variable.type === 'userDefined'">
+                        <label>{{ variable.name }} :</label>
+                        <input type="text" [(ngModel)]="variable.value" [name]="variable.name" required>
+                    </div>
+            </div>
+            <div class="buttons">
+                <button type="submit">Submit</button>
+                <button type="button" (click)="onCancel()">Cancel</button>
+            </div>
+            </form>
+    </div>
+</div>
+</div>
+
