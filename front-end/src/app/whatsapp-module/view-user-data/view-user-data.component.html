@@ -1,0 +1,24 @@
+<div>
+  <div class="user-list">
+    <table>
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Name</th>
+          <th>WhatsApp Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td><input type="checkbox" [(ngModel)]="user.checked"></td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.whatsappNumber }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="bottom">
+    <button class="send-button" (click)="Submit()">Confirm Selections</button>
+  </div>
+
+</div>
