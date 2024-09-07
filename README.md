@@ -48,18 +48,18 @@ Before running the application, make sure to set the backend API URL in the envi
 
 Open the `src/app/environments/environment.ts` file and update the `apiUrl` field to point to the backend server. If you're running the backend locally, the default value is:
 
-````typescript
+```typescript
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000',
+  apiUrl: "http://localhost:3000",
 };
-
+```
 
 ### 7. Build and serves your application, rebuilding on file changes.
 
 ```bash
 ng serve
 
-````
+```
 
 This will launch the application on http://localhost:4200
