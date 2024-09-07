@@ -241,7 +241,7 @@ export class UserFilterComponent {
           this.apiResponse = response;
           this.errorMessage = null;
           this.userService.setResponseData(this.apiResponse);
-          this.router.navigate(['/records']);
+          this.router.navigate(['/users']);
         },
         (error) => {
           console.error('Error:', error);
@@ -251,7 +251,7 @@ export class UserFilterComponent {
           } else {
             this.errorMessage = 'Failed to fetch data. Please try again later.';
           }
-          this.router.navigate(['/records']);
+          this.router.navigate(['/users']);
         }
       );
     } else {
