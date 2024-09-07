@@ -42,11 +42,24 @@ npm install
 
 ```
 
+### 6. Configure Backend URL
+
+Before running the application, make sure to set the backend API URL in the environment file.
+
+Open the `src/app/environments/environment.ts` file and update the `apiUrl` field to point to the backend server. If you're running the backend locally, the default value is:
+
+````typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:3000',
+};
+
+
 ### 7. Build and serves your application, rebuilding on file changes.
 
 ```bash
 ng serve
 
-```
+````
 
 This will launch the application on http://localhost:4200
