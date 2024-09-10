@@ -2,7 +2,7 @@
   <div class="user-data-container">
 
     <h2>User Data</h2>
-    <button (click)="selectUsers()">Select</button>
+    <button (click)="selectUsers()" [disabled]="selectedUsers.size === 0">Select</button>
   </div>
   <div *ngIf="selectionMessage" class="selection-message">
     {{ selectionMessage }}
@@ -24,8 +24,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of filteredUsers">
-        <td><input type="checkbox" [checked]="user.selected" (change)="toggleSelection(user.id)"></td>
+      <tr *ngFor="let user of filteredUsers" (click)="toggleSelection(user.id)">
+        <td><input type="checkbox" [checked]="user.selected" (click)="$event.stopPropagation()"></td>
         <td *ngFor="let field of fields">{{ user[field] }}</td>
       </tr>
     </tbody>

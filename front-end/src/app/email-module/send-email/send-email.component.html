@@ -1,4 +1,5 @@
 <div class="selected-users-box">
+  <p style="color: blue;">*Select users from the View User Data Menu</p>
   <h3>Selected Users ({{ selectedUsers.length }})</h3>
   <ul>
     <li *ngFor="let user of selectedUsers">
@@ -34,7 +35,7 @@
     <input type="file" id="attachment" (change)="onFileSelected($event)" class="form-control">
   </div>
   
-  <button class="btn btn-primary" (click)="sendEmail()">Send Email</button>
+  <button class="btn btn-primary" (click)="sendEmail()" [disabled]="selectedUsers.length === 0">Send Email</button>
   <div *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
     Email sent successfully!
 </div>

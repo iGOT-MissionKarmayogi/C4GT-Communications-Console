@@ -1,21 +1,57 @@
-<div class="create-template">
-  <h2>Create Email Template</h2>
-  <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="name">Template Name</label>
-      <input type="text" id="name" name="name" [(ngModel)]="name" class="form-control" required>
-    </div>
-    <div class="form-group">
-      <label for="subject"> Email Subject</label>
-      <input type="text" id="subject" name="subject" [(ngModel)]="subject" class="form-control" required>
-    </div>
-    <div class="form-group">
-      <label for="body">Body</label>
-      <textarea id="body" name="body" [(ngModel)]="body" class="form-control" rows="6" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Create Template</button>
-  </form>
-  <div *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
-    Template created successfully!
+<div class="box">
+  <div class="create-template">
+    <h2>Create Email Template</h2>
+    <form (ngSubmit)="onSubmit()" #templateForm="ngForm">
+      <div class="form-group">
+        <label for="name">Template Name</label>
+        <input type="text" id="name" name="name" [(ngModel)]="name" class="form-control" required #nameField="ngModel">
+        <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="text-danger">
+          <small *ngIf="nameField.errors?.['required']" class="error-message">Template Name is required.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="subject">Email Subject</label>
+        <input type="text" id="subject" name="subject" [(ngModel)]="subject" class="form-control" required
+          #subjectField="ngModel">
+        <div *ngIf="subjectField.invalid && (subjectField.dirty || subjectField.touched)" class="text-danger">
+          <small *ngIf="subjectField.errors?.['required']" class="error-message">Email Subject is required.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="body">Body</label>
+        <textarea id="body" name="body" [(ngModel)]="body" class="form-control" rows="6" required
+          #bodyField="ngModel"></textarea>
+        <div *ngIf="bodyField.invalid && (bodyField.dirty || bodyField.touched)" class="text-danger">
+          <small *ngIf="bodyField.errors?.['required']" class="error-message">Body is required.</small>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="templateForm.invalid">Create Template</button>
+    </form>
   </div>
+  <div class="right-section">
+
+    <div>
+    <p>Available placeholders(From User Data Fields):</p>
+    <br>
+      <ol>
+        
+        <li>{{ '{{Name}}' }}</li>
+        <li>{{ '{{Email}}' }}</li>
+        <li>{{ '{{Mobile}}' }}</li>
+        <li>{{ '{{Age}}' }}</li>
+        <li>{{ '{{Address}}' }}</li>
+        <li>{{ '{{Company}}' }}</li>
+        <li>{{ '{{Occupation}}' }}</li>
+        <!-- Add more placeholders as needed -->
+      </ol>
+      <br>
+      Use these place holders to fetch the field values from User-data before sending
+    </div>
+  </div>
+</div>
+<div *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
+  Template created successfully!
+</div>
+<div *ngIf="showErrorMessage" class="alert alert-danger" role="alert">
+  {{ errorMessage }}
 </div>

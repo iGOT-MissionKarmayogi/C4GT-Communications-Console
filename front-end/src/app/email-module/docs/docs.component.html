@@ -3,10 +3,61 @@
 
     <h2>Overview</h2>
     <div>
-        <p>The Email Notifier Service is designed to streamline the process of sending notifications and managing email templates
+        <p>The Email Notifier Service is designed to streamline the process of sending notifications and managing email
+            templates
             within an application. It provides a flexible interface for creating, configuring, and sending emails, as
             well
             as viewing user data and email history.</p>
+    </div>
+
+    <h3>APIs</h3>
+    <div>
+        <table class="api-table">
+            <thead>
+                <tr>
+                    <th>Request</th>
+                    <th>Middleware</th>
+                    <th>API</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GET</td>
+                    <td>verify, anonymous, anonymous</td>
+                    <td>/api/email</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>verify, anonymous, multerMiddleware, anonymous</td>
+                    <td>/api/email/send-email</td>
+                </tr>
+                <tr>
+                    <td>POST, GET</td>
+                    <td>verify, anonymous, anonymous</td>
+                    <td>/api/email/templates</td>
+                </tr>
+                <tr>
+                    <td>GET, PUT</td>
+                    <td>verify, anonymous, anonymous</td>
+                    <td>/api/email/templates/:id</td>
+                </tr>
+                <tr>
+                    <td>POST, GET</td>
+                    <td>verify, anonymous, anonymous</td>
+                    <td>/api/email/users</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>verify, anonymous, multerMiddleware, uploadUserData</td>
+                    <td>/api/email/upload-user-data</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>verify, anonymous, router</td>
+                    <td>/api/email/history</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <h2>Tech Stack</h2>
@@ -78,16 +129,18 @@
         <ul>
             <li><strong>Create Template</strong>: Interface for creating new email templates.</li>
             <li><strong>Configure Template</strong>: Allows users to configure existing email templates.</li>
-            <li><strong>View User Data</strong>: Displays user data relevant to the email service and select users to send email.</li>
+            <li><strong>View User Data</strong>: Displays user data relevant to the email service and select users to
+                send email.</li>
             <li><strong>Upload User Data</strong>: Provides an option to upload user data for email targeting.</li>
             <li><strong>Send Email</strong>: Interface for sending emails using configured templates.</li>
             <li><strong>History</strong>: Shows the history of sent emails for tracking and auditing purposes.</li>
-            <li><strong>Docs</strong>: (default) Displays the documentation to understand the platform interface and learn about
+            <li><strong>Docs</strong>: (default) Displays the documentation to understand the platform interface and
+                learn about
                 the project.</li>
         </ul>
 
     </div>
-    <h2>Usage</h2>
+    <h2>Usage</h2>\
 
     <h3>Navigation</h3>
     <div>
@@ -118,7 +171,8 @@
 
     <h3>Viewing User Data</h3>
     <div>
-        <p>Select "View User Data" from the menu to display a list of user data , filter and select users to send email.</p>
+        <p>Select "View User Data" from the menu to display a list of user data , filter and select users to send email.
+        </p>
     </div>
 
 
@@ -138,6 +192,7 @@
             <li>Select "Send Email" from the menu.</li>
             <li>Choose a template and configure the necessary details.</li>
             <li>Preview the email before sending.</li>
+            <li>Upload Attachment (optional).</li>
             <li>Submit the form to send the email to the selected recipients.</li>
         </ol>
     </div>

@@ -68,18 +68,20 @@ export class SendEmailComponent implements OnInit {
       this.http.get(`http://localhost:5000/api/email/templates/${this.selectedTemplate._id}`)
       .subscribe({
         next: (templateResponse: any) => {
-          // Replace [User] with user.name in the email body and so on
+          // Replace {{Name}} with user.name in the email body and so on
           const variables = {
-            User: user.name,
+            Name: user.name,
             Email: user.email,
             Age: user.age,
             Mobile: user.mobile_no,
             Address: user.address,
+            Occupation: user.occupation,
+            Company: user.company
             // Add more variables as needed
           };
           
           const replaceVariables = (template: string, variables: { [key: string]: string }) => {
-            return template.replace(/\[([^\]]+)\]/g, (match, p1) => variables[p1] || match);
+            return template.replace(/{{([^}]+)}}/g, (match, p1) => variables[p1.trim()] || match);
           };
           const emailBody = replaceVariables(templateResponse.body, variables);
           

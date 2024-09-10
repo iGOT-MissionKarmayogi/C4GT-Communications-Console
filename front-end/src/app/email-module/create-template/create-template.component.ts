@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-create-template',
@@ -21,10 +21,20 @@ export class CreateTemplateComponent {
   subject: string = '';
   body: string = '';
   showSuccessMessage: boolean | undefined;
+  showErrorMessage: boolean = false;
+  errorMessage: string = '';
+  
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   onSubmit() {
+
+    if (!this.name || !this.subject || !this.body) {
+      this.showErrorMessage = true;
+      this.errorMessage = 'All fields are required.';
+      return;
+    }
+
     const templateData = {
       name: this.name,
       subject: this.subject,
@@ -35,13 +45,14 @@ export class CreateTemplateComponent {
       .subscribe({
         next: (response) => {
           console.log('Template created successfully:', response);
-          this.showSuccessMessage = true; 
-          
+          this.showSuccessMessage = true;
+
           this.resetForm();
         },
         error: (error) => {
           console.error('Error creating template:', error);
-          // Handle error feedback to the user
+          this.showErrorMessage = true;
+          this.errorMessage = 'Failed to create template. Please try again.';
         }
       });
   }
@@ -50,12 +61,8 @@ export class CreateTemplateComponent {
     this.name = '';
     this.subject = '';
     this.body = '';
+
+
   }
 
 }
-
-
-
-
-
-

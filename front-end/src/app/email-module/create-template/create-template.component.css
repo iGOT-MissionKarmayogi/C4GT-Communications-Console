@@ -1,54 +1,100 @@
 .create-template {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    font-weight: bold;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  textarea {
-    resize: vertical; /* Allow vertical resizing of textarea */
-  }
-  
-  .btn-primary {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
-  /* Define the base alert class */
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+textarea {
+  resize: vertical;
+  /* Allow vertical resizing of textarea */
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Define the base alert class */
 .alert {
   padding: 20px;
-  background-color: #f44336; /* Red */
+  background-color: #f44336;
+  /* Red */
   color: white;
   margin-bottom: 15px;
 }
 
 /* Define the success variant */
 .alert-success {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50;
+  /* Green */
 }
-  
+
+
+.error-message {
+  color: red;
+}
+
+
+button[disabled] {
+  background-color: #d3d3d3;
+  color: #808080;
+  cursor: not-allowed;
+}
+
+.box {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+
+/* Right section taking the remaining space */
+.right-section {
+  flex: 1;
+  max-width: 35%;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.form-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Form content taking 3/4 of the space */
+.form-content {
+  flex: 3;
+  max-width: 75%;
+}
+
+
+
