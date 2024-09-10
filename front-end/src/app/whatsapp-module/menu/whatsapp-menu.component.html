@@ -1,0 +1,43 @@
+<div class="menu">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-col">
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'select-template'" (click)="selectMenu('select-template')">Select Template</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'create-template'" (click)="selectMenu('create-template')">Create Template</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'configure-template'" (click)="selectMenu('configure-template')">Configure Template</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'select-recipients'" (click)="selectMenu('select-recipients')">Select Recipients</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'upload-user-data'" (click)="selectMenu('upload-user-data')">Upload User Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="selectedMenu === 'preview-and-send'" (click)="selectMenu('preview-and-send')">Preview and Send</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <main class="main-content">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <app-select-template *ngIf="selectedMenu === 'select-template'"></app-select-template>
+                    <app-create-WhatsApp-template *ngIf="selectedMenu === 'create-template'"></app-create-WhatsApp-template>
+                    <app-configure-WhatsApp-template *ngIf="selectedMenu === 'configure-template'"></app-configure-WhatsApp-template>
+                    <app-view-WhatsApp-user-data *ngIf="selectedMenu === 'select-recipients'"></app-view-WhatsApp-user-data>
+                    <app-upload-WhatsApp-user-data *ngIf="selectedMenu === 'upload-user-data'"></app-upload-WhatsApp-user-data>
+                    <app-send-whatsapp *ngIf="selectedMenu === 'preview-and-send'"></app-send-whatsapp>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
