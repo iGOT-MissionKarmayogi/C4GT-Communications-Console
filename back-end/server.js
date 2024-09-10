@@ -11,7 +11,7 @@ import userRouter from './Routes/User.routes.js';
 // "start": "concurrently \"nodemon server.js\" \"nodemon Email/backend/server.js\""
 
 // Import routes
-
+import WhatsappRouter from './Routes/Whatsapp.routes.js';
 // Initialize express
 const app = express();
 
@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 
 
 // Routes
-
+app.use('/api/whatsapp',WhatsappRouter);
 
 
 // Error handling middlewares
@@ -44,7 +44,7 @@ app.use(errorHandler);
 // Connect to MongoDB
 ConnectDB().then(() => {
     app.listen(process.env.PORT, () => {
-        console.log(`Server is running on port ${process.env.PORT}`);
+        console.log(`Server is running on port ${process.env.PORT} and MongoDB is connected`);
     });
 }).catch((error) => {
     console.log('Error connecting to MongoDB', error.message);
