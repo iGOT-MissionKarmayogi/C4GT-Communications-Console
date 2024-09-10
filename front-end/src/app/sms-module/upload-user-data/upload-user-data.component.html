@@ -1,105 +1,35 @@
-<div class="container">
+<div class="container" style="position: relative;">
   <p-toast [life]="2000"></p-toast>
-  <div *ngIf="!selectedTemplate">
 
+  <div *ngIf="!showTemplatePopup">
+    <h2 style="font-weight: 500;">Select-Users</h2>
 
-    <div class="header">
-      <div>
-        <h2>SMS-Service</h2>
-        <h3>Select Users</h3>
-      </div>
-
-      <div class="actions">
-        <button (click)="fetchUsers()">Fetch Users</button>
-        <button (click)="uploadUsers()">Upload to Server</button>
-        <button (click)="showAddForm = true">Add Manually</button>
-        <button (click)="showFilePopup = true">Import from CSV</button>
-      </div>
-    </div>
-
-    <div class="popupform" *ngIf="showAddForm">
-      <form (ngSubmit)="addUser()">
-        <input [(ngModel)]="newUser.name" name="name" placeholder="Name" required>
-        <input [(ngModel)]="newUser.phoneNumber" name="phoneNo" placeholder="Phone Number" required>
-        <div style="display: flex;gap: 20px;">
-          <button class="submit" type="submit">Add User</button>
-          <button class="close" type="button" (click)="showAddForm = false">Close</button>
-        </div>
-      </form>
-    </div>
-
-    <div class="file-popup" *ngIf="showFilePopup">
-      <div>
-        <label for="fileInput">Select a file to import</label>
-        <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".csv">
-        <button style="width: fit-content;" class="close" type="button" (click)="showFilePopup = false">Close</button>
-      </div>
-    </div>
-
-    <div class="filters">
-      <input type="text" placeholder="Search by name or phone number" [(ngModel)]="searchQuery"
-        (ngModelChange)="filterUsers()">
-      <button (click)="toggleSortOrder()">Sort by Name {{ sortAscending ? '▲' : '▼' }}</button>
-    </div>
-
-    <div class="user-list">
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Phone Number</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of filteredUsers">
-            <td><input type="checkbox" [(ngModel)]="user.checked"></td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.phoneNumber }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="bottom">
+    <div class="actions">
+      <!-- <button (click)="fetchUsers()">Fetch Users</button>
+      <button (click)="uploadUsers()">Upload to Server</button> -->
+      <button (click)="importFromCSV()">Import from CSV</button>
       <button class="send-button" (click)="sendSMS()">Select Template</button>
     </div>
+
+    <input type="file" id="fileInput" style="display: none;" (change)="onFileSelected($event)" accept=".csv" />
+
+    <div class="ag-theme-alpine" style="height: 500px; width: 100%;">
+      <div style="display: flex;gap: 10px;align-items: center;margin-bottom: 10px;margin-top: 10px;">
+        <p>
+          Search Filter - 
+        </p>
+        <input style="padding: 10px 5px 10px 5px;" type="text" placeholder="Search..." (input)="onQuickFilterChanged($event)" />
+      </div>
+
+      <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-quartz" [rowData]="rowData"
+        [columnDefs]="columnDefs" rowSelection="multiple" (gridReady)="onGridReady($event)" [gridOptions]="gridOptions">
+      </ag-grid-angular>
+    </div>
+
 
   </div>
 
   <app-template-popup *ngIf="showTemplatePopup" (templateSelected)="handleTemplateSelection($event)"
     (popupClosed)="showTemplatePopup = false">
   </app-template-popup>
-
-  <div class="full-screen-template" *ngIf="selectedTemplate">
-    <h3>
-      Template Preview (Predefined Variables will be replaced with actual values)
-
-    </h3>
-    <div class="template-content">
-      <h4>Template Id - {{ selectedTemplate.templateId }}</h4>
-      <p [innerHTML]="selectedTemplate.Content"></p>
-      <button (click)="closeFullScreenTemplate()">Send message</button>
-    </div>
-    <div class="user-list">
-      <h4 style="margin-top: 30px;">Selected Users</h4>
-      <table>
-
-        <thead>
-
-          <tr>
-            <th>Name</th>
-            <th>Phone Number</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of selectedUsers">
-            <td>{{ user.name }}</td>
-            <td>{{ user.phoneNumber }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
- 
 </div>
