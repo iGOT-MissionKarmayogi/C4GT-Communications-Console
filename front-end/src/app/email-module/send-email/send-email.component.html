@@ -1,0 +1,41 @@
+<div class="selected-users-box">
+  <h3>Selected Users ({{ selectedUsers.length }})</h3>
+  <ul>
+    <li *ngFor="let user of selectedUsers">
+      <strong>Name:</strong> {{ user.name }} <br>
+      <strong>Email:</strong> {{ user.email }}
+    </li>
+  </ul>
+</div>
+
+<h2>Select an Email Template</h2>
+<div class="template-container">
+  <div class="card" *ngFor="let template of templates" (click)="selectTemplate(template)">
+    <div class="card-body">
+      <h5 class="card-title">{{ template.name }}</h5>
+      <p class="card-text">{{ template.subject }}</p>
+      <button class="btn btn-primary" (click)="previewTemplate(template, $event)">Preview</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedTemplate" class="preview-container" #previewSection>
+  <h2>Preview Template</h2>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ selectedTemplate.name }}</h5>
+      <p class="card-text">{{ selectedTemplate.subject }}</p>
+      <p class="card-text">{{ selectedTemplate.body }}</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="attachment">Upload Attachment</label>
+    <input type="file" id="attachment" (change)="onFileSelected($event)" class="form-control">
+  </div>
+  
+  <button class="btn btn-primary" (click)="sendEmail()">Send Email</button>
+  <div *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
+    Email sent successfully!
+</div>
+</div>

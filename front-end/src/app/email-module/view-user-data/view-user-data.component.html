@@ -1,0 +1,34 @@
+<div class="user-data">
+  <div class="user-data-container">
+
+    <h2>User Data</h2>
+    <button (click)="selectUsers()">Select</button>
+  </div>
+  <div *ngIf="selectionMessage" class="selection-message">
+    {{ selectionMessage }}
+  </div>
+  <div class="table-container">
+
+    <table>
+      <thead>
+      <tr>
+        <th><input type="checkbox" (change)="toggleSelectAll($event)"></th>
+        <th *ngFor="let field of fields">
+          {{ field }}
+          <br>
+          <select (change)="applyFilters()" [(ngModel)]="filters[field]">
+            <option value="">All</option>
+            <option *ngFor="let option of uniqueValues[field]" [value]="option">{{ option }}</option>
+          </select>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of filteredUsers">
+        <td><input type="checkbox" [checked]="user.selected" (change)="toggleSelection(user.id)"></td>
+        <td *ngFor="let field of fields">{{ user[field] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
