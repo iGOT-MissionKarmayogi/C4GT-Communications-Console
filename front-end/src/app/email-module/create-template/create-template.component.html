@@ -1,6 +1,12 @@
 <div class="box">
   <div class="create-template">
     <h2>Create Email Template</h2>
+    <div *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
+      Template created successfully!
+    </div>
+    <div *ngIf="showErrorMessage" class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
     <form (ngSubmit)="onSubmit()" #templateForm="ngForm">
       <div class="form-group">
         <label for="name">Template Name</label>
@@ -48,10 +54,4 @@
       Use these place holders to fetch the field values from User-data before sending
     </div>
   </div>
-</div>
-<div *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
-  Template created successfully!
-</div>
-<div *ngIf="showErrorMessage" class="alert alert-danger" role="alert">
-  {{ errorMessage }}
 </div>

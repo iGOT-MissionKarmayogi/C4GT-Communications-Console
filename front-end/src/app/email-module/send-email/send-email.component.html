@@ -22,11 +22,12 @@
 
 <div *ngIf="selectedTemplate" class="preview-container" #previewSection>
   <h2>Preview Template</h2>
+  <p>Preview for 1st user(if selected)</p>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">{{ selectedTemplate.name }}</h5>
-      <p class="card-text">{{ selectedTemplate.subject }}</p>
-      <p class="card-text">{{ selectedTemplate.body }}</p>
+      
+      <p class="card-text">Subject - {{ selectedTemplate.subject }}</p>
+      <p class="card-text" [innerHTML]="previewBody || selectedTemplate?.body"></p>
     </div>
   </div>
 

@@ -20,6 +20,7 @@ export class SendEmailComponent implements OnInit {
   showSuccessMessage : Boolean | undefined;
   selectedUsers: any[] = [];
   selectedFile: File | null = null;
+  previewBody: string = '';
 
   constructor(private http: HttpClient, private userSelectionService: UserSelectionService) {
     this.selectedUsers = this.userSelectionService.selectedUsers;
@@ -47,9 +48,29 @@ export class SendEmailComponent implements OnInit {
     this.selectedUsers = this.userSelectionService.getSelectedUsers();
   }
 
+  replaceVariables(template: string, variables: { [key: string]: string }): string {
+    return template.replace(/{{([^}]+)}}/g, (match, p1) => variables[p1.trim()] || match);
+  }
+
   previewTemplate(template: any, event: Event) {
     event.stopPropagation(); // Prevent the outer click event
     this.selectTemplate(template);
+
+    if (this.selectedUsers.length > 0) {
+      const user = this.selectedUsers[0]; // Preview for the first selected user
+      const variables = {
+        Name: user.name,
+        Email: user.email,
+        Age: user.age,
+        Mobile: user.mobile_no,
+        Address: user.address,
+        Occupation: user.occupation,
+        Company: user.company
+      };
+      this.previewBody = this.replaceVariables(template.body, variables);
+      this.previewBody= this.previewBody.replace(/\n/g, '<br>')
+    }
+
     setTimeout(() => {
       this.previewSection.nativeElement.scrollIntoView({ behavior: 'smooth' });
     }, 0);
@@ -80,10 +101,8 @@ export class SendEmailComponent implements OnInit {
             // Add more variables as needed
           };
           
-          const replaceVariables = (template: string, variables: { [key: string]: string }) => {
-            return template.replace(/{{([^}]+)}}/g, (match, p1) => variables[p1.trim()] || match);
-          };
-          const emailBody = replaceVariables(templateResponse.body, variables);
+          
+          const emailBody = this.replaceVariables(templateResponse.body, variables);
           
 
 

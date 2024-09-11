@@ -25,7 +25,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let user of filteredUsers" (click)="toggleSelection(user.id)">
-        <td><input type="checkbox" [checked]="user.selected" (click)="$event.stopPropagation()"></td>
+        <td><input type="checkbox" [checked]="user.selected" (click)="toggleSelection(user.id); $event.stopPropagation()"></td>
         <td *ngFor="let field of fields">{{ user[field] }}</td>
       </tr>
     </tbody>
