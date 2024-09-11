@@ -1,75 +1,161 @@
-body {
-    font-family: Arial, sans-serif;
-  }
-  .form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
-    padding: 2rem;
-  }
+
+.configure-template {
+  width: 100%;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: transparent;
+  position: relative;
+}
+
+.configure-template h2{
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  width: 60%;
+}
+
+.form-g select{
+  padding: 8px;
+  width: 150px;
+  font-size: 16px;
+  border: 1.5px solid #000000;
+  /* border-radius: 5px; */
+  background-color: transparent !important;
+}
+
+.form-g input{
+  width: 150px !important;
+  margin-top: 0 !important;
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #000000;
+  background-color: transparent !important;
+}
+
+.form-g{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+label {
+  font-weight: 500;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  font-size: 15px;
+  border: 1.5px solid #848484;
+  border-radius: 0px;
+  background-color: transparent !important;
+}
+
+textarea {
+  resize: vertical; /* Allow vertical resizing of textarea */
+}
+
+.btn-primary {
+  position: absolute;
+  top: 5%;
+  right: 0;
   
-  .form input,
-  textarea,
-  select {
-    width: 300px;
-    border-radius: 5px;
-    border: none;
-    padding: 10px;
-  }
-  
-  select {
-    font-family: 'Poppins', sans-serif;
-  }
-  select option{
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .form input:focus,
-  textarea:focus,
-  select:focus {
-    outline: none;
-  }
-  
-  .fields {
-    width: 60%;
-    display: flex;
-    align-items: center;
-    gap: 5rem;
-    justify-content: space-between;
-    padding-inline: 10px;
-  }
-  
-  
-  
-  .ExampleAdder button {
-    height: 40px;
-    width: 100px;
-    background-color: rgb(189, 188, 188);
-    border: none;
-    border-radius: 10px;
-    font-size: 15px;
-    cursor: pointer;
-  }
-  
-  .SubmitButton button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    min-width: 50px;
-    padding: 20px;
-    border-radius: 30px;
-    font-family: 'Poppins', sans-serif;
-    cursor: pointer;
-    color: white;
-    font-size: 18px;
-    border: solid #184486 2px;
-    background-color: #184486;
-  }
-  
-  .SubmitButton button:active {
-    background-color: #082754;
-    scale: 90%;
-  }
-  
+  margin-right: 2rem;
+  padding: 0.7rem;
+  padding-inline: 2rem;
+  background-color: #059629;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.btn-primary:active{
+  scale: 95%;
+}
+
+.btn-secondary{
+  margin-right: 2rem;
+  padding: 0.7rem;
+  padding-inline: 2rem;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+
+.alert {
+padding: 20px;
+background-color: #f44336; /* Red */
+color: white;
+margin-bottom: 15px;
+}
+
+.alert-success {
+background-color: #4CAF50; /* Green */
+}
+
+
+/*Loading animation css*/
+.loader {
+  margin-left: 50%;
+  margin-top: 25%;
+  height: 50px;
+  width: max-content;
+  font-size: 20px;
+  font-weight: 800;
+  font-family: monospace;
+  letter-spacing: 1em;
+  color: #000000;
+  filter: drop-shadow(0 0 10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader span {
+animation: loading6454 1.75s ease infinite;
+}
+
+.loader span:nth-child(2) {
+animation-delay: 0.25s;
+}
+
+.loader span:nth-child(3) {
+animation-delay: 0.5s;
+}
+
+.loader span:nth-child(4) {
+animation-delay: 0.75s;
+}
+
+.loader span:nth-child(5) {
+animation-delay: 1s;
+}
+
+.loader span:nth-child(6) {
+animation-delay: 1.25s;
+}
+
+.loader span:nth-child(7) {
+animation-delay: 1.5s;
+}
+
+@keyframes loading6454 {
+0%, 100% {
+ transform: translateY(0);
+}
+
+50% {
+ transform: translateY(-10px);
+}
+}

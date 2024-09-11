@@ -1,31 +1,78 @@
-<div>
-    <h1><strong>Create New Template</strong></h1>
+<div class="create-template">
+    <h2>Create New Template</h2>
     <form (ngSubmit)="onSubmit()" #templateForm="ngForm" class="form">
-        <div class="fields">
-            <label for="name">Template Name:</label>
-            <input type="text" id="name" [(ngModel)]="name" name="name" required>
+        <div class="form-group">
+            <label for="name">Template Name</label>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <input type="text" id="name" [(ngModel)]="name" name="name" class="form-control" required>
+                <img 
+                    style="height: 20px; width: 20px; margin-top: 0; cursor: pointer;" 
+                    src="question.png" 
+                    alt="Tooltip" 
+                    pTooltip="Enter the name of the template" 
+                    tooltipPosition="right"
+                >
+            </div>
         </div>
-        <div class="fields">
-            <label for="category">Category:</label>
-            <select id="category" [(ngModel)]="category" name="category" required>
-                <option value="UTILITY">UTILITY</option>
-                <option value="MARKETING">MARKETING</option>
-                <option value="AUTHENTICATION">AUTHENTICATION</option>
-            </select>
+        
+        <div class="form-group">
+            <label for="category">Category</label>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <select id="category" [(ngModel)]="category" name="category" class="form-control" required>
+                    <option value="UTILITY">UTILITY</option>
+                    <option value="MARKETING">MARKETING</option>
+                    <option value="AUTHENTICATION">AUTHENTICATION</option>
+                </select>
+                <img 
+                    style="height: 20px; width: 20px; margin-top: 0; cursor: pointer;" 
+                    src="question.png" 
+                    alt="Tooltip" 
+                    pTooltip="Select the category for the template" 
+                    tooltipPosition="right"
+                >
+            </div>
         </div>
-        <div class="fields body">
-            <label for="bodyText">Body Text:</label>
-            <textarea id="bodyText" [(ngModel)]="bodyText" name="bodyText" required></textarea>
+        
+        <div class="form-group" style="display: flex;">
+            <div style="width: 60%;">
+                <label for="bodyText">Body Text</label>
+                <div style="display: flex; gap: 15px;">
+                    <textarea id="bodyText" [(ngModel)]="bodyText" name="bodyText" class="form-control" rows="6" required></textarea>
+                    <img 
+                        style="height: 20px; width: 20px; margin-top: 0; cursor: pointer;" 
+                        src="question.png" 
+                        alt="Tooltip" 
+                        pTooltip="Enter the body content of the template" 
+                        tooltipPosition="right"
+                    >
+                </div>
+            </div>
         </div>
-        <div *ngFor="let example of examples; let i = index" class="fields">
-            <label for="example{{i}}">Example {{i + 1}}:</label>
-            <input type="text" id="example{{i}}" [(ngModel)]="examples[i]" name="example{{i}}">
+
+        <div class="form-group" *ngFor="let example of examples; let i = index">
+            <label for="example{{i}}">Example {{i + 1}}</label>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <input type="text" id="example{{i}}" [(ngModel)]="examples[i]" name="example{{i}}" class="form-control">
+                <img 
+                    style="height: 20px; width: 20px; margin-top: 0; cursor: pointer;" 
+                    src="question.png" 
+                    alt="Tooltip" 
+                    pTooltip="Provide an example input for the template" 
+                    tooltipPosition="right"
+                >
+            </div>
         </div>
-        <div class="ExampleAdder">
-            <button type="button" (click)="addExample()">Add Example</button>
+        
+        <div class="form-group ExampleAdder">
+            <button type="button" (click)="addExample()" class="btn btn-secondary">Add Example</button>
         </div>
-        <div class="SubmitButton">
-            <button type="submit">Submit</button>
+
+        <div class="form-group SubmitButton">
+            <button type="submit" class="btn btn-primary">Create Template</button>
         </div>
     </form>
+
+    <div *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
+        Template has been sent for verification successfully!
+    </div>
 </div>

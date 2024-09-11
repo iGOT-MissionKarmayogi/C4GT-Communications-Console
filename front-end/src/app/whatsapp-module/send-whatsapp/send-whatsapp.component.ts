@@ -41,6 +41,7 @@ export class SendWhatsAppComponent implements OnInit {
   }
 
   getTemplate(templateId: string): void {
+    this.previewText='Loading...'
     this.whatsappService.getSingleTemplate(templateId).subscribe(
       template => {
         this.templateData = template;
@@ -76,12 +77,16 @@ export class SendWhatsAppComponent implements OnInit {
   }
 
   sendMessages(): void {
-    this.recipientList.forEach(recipient => {
-      const { name, whatsappNumber } = recipient;
-      this.fields = [name];  // Assuming you only need the name in the fields array
-      this.recipientNumber = whatsappNumber;
-      this.sendMessage();
-    });
+    if(this.recipientList.length>0){
+      this.recipientList.forEach(recipient => {
+        const { name, whatsappNumber } = recipient;
+        this.fields = [name];  // Assuming you only need the name in the fields array
+        this.recipientNumber = whatsappNumber;
+        this.sendMessage();
+      });
+    }else{
+      alert("Please select recipients first!")
+    }
   }
 
   sendMessage(): void {

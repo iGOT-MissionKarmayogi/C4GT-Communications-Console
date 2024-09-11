@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Papa } from 'ngx-papaparse';
 import { FormsModule } from '@angular/forms';
 import { NavigatorService } from '../Services/navigator.service';
+import { ColDef, GridOptions, GridApi } from 'ag-grid-community';
+import { AgGridModule } from 'ag-grid-angular';
+import { Papa } from 'ngx-papaparse';
+import { ToastModule } from 'primeng/toast';
+
 interface User {
   name: string;
   whatsappNumber: string;
@@ -14,22 +17,36 @@ interface User {
 @Component({
   selector: 'app-view-WhatsApp-user-data',
   standalone: true,
-  imports: [RouterModule, CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AgGridModule,ToastModule],
   templateUrl: './view-user-data.component.html',
-  styleUrls: ['./view-user-data.component.css']
+  styleUrls: ['./view-user-data.component.css'],
 })
-
 export class ViewWhatsAppUserDataComponent implements OnInit {
-  fields: string[] = [];
   users: User[] = [];
   filteredUsers: User[] = [];
   newUser: { name: string; whatsappNumber: string } = { name: '', whatsappNumber: '' };
   searchQuery = '';
-  sortAscending = true;
+  showAddForm = false;
+  gridApi!: GridApi;
+  
+  columnDefs: ColDef[] = [
+    { field: 'name', headerName: 'Name', checkboxSelection: true },
+    { field: 'whatsappNumber', headerName: 'WhatsApp Number' }
+  ];
 
-  constructor(private http: HttpClient, private papa: Papa, private NavigatorService:NavigatorService) {}
-  
-  
+  gridOptions: GridOptions = {
+    defaultColDef: {
+      checkboxSelection: true,
+      filter: true
+    },
+    rowSelection: 'multiple'
+  };
+
+  constructor(
+    private http: HttpClient,
+    private NavigatorService: NavigatorService
+  ) {}
+
   ngOnInit() {
     this.fetchUserData();
   }
@@ -38,10 +55,8 @@ export class ViewWhatsAppUserDataComponent implements OnInit {
     this.http.get<User[]>('http://localhost:5000/api/whatsapp/users', { withCredentials: true })
       .subscribe({
         next: (data) => {
-          if (data.length > 0) {
-            this.fields = Object.keys(data[0]);
-          }
           this.users = data;
+          this.filterUsers();
         },
         error: (error) => {
           console.error('Error fetching user data:', error);
@@ -54,45 +69,51 @@ export class ViewWhatsAppUserDataComponent implements OnInit {
       user.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
       user.whatsappNumber.includes(this.searchQuery)
     );
-
-    this.sortUsers();
+    this.updateGrid(); // Use transactions to update the grid
   }
 
-  sortUsers() {
-    this.filteredUsers.sort((a, b) => {
-      const comparison = a.name.localeCompare(b.name);
-      return this.sortAscending ? comparison : -comparison;
-    });
+  addUser() {
+    if (this.newUser.name && this.newUser.whatsappNumber) {
+      const newUser: User = { ...this.newUser, checked: false };
+      this.users.push(newUser);
+      this.newUser = { name: '', whatsappNumber: '' };
+      this.showAddForm = false;
+      this.filterUsers(); // Refresh grid with the newly added user
+    }
   }
-
-  toggleSortOrder() {
-    this.sortAscending = !this.sortAscending;
-    this.sortUsers();
-  }
-
-  toggleUserSelection(user: User) {
-    user.checked = !user.checked;
-  }
-
-  resetSelection() {
-    this.users.forEach(user => user.checked = false);
-    this.filterUsers();  // Refresh the filtered list if needed
-  }
-
-  
 
   Submit() {
-    const selectedUsers = this.users.filter(user => user.checked);
-    
+    const selectedNodes = this.gridApi.getSelectedNodes();
+    const selectedUsers = selectedNodes.map(node => node.data);
+
     if (selectedUsers.length === 0) {
       console.error('No users selected');
+      alert('Please select at least one user.');
       return;
     }
-    console.log(selectedUsers);
+
     this.NavigatorService.setSelectedUsers(selectedUsers);
-    console.log("We will send message to these:",this.NavigatorService.getSelectedUsers());
-    alert("Recipients added to list!")
+    console.log("Selected Users:", this.NavigatorService.getSelectedUsers());
+    alert("Recipients added to list!");
   }
 
-  
+  onGridReady(params: any) {
+    this.gridApi = params.api;
+    this.updateGrid(); // Initialize the grid with filtered data
+  }
+
+  onSelectionChanged() {
+    const selectedNodes = this.gridApi.getSelectedNodes();
+    console.log('Selected Users:', selectedNodes.map(node => node.data));
+  }
+
+  updateGrid() {
+    if (this.gridApi) {
+      // Use applyTransaction for updating grid
+      const transactions = {
+        add: this.filteredUsers, // Add or update rows as necessary
+      };
+      this.gridApi.applyTransaction(transactions);
+    }
+  }
 }
