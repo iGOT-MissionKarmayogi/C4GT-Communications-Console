@@ -23,7 +23,6 @@ export class SelectTemplateComponent implements OnInit {
   pageSize: number = 4;
   templatesLoaded: boolean = false;
   showPopup: boolean = false;
-
   constructor(
     private whatsappService: WhatsappTemplateService,
     private propService: PropServiceService,
@@ -32,6 +31,7 @@ export class SelectTemplateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading=true;
     this.getTemplates();
     const Templateid=this.navigatorService.getSelectedTemplate();
     if(Templateid!=null){
@@ -40,15 +40,16 @@ export class SelectTemplateComponent implements OnInit {
   }
 
   getTemplates(): void {
+    this.loading=true;
     this.whatsappService.getTemplates().subscribe(
       data => {
         this.templates = data.templates;
         console.log(data);
         this.templatesLoaded = true;
+        this.loading = false;
       },
       error => console.error('Error:', error)
     );
-    this.loading = false;
   }
 
   onRadioClick(templateId: string): void {

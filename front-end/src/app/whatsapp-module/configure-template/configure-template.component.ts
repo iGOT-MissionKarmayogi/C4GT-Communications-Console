@@ -7,17 +7,18 @@ import { PropServiceService } from '../../services/prop-service.service';
 import { WhatsappTemplateService } from '../Services/whatsapp-service.service';
 import { NavigatorService } from '../Services/navigator.service';
 import { OnInit } from '@angular/core';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-configure-WhatsApp-template',
   standalone: true,
-  imports: [RouterModule, CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [RouterModule, CommonModule, FormsModule, ReactiveFormsModule,TooltipModule],
   templateUrl: './configure-template.component.html',
   styleUrl: './configure-template.component.css'
 })
 export class ConfigureWhatsAppTemplateComponent implements OnInit {
   isClosing: boolean = false;
-
+  loading:boolean=false;
   senderNumber: string | null = null;
   name: string = '';
   language: string = 'en';
@@ -25,6 +26,7 @@ export class ConfigureWhatsAppTemplateComponent implements OnInit {
   allowCategoryChange: boolean = false;
   bodyText: string = '';
   examples: string[] = [''];
+  showSuccessMessage: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -35,17 +37,19 @@ export class ConfigureWhatsAppTemplateComponent implements OnInit {
 
   ngOnInit() {
     this.senderNumber = this.propService.getSenderNumber();
-    this.loadTemplateData();
     if(this.navigatorService.getSelectedTemplate()==null){
       alert("Please select a template first!")
     }
+    else{this.loadTemplateData();}
   }
 
   loadTemplateData() {
+    this.loading=true;
     const selectedTemplateId = this.navigatorService.getSelectedTemplate();
     if (selectedTemplateId) {
       this.whatsappService.getSingleTemplate(selectedTemplateId).subscribe(
         data => {
+          this.loading=false;
           this.name = data.name;
           this.category = data.category;
           this.bodyText = data.structure.body.text;
@@ -53,7 +57,9 @@ export class ConfigureWhatsAppTemplateComponent implements OnInit {
         },
         error => {
           console.error('Error fetching template data:', error);
+          this.loading=false;
         }
+        
       );
     } else {
       console.error('No template selected');
@@ -65,9 +71,11 @@ export class ConfigureWhatsAppTemplateComponent implements OnInit {
   }
 
   onSubmit() {
+    var selectedTemplateId = this.navigatorService.getSelectedTemplate();
     const templateData = {
       senderNumber: this.senderNumber,
       name: this.name,
+      templateId:selectedTemplateId,
       language: this.language,
       category: this.category,
       allowCategoryChange: this.allowCategoryChange,
@@ -81,7 +89,7 @@ export class ConfigureWhatsAppTemplateComponent implements OnInit {
     };
 
     console.log('Template modification started');
-    console.log(templateData.structure.body.examples);
+    console.log(templateData);
 
     this.whatsappService.modifyTemplate(templateData).subscribe(
       data => {

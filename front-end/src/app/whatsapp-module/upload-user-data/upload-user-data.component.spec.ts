@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UploadUserDataComponent } from './upload-user-data.component';
+import { UploadWhatsappUserDataComponent } from './upload-user-data.component';
 
-describe('UploadUserDataComponent', () => {
-  let component: UploadUserDataComponent;
-  let fixture: ComponentFixture<UploadUserDataComponent>;
+describe('UploadWhatsappUserDataComponent', () => {
+  let component: UploadWhatsappUserDataComponent;
+  let fixture: ComponentFixture<UploadWhatsappUserDataComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UploadUserDataComponent]
+      imports: [UploadWhatsappUserDataComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(UploadUserDataComponent);
+    fixture = TestBed.createComponent(UploadWhatsappUserDataComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

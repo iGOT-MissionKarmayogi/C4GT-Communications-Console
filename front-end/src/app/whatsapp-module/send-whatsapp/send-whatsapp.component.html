@@ -15,10 +15,29 @@
             class="form-control" />
         </div>
         <div class="form-group">
-          
+          <button type="submit" class="btn btn-primary">Send Message</button>
         </div>
-        <button type="submit" class="btn btn-primary">Send Message</button>
       </form>
+    </div>
+  </div>
+
+  <div class="Table" *ngIf="recipientList.length>0">
+    <div class="col-md-10">
+      <h3>Current Recipients List</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>WhatsApp Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let recipient of recipientList">
+            <td>{{ recipient.name }}</td>
+            <td>{{ recipient.whatsappNumber }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

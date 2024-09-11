@@ -2,16 +2,23 @@
     <div class="Container">
         <div class="Upper">
             <h2>Whatsapp Service Templates</h2>
-            <div class="Header">
-                <h3>Choose Template</h3>
-                <button>Create New Template</button>
-            </div>
         </div>
-        <div class="Lower">
+        <!-- Loader shown when loading is true -->
+        <div *ngIf="loading" class="loader">
+            <span>L</span>
+            <span>O</span>
+            <span>A</span>
+            <span>D</span>
+            <span>I</span>
+            <span>N</span>
+            <span>G</span>
+        </div>
+        <!-- Content shown when loading is false -->
+        <div *ngIf="!loading" class="Lower">
             <div class="SubContainer">
                 <div class="CardsSection">
-                    <div class="Card" *ngFor="let template of templates"
-                        (click)="selectTemplate(template)">
+                    <div class="Card" *ngFor="let template of templates" (click)="selectTemplate(template)"
+                        (click)="navigate()">
                         <div class="CardUpper">
                             <div class="TemplateId">
                                 <h3>Template Id</h3>
@@ -28,9 +35,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="SubmitButton">
-            <button [disabled]="!selectedTemplateId" (click)="navigate()">Select</button>
         </div>
     </div>
 </div>

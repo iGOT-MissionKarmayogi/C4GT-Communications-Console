@@ -1,17 +1,26 @@
-<div class="container">
-    <div class="header">
-      <div>
-        <h2>WhatsApp Service</h2>
-        <h3>Select Users</h3>
+<div class="container" style="position: relative;">
+  <p-toast [life]="2000"></p-toast>
+
+  <div class="sub-Container">
+    <div>
+      <h2 style="font-weight: 500;">Select Users</h2>
+    </div>
+
+    <div class="actions">
+      <div class="search-sort">
+        <input type="text" [(ngModel)]="searchQuery" (input)="filterUsers()" placeholder="Search by name or number" />
       </div>
-  
-      <div class="actions">
-        <button (click)="showAddForm = true">Add Manually</button>
-        <button (click)="showFilePopup = true">Import from CSV</button>
+      <div class="buttons">
+        <button class="optional-button" (click)="showAddForm = !showAddForm">Add Manually</button>
+        <button class="optional-button" (click)="importFromCSV()">
+          <input type="file" id="fileInput" #fileInput style="display: none;" (change)="onFileSelected($event)" accept=".csv" />
+          Import from CSV
+        </button>
+        <button class="send-button" (click)="Submit()">Upload to Cloud</button>
       </div>
     </div>
-  
-    <div class="popupform" *ngIf="showAddForm">
+
+    <div *ngIf="showAddForm" class="AddOneUserForm">
       <form (ngSubmit)="addUser()">
         <input [(ngModel)]="newUser.name" name="name" placeholder="Name" required>
         <input [(ngModel)]="newUser.whatsappNumber" name="whatsappNumber" placeholder="Phone Number" required>
@@ -19,41 +28,16 @@
         <button class="close" type="button" (click)="showAddForm = false">🞥</button>
       </form>
     </div>
-  
-    <div class="file-popup" *ngIf="showFilePopup">
-      <div>
-        <label for="fileInput">Select a file to import</label>
-        <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".csv">
-        <button class="close" type="button" (click)="showFilePopup = false">🞥</button>
-      </div>
-    </div>
-  
-    <div class="filters">
-      <input type="text" placeholder="Search by name or phone number" [(ngModel)]="searchQuery" (ngModelChange)="filterUsers()">
-      <button (click)="toggleSortOrder()">Sort by Name {{ sortAscending ? '▲' : '▼' }}</button>
-    </div>
-  
-    <div class="user-list">
-      <table>
-        <thead>
-          <tr>
-            <th>Select</th>
-            <th>Name</th>
-            <th>WhatsApp Number</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of filteredUsers">
-            <td><input type="checkbox" [(ngModel)]="user.checked"></td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.whatsappNumber }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <div class="bottom">
-      <button class="send-button" (click)="Submit()">Upload Data</button>
+
+    <div class="ag-theme-alpine" style="height: 500px; width: 100%;">
+      <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-quartz"
+        [rowData]="filteredUsers"
+        [columnDefs]="columnDefs"
+        rowSelection="multiple"
+        (gridReady)="onGridReady($event)"
+        (selectionChanged)="onSelectionChanged()"
+        [gridOptions]="gridOptions">
+      </ag-grid-angular>
     </div>
   </div>
-  
+</div>
