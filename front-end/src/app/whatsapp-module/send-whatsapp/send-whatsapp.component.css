@@ -5,40 +5,35 @@
 
 .container input {
   height: 1.7rem;
-  border-radius: 10px;
-  border: none;
+  border-radius: 5px;
   padding: 5px;
   padding-inline: 10px;
   font-size: 1rem;
+  border: solid #2d435c 2px;
+  background-color: transparent;
 }
 
 .container input:focus {
-  outline: #184486;
-  border: none;
+  outline: #274f8b;
 }
 
 .container button {
-  position: relative;
-  top: 15%;
-  right: 24%;
-  margin-inline: auto;
-  padding: 10px;
-  margin-top: 3rem;
-  border-radius: 30px;
-  font-family: 'Poppins', sans-serif;
-  cursor: pointer;
+  background-color: #28a745;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem;
+  padding-inline: 1rem;
+  border: none;
+  border-radius: 5px;
   color: white;
-  border: solid #184486 2px;
-  background-color: #184486;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
-.container button:hover {
-  background-color: #0c326c;
-  color: white;
-}
 
 .container button:active {
-  scale: 90%;
+  scale: 95%;
 }
 
 .row {
@@ -51,11 +46,10 @@
 }
 
 .Template-Preview {
-  background-color: white;
-  height: 200px;
+  height: 100%;
   border-radius: 10px;
-  padding: 15px;
-  font-size: 19px;
+  padding: 10px;
+  border: solid #2d435c 2px;
 }
 
 .fields {
@@ -64,6 +58,7 @@
   justify-content: left;
   gap: 0.5rem;
 }
+
 .form{
   display: flex;
   flex-direction: column;
@@ -78,4 +73,28 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+}
+
+
+/* Example CSS (can be customized) */
+.Table{
+  margin-top: 50px;
+}
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+}
+
+.table-bordered {
+  border: 1px solid #dee2e6;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody + tbody {
+  border-top: 2px solid #dee2e6;
 }

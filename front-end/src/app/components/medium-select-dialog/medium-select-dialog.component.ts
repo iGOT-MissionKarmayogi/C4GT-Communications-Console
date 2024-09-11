@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './medium-select-dialog.component.html',
-  styleUrls: ['./medium-select-dialog.component.css']
+  styleUrls: ['./medium-select-dialog.component.css'],
 })
 export class MediumSelectDialogComponent {
   @Input() campaign: any;
@@ -20,7 +20,8 @@ export class MediumSelectDialogComponent {
 
   constructor(
     private propService: PropServiceService,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   mediumSelect(medium: string) {
     this.selectedMedium = medium;
@@ -30,7 +31,7 @@ export class MediumSelectDialogComponent {
     if (this.selectedMedium) {
       this.propService.setMedium(this.selectedMedium);
       if (this.selectedMedium === 'Whatsapp') {
-        this.router.navigate([`/dashboard/whatsapp/templates`]);
+        this.router.navigate([`/dashboard/whatsapp/edashboard`]);
       } else if (this.selectedMedium === 'Email') {
         // Update the navigation path for Email
         this.router.navigate([`/dashboard/email/edashboard`]);
