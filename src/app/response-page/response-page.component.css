@@ -51,7 +51,7 @@ tr:nth-child(even) {
   display: block;
   margin: 15px auto;
   padding: 12px 24px;
-  background-color: #007bff;
+  background-color: black;
   color: white;
   font-size: 18px;
   border: none;
@@ -62,5 +62,5 @@ tr:nth-child(even) {
 }
 
 .back-button:hover {
-  background-color: #0056b3;
+  background-color: rgb(57, 55, 55);
 }

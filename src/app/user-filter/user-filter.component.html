@@ -181,7 +181,6 @@
         </div>
       </div>
     </div>
-    <div class="form-row"></div>
 
     <div class="form-row">
       <div class="form-group">
@@ -358,7 +357,7 @@
       </div>
     </div>
 
-    <div class="form-row">
+    <div class="form-row form-row-limit">
       <div class="form-group">
         <label for="limit">Limit</label>
         <input
@@ -369,9 +368,6 @@
           placeholder="Enter limit"
         />
       </div>
-    </div>
-
-    <div class="form-row">
       <div class="form-group">
         <label for="sortByField">Sort By Field</label>
         <select
@@ -389,9 +385,6 @@
           </option>
         </select>
       </div>
-    </div>
-
-    <div class="form-row">
       <div class="form-group">
         <label for="sortByOrder">Sort Order</label>
         <select id="sortByOrder" formControlName="sortByOrder">
@@ -400,6 +393,7 @@
         </select>
       </div>
     </div>
+
     <div class="form-row">
       <button type="submit" class="submit-btn">Submit</button>
       <button type="reset" class="reset-btn" (click)="onReset()">Reset</button>

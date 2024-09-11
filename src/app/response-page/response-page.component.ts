@@ -26,6 +26,8 @@ export class ResponsePageComponent implements OnInit {
   }
 
   goBack(): void {
+    this.responseData = this.userService.setResponseData(null);
+    this.errorMessage = this.userService.setErrorMessage(null);
     this.router.navigate(['/'], {});
   }
 }
