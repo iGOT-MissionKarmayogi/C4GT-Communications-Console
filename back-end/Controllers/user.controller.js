@@ -1,5 +1,5 @@
-import User from "../Models/user.model.js";
-
+import UserModel from "../Models/user.model.js";
+import HistoryModel from "../Models/History.model.js";
 
 const AddUsers = async (req, res) => {
     try {
@@ -7,11 +7,11 @@ const AddUsers = async (req, res) => {
         
         for(let i = 0; i < data.length; i++) {
             const {name,phoneNumber} = data[i];
-            const newUser = await User.findOne({phoneNumber})
+            const newUser = await UserModel.findOne({phoneNumber})
             if(newUser) {
                 continue;
             }
-            const user = new User({
+            const user = new UserModel({
                 name,
                 phoneNumber
 
@@ -36,7 +36,7 @@ const AddUsers = async (req, res) => {
 const GetUsers = async (req, res) => {
 
     try {
-        const users = await User.find();
+        const users = await UserModel.find();
 
       
         res.status(200).json({ 
@@ -50,6 +50,8 @@ const GetUsers = async (req, res) => {
         });
     }
 }
+
+
 
 
 export { AddUsers, GetUsers };

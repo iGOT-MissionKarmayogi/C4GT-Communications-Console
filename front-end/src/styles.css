@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 /* Reset margin and padding for html and body */
+@import "primeicons/primeicons.css";
+@import "ag-grid-community/styles/ag-grid.css";
+@import "ag-grid-community/styles/ag-theme-quartz.css";
 html, body {
     margin: 0;
     padding: 0;
@@ -7,7 +10,7 @@ html, body {
     width: 100%;
 }
 
-@import "primeicons/primeicons.css";
+
 
 *{
     box-sizing: border-box;
@@ -20,4 +23,27 @@ app-root {
     display: block;
     height: 100%;
     width: 100%;
-}
+  }
+  
+  .p-tooltip-text {
+    padding: 10px;
+  }
+  .p-tooltip {
+    margin-left: 10px;
+  }
+  
+  .p-tooltip-arrow {
+    display: none;
+  }
+  
+  .p-toast-message-text {
+    padding: 10px;
+  }
+  
+  .p-icon {
+    display: none;
+  }
+  
+  .p-ripple {
+    display: block !important;
+  }

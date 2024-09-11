@@ -19,16 +19,20 @@
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" [class.active]="selectedMenu === 'create-template'" (click)="selectMenu('create-template')">Create Template</a>
+                            <a class="nav-link" [class.active]="selectedMenu === 'create-template'"
+                                (click)="selectMenu('create-template')">Create Template</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" [class.active]="selectedMenu === 'configure-template'" (click)="selectMenu('configure-template')">Configure Template</a>
+                            <a class="nav-link" [class.active]="selectedMenu === 'configure-template'"
+                                (click)="selectMenu('configure-template')">Configure Template</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" [class.active]="selectedMenu === 'upload-user-data'" (click)="selectMenu('upload-user-data')">Select Users</a>
+                            <a class="nav-link" [class.active]="selectedMenu === 'upload-user-data'"
+                                (click)="selectMenu('upload-user-data')">Select Users</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" [class.active]="selectedMenu === 'history'" (click)="selectMenu('history')">History</a>
+                            <a class="nav-link" [class.active]="selectedMenu === 'history'"
+                                (click)="selectMenu('history')">History</a>
                         </li>
                     </ul>
                 </div>
@@ -36,11 +40,86 @@
 
             <!-- Main content -->
             <main class="main-content">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <div *ngIf="selectedMenu === 'default'">Welcome to Smart SMS Notifier</div>
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <div *ngIf="selectedMenu === 'default'">
+                        <div class="docs-content-container">
+                            <h1>Custom SMS Template Documentation</h1>
+
+                            <h2>Introduction</h2>
+                            <div>
+                                <strong>Registering a Template on DLT Platform:</strong>
+                                <ol>
+                                    <li>Login to your DLT platform (e.g., Vodafone, Airtel, Jio).</li>
+                                    <li>Navigate to the "Template Registration" section.</li>
+                                    <li>Provide the template name, content, and category (Promotional/Transactional).
+                                    </li>
+                                    <li>Specify variable placeholders.</li>
+                                    <li>Submit the template for approval.</li>
+                                    <li>Once approved, use the template ID for sending SMS via your service provider.
+                                    </li>
+                                </ol>
+                            </div>
+
+                            <h2>Components</h2>
+
+                            <h3>Main Features</h3>
+                            <div>
+                                <p>The platform offers several features:</p>
+                                <ul>
+                                    <li><strong>Create Template</strong>: Create new SMS templates.</li>
+                                    <li><strong>Configure Template</strong>: Modify existing templates.</li>
+                                    <li><strong>Select User </strong>: Select users for SMS targeting.</li>
+                                    <li><strong>History</strong>: View SMS sending history.</li>
+                                </ul>
+                            </div>
+
+                            <h2>Usage</h2>
+
+                            <h3>Navigation</h3>
+                            <div>
+                                <p>Use the menu to change the <code>selectedMenu</code> variable, controlling which
+                                    feature is displayed.</p>
+                            </div>
+
+                            <h3>Creating a Template</h3>
+                            <div>
+                                <ol>
+                                    <li>Select "Create Template" from the menu.</li>
+                                    <li>Fill in the form and submit to save the template.</li>
+                                </ol>
+                            </div>
+
+                            <h3>Configuring a Template</h3>
+                            <div>
+                                <ol>
+                                    <li>Select "Configure Template" from the menu.</li>
+                                    <li>Choose a template and update as needed.</li>
+                                </ol>
+                            </div>
+
+                            <h3>Viewing & Uploading User Data</h3>
+                            <div>
+                                <p>Select "View User Data" to filter and target users, or "Upload User Data" to add new
+                                    data for targeting and send Sms</p>
+                            </div>
+
+                            
+
+                            <h3>Viewing History</h3>
+                            <div>
+                                <p>View "History" to track sent messages, timestamps, and recipients.</p>
+                            </div>
+
+                            <h2>Conclusion</h2>
+                            <div>
+                                <p>This platform simplifies SMS notifications, allowing users to efficiently create,
+                                    send, and track messages.</p>
+                            </div>
+                        </div>
+                    </div>
                     <app-create-template *ngIf="selectedMenu === 'create-template'"></app-create-template>
                     <app-configure-template *ngIf="selectedMenu === 'configure-template'"></app-configure-template>
-                    <app-view-user-data *ngIf="selectedMenu === 'view-user-data'"></app-view-user-data>
                     <app-upload-user-data *ngIf="selectedMenu === 'upload-user-data'"></app-upload-user-data>
                     <app-history *ngIf="selectedMenu === 'history'"></app-history>
                 </div>
