@@ -1,72 +1,87 @@
 .user-data {
-    margin: 20px;
-  }
-  
-  .filters {
-    margin-bottom: 10px;
-  }
-  
-  .filters input {
-    margin-right: 10px;
-    padding: 5px;
-  }
+  margin: 20px;
+}
 
-  .table-container {
-    max-height: 350px; 
-    max-width: 900px;
-    overflow-x: auto;
-    overflow-y: auto;
-    width: 100%;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-    text-align: left;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  tr:hover {
-    background-color: #ddd;
-  }
+.filters {
+  margin-bottom: 10px;
+}
 
-  button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 8px;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  .user-data-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .selection-message {
-    margin-top: 10px;
-    color: #030303;
-    background-color:#45a049;
-    font-size: 16px;
-  }
+.filters input {
+  margin-right: 10px;
+  padding: 5px;
+}
+
+.table-container {
+  max-height: 350px;
+  max-width: 900px;
+  overflow-x: auto;
+  overflow-y: auto;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.user-data-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selection-message {
+  margin-top: 10px;
+  color: #45a049;
+  font-size: 16px;
+}
+
+button[disabled] {
+  background-color: #d3d3d3;
+  color: #808080;
+  cursor: not-allowed;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.2);
+  margin-right: 10px;
+}

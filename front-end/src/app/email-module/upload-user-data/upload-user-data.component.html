@@ -5,7 +5,7 @@
       <label for="file">Choose file</label>
       <input type="file" id="file" (change)="onFileSelected($event)" class="form-control">
     </div>
-    <button type="submit" class="btn btn-primary">Upload</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!fileSelected">Upload</button>
   </form>
 
   <div *ngIf="uploadSuccess" class="alert alert-success mt-3">

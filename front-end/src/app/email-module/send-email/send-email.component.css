@@ -1,6 +1,12 @@
 /* General container styling */
 .template-container, .preview-container {
   margin: 2rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  overflow: auto;
 }
 
 /* Flexbox container for cards */
@@ -13,7 +19,7 @@
 /* Card container */
 .card {
   flex: 1 1 calc(33.333% - 1rem); /* Adjust to have 3 columns */
-  border: 1px solid #ccc;
+  border: 1px solid #1353c8;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;
@@ -84,7 +90,7 @@
 }
 
 /* Add some spacing around the card elements */
-.card + .card {
+.card {
   margin-top: 1rem;
 }
 
@@ -119,4 +125,10 @@
 
 .selected-users-box li {
   margin-bottom: 10px;
+}
+
+button[disabled] {
+  background-color: #d3d3d3;
+  color: #808080;
+  cursor: not-allowed;
 }

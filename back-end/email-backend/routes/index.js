@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 });
 
 // Use email routes for /send-email path
-router.use('/send-email', emailRoutes);
+router.use('/send-email',emailRoutes);
 // Use template routes for /templates path
 router.use('/templates', templateRoutes);
 

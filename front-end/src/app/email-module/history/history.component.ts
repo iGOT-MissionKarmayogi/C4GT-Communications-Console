@@ -40,6 +40,8 @@ export class HistoryComponent implements OnInit {
   }
 
   resendEmail(history: any): void {
+    const message = `Go to the "View User Data" menu and repeat the process for user`;
+    window.alert(message);
     // Navigate to the "View User Data" menu
   }
 }

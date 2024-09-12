@@ -16,6 +16,7 @@ export class UploadUserDataComponent {
   selectedFile: File | null = null;
   uploadSuccess: boolean = false;
   uploadError: boolean = false;
+  fileSelected: boolean = false;
 
   constructor(private http: HttpClient) {}
 
@@ -23,6 +24,9 @@ export class UploadUserDataComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
+      this.fileSelected = true;
+    } else{
+      this.fileSelected = false;
     }
   }
 
