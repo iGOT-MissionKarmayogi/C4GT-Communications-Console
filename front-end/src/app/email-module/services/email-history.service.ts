@@ -11,6 +11,6 @@ export class EmailHistoryService {
   constructor(private http: HttpClient) {}
 
   getEmailHistory(): Observable<any[]> {
-	return this.http.get<any[]>(this.apiUrl);
+	return this.http.get<any[]>(this.apiUrl,{withCredentials: true});
   }
 }
