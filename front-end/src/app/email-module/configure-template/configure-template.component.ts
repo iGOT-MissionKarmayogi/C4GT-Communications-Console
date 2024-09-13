@@ -30,7 +30,7 @@ export class ConfigureTemplateComponent implements OnInit {
   @ViewChild('editSection') editSection!: ElementRef;
 
   fetchTemplates() {
-    this.http.get('http://localhost:5000/api/email/templates')
+    this.http.get('http://localhost:5000/api/email/templates',{withCredentials: true})
       .subscribe({
         next: (response: any) => {
           this.templates = response;

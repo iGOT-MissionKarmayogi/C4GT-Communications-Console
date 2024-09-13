@@ -41,7 +41,7 @@ export class CreateTemplateComponent {
       body: this.body
     };
 
-    this.http.post('http://localhost:5000/api/email/templates', templateData)
+    this.http.post('http://localhost:5000/api/email/templates',templateData,{withCredentials: true})
       .subscribe({
         next: (response) => {
           console.log('Template created successfully:', response);

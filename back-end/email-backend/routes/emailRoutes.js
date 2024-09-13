@@ -4,6 +4,7 @@ import { getTemplateById } from '../controllers/templateController.js'; // Impor
 import EmailHistory from '../models/emailHistory.js';
 import multer from 'multer';
 import fs from 'fs';
+import { verify, roleAuthorization } from '../../middlewares/authenticated.js';
 
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
@@ -14,7 +15,7 @@ export const saveEmailStatus = async (emailData) => {
   await emailHistory.save();
 };
 // Route to send an email with selected or default template
-router.post('/', upload.single('attachment'), async (req, res) => {
+router.post('/', verify, roleAuthorization(['Admin']),  upload.single('attachment'), async (req, res) => {
   const { to, username, body, templateId } = req.body;
   const attachment = req.file;
 

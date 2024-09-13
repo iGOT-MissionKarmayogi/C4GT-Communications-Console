@@ -37,7 +37,7 @@ export class UploadUserDataComponent {
       formData.append('file', this.selectedFile);
 
       try {
-        await this.http.post('http://localhost:5000/api/email/upload-user-data', formData).toPromise();
+        await this.http.post('http://localhost:5000/api/email/upload-user-data', formData,{withCredentials: true}).toPromise();
         this.uploadSuccess = true;
         this.uploadError = false;
       } catch (error) {

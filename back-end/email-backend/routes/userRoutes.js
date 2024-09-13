@@ -1,10 +1,12 @@
 import express from 'express';
 import User from '../models/userModel.js';
+import { verify, roleAuthorization } from '../../middlewares/authenticated.js';
+
 
 const router = express.Router();
 
 // Example route to add a user (for testing purposes)
-router.post('/',async (req, res) => {
+router.post('/', verify, roleAuthorization(['Admin']), async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();

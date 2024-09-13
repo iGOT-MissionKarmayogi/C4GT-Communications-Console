@@ -10,8 +10,8 @@ export class TemplateService {
   private apiUrl = 'http://localhost:5000/api/email/templates'; 
 
   constructor(private http: HttpClient) {}
-
+  
   updateTemplate(templateId: string, newTemplate: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${templateId}`, newTemplate);
+    return this.http.put(`${this.apiUrl}/${templateId}`, {withCredentials: true}, newTemplate);
   }
 }
