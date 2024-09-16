@@ -2,11 +2,12 @@ import express from 'express';
 import { createTemplate, getTemplates, getTemplateById , updateTemplate} from '../controllers/templateController.js';
 import mongoose from 'mongoose';
 import EmailTemplate from '../models/template.js';
+import { verify, roleAuthorization } from '../../middlewares/authenticated.js';
 
 const router = express.Router();
 
 // Route to create a new template
-router.post('/', async (req, res) => {
+router.post('/', verify, roleAuthorization(['Admin']),  async (req, res) => {
   const { name, subject, body } = req.body;
   /**
    * Creates a new template.
@@ -25,7 +26,7 @@ router.post('/', async (req, res) => {
 });
 
 // Route to fetch all templates
-router.get('/', async (req, res) => {
+router.get('/', verify, roleAuthorization(['Admin']),  async (req, res) => {
   try {
     /**
      * Retrieves the templates.
@@ -41,7 +42,7 @@ router.get('/', async (req, res) => {
 
 
 // Route to fetch a template by ID
-router.get('/:id', async (req, res) => {
+router.get('/:id', verify, roleAuthorization(['Admin']),  async (req, res) => {
   const templateId = req.params.id;
   try {
     /**
@@ -64,7 +65,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Route to update a template by ID
-router.put('/:id', async (req, res) => {
+router.put('/:id', verify, roleAuthorization(['Admin']),  async (req, res) => {
   const templateId = req.params.id;
   const templateData = req.body;
   try {

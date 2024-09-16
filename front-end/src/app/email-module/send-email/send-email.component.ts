@@ -32,7 +32,7 @@ export class SendEmailComponent implements OnInit {
   @ViewChild('previewSection') previewSection!: ElementRef;
 
   fetchTemplates() {
-    this.http.get('http://localhost:5000/api/email/templates')
+    this.http.get('http://localhost:5000/api/email/templates',{withCredentials: true})
       .subscribe({
         next: (response: any) => {
           this.templates = response;
@@ -86,7 +86,7 @@ export class SendEmailComponent implements OnInit {
     
 
     this.selectedUsers.forEach(user => {
-      this.http.get(`http://localhost:5000/api/email/templates/${this.selectedTemplate._id}`)
+      this.http.get(`http://localhost:5000/api/email/templates/${this.selectedTemplate._id}`,{withCredentials: true})
       .subscribe({
         next: (templateResponse: any) => {
           // Replace {{Name}} with user.name in the email body and so on
@@ -116,7 +116,7 @@ export class SendEmailComponent implements OnInit {
             formData.append('attachment', this.selectedFile, this.selectedFile.name);
           }
 
-    this.http.post('http://localhost:5000/api/email/send-email', formData)
+    this.http.post('http://localhost:5000/api/email/send-email', formData,{withCredentials: true})
       .subscribe({
         next: (response) => {
           console.log('Email sent successfully:', response);

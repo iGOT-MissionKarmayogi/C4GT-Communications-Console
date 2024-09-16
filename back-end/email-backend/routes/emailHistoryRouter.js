@@ -1,10 +1,11 @@
 import express from 'express';
 import { getHistory } from '../controllers/historyController.js';
+import { verify, roleAuthorization } from '../../middlewares/authenticated.js';
 
 const router = express.Router();
 
 // Route to fetch all history
-router.get('/history', async (req, res) => {
+router.get('/history', verify, roleAuthorization(['Admin']),  async (req, res) => {
   try {
     /**
      * Represents the email history.
