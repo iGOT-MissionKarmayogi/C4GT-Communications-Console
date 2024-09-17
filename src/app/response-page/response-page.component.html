@@ -1,0 +1,45 @@
+<button class="back-button" (click)="goBack()">Back to Form</button>
+
+<div *ngIf="responseData">
+  <h3 class="records">Records Found: {{ responseData.result.count }}</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th *ngFor="let key of getObjectKeys(responseData.result.users[0])">
+          {{ key }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of responseData.result.users; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td *ngFor="let key of getObjectKeys(user)">
+          <ng-container *ngIf="key === 'completedContents'; else defaultCell">
+            <table>
+              <thead>
+                <tr>
+                  <th>Identifier</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let content of user.completedContents">
+                  <td>{{ content.identifier }}</td>
+                  <td>{{ content.status }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-container>
+          <ng-template #defaultCell>
+            {{ user[key] }}
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="errorMessage" class="error">
+  <p>{{ errorMessage }}</p>
+</div>

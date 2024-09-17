@@ -1,0 +1,402 @@
+<div class="user-filter-container">
+  <form [formGroup]="userFilterForm" class="form-class" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="courseId">Course ID</label>
+        <input
+          id="courseId"
+          formControlName="courseId"
+          type="text"
+          class="form-control"
+          placeholder="Enter Course ID"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="batchId">Batch ID</label>
+        <input
+          id="batchId"
+          formControlName="batchId"
+          type="text"
+          class="form-control"
+          placeholder="Enter Batch ID"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="userId">User ID</label>
+        <input
+          id="userId"
+          formControlName="userId"
+          type="text"
+          class="form-control"
+          placeholder="Enter User ID"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input
+          id="location"
+          formControlName="location"
+          type="text"
+          class="form-control"
+          placeholder="Enter Location"
+          required
+        />
+        <div
+          *ngIf="userFilterForm.get('location')?.hasError('noNumbers')"
+          style="color: red; margin-top: 2px"
+        >
+          Location should not contain numbers.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="dateType" class="label-underline">
+          Batch Enrollment Date Type</label
+        >
+        <div class="radio-group">
+          <label class="radio-inline">
+            <input
+              type="radio"
+              formControlName="dateType"
+              value="single"
+              (change)="onDateTypeChange('single')"
+              checked
+            />
+            Single Date
+          </label>
+          <label class="radio-inline">
+            <input
+              type="radio"
+              formControlName="dateType"
+              value="range"
+              (change)="onDateTypeChange('range')"
+            />
+            Date Range
+          </label>
+        </div>
+
+        <div *ngIf="isSingleDate" class="form-group single-date">
+          <label for="batchEnrollmentDate">Batch Enrollment Date</label>
+          <input
+            id="batchEnrollmentDate"
+            formControlName="batchEnrollmentDate"
+            type="date"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div *ngIf="!isSingleDate" class="form-group">
+          <label for="batchEnrollmentDateStart"
+            >Batch Enrollment Date Start</label
+          >
+          <input
+            id="batchEnrollmentDateStart"
+            formControlName="batchEnrollmentDateStart"
+            type="date"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div *ngIf="!isSingleDate" class="form-group" style="margin-top: 10px">
+          <label for="batchEnrollmentDateEnd">Batch Enrollment Date End</label>
+          <input
+            id="batchEnrollmentDateEnd"
+            formControlName="batchEnrollmentDateEnd"
+            type="date"
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="progressType" class="label-underline">Progress Type</label>
+        <div class="radio-group">
+          <label class="radio-inline">
+            <input
+              type="radio"
+              formControlName="progressType"
+              value="single"
+              (change)="onProgressTypeChange('single')"
+              checked
+            />
+            Single Value
+          </label>
+          <label class="radio-inline">
+            <input
+              type="radio"
+              formControlName="progressType"
+              value="range"
+              (change)="onProgressTypeChange('range')"
+            />
+            Range Value
+          </label>
+        </div>
+
+        <div *ngIf="isSingleValue" class="form-group single-progress">
+          <label for="progress">Progress</label>
+          <input
+            id="progress"
+            formControlName="progress"
+            type="number"
+            class="form-control"
+            placeholder="Enter Progress"
+            required
+          />
+        </div>
+
+        <div *ngIf="!isSingleValue" class="form-group">
+          <label for="progressRangeStart">Progress Range Start</label>
+          <input
+            id="progressRangeStart"
+            formControlName="progressRangeStart"
+            type="number"
+            class="form-control"
+            placeholder="Enter Progress Range Start"
+            required
+          />
+        </div>
+
+        <div *ngIf="!isSingleValue" class="form-group" style="margin-top: 10px">
+          <label for="progressRangeEnd">Progress Range Start</label>
+          <input
+            id="progressRangeEnd"
+            formControlName="progressRangeEnd"
+            type="number"
+            class="form-control"
+            placeholder="Enter Progress Range End"
+            required
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="totalLeafNodecount">Total Leaf Node Count</label>
+        <input
+          id="totalLeafNodecount"
+          formControlName="totalLeafNodecount"
+          type="number"
+          class="form-control"
+          placeholder="Enter Total Leaf Node Count"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="lastAccessTime">Last Access Time</label>
+        <input
+          id="lastAccessTime"
+          formControlName="lastAccessTime"
+          type="date"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="lastCompletedTime">Last Completed Time</label>
+        <input
+          id="lastCompletedTime"
+          formControlName="lastCompletedTime"
+          type="date"
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="lastUpdatedTime">Last Updated Time</label>
+        <input
+          id="lastUpdatedTime"
+          formControlName="lastUpdatedTime"
+          type="date"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <h1 class="response-title label-underline">
+        Fields to Include in Response:
+      </h1>
+
+      <div class="response">
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="toggleSelectAll($event)"
+              [checked]="allFieldsSelected"
+            />
+            Select All Fields
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="location"
+            />
+            Location
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="progress"
+            />
+            Progress
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="batchId"
+            />
+            Batch ID
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="totalLeafNodecount"
+            />
+            Total Leaf Node Count
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="completedContents"
+            />
+            Completed Contents
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="batchEnrollmentDate"
+            />
+            Batch Enrollment Date
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="lastAccessTime"
+            />
+            Last Access Time
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="lastCompletedTime"
+            />
+            Last Completed Time
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="lastUpdatedTime"
+            />
+            Last Updated Time
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-checkbox">
+            <input
+              type="checkbox"
+              (change)="onFieldChange($event)"
+              value="viewCount"
+            />
+            View Count
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row form-row-limit">
+      <div class="form-group">
+        <label for="limit">Limit</label>
+        <input
+          id="limit"
+          formControlName="limit"
+          type="number"
+          class="form-control"
+          placeholder="Enter limit"
+        />
+      </div>
+      <div class="form-group">
+        <label for="sortByField">Sort By Field</label>
+        <select
+          id="sortByField"
+          formControlName="sortByField"
+          class="form-control"
+        >
+          <option value="" disabled>Select a field</option>
+          <option
+            *ngFor="let field of responseFields"
+            [value]="field"
+            class="form-control"
+          >
+            {{ field }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="sortByOrder">Sort Order</label>
+        <select id="sortByOrder" formControlName="sortByOrder">
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <button type="submit" class="submit-btn">Submit</button>
+      <button type="reset" class="reset-btn" (click)="onReset()">Reset</button>
+    </div>
+  </form>
+</div>

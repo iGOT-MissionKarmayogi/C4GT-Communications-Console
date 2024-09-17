@@ -1,0 +1,66 @@
+table {
+  width: 96%;
+  border-collapse: collapse;
+  margin: 15px auto;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+}
+.records {
+  font-size: 27px;
+  text-align: center;
+}
+th {
+  font-size: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 14px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  color: #ff4d4f;
+  border: 1px solid #f5c2c7;
+  border-radius: 8px;
+  padding: 20px;
+  font-size: 1.9rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.error p {
+  margin: 0;
+}
+
+.back-button {
+  display: block;
+  margin: 15px auto;
+  padding: 12px 24px;
+  background-color: black;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.back-button:hover {
+  background-color: rgb(57, 55, 55);
+}

@@ -1,0 +1,144 @@
+.user-filter-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.form-class {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-family: "Roboto", sans-serif;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  background-color: #ffffff;
+}
+
+.form-group input:hover,
+.form-group select:hover {
+  border-color: #007bff;
+}
+
+.form-group input::placeholder,
+.form-group select::placeholder {
+  color: #aaa;
+}
+
+.radio-group {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.radio-inline {
+  display: flex;
+  align-items: center;
+}
+
+.radio-inline input {
+  margin-right: 0.5rem;
+}
+
+.label-underline {
+  text-decoration: underline;
+}
+
+.response-title {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.response {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.custom-checkbox input {
+  margin-right: 0.5rem;
+}
+.form-row-limit {
+  margin-top: 2rem;
+}
+
+.submit-btn,
+.reset-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.submit-btn {
+  background-color: #007bff;
+}
+
+.reset-btn {
+  background-color: #6c757d;
+}
+
+.submit-btn:hover,
+.reset-btn:hover {
+  opacity: 0.9;
+}
+
+.single-date,
+.single-progress {
+  grid-column: span 2;
+}
+
+@media (max-width: 500px) {
+  .form-row {
+    flex-direction: column;
+  }
+}
