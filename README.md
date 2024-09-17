@@ -26,7 +26,7 @@ git clone https://github.com/iGOT-MissionKarmayogi/C4GT-Communications-Console
 ### 4. Checkout the following branch
 
 ```bash
-git checkout user-search
+git checkout user-search-api
 
 ```
 
