@@ -1,6 +1,11 @@
 # C4GT Communications Console
 
-## User Search UI
+## User Search
+
+### Prerequisites
+
+- **Node.js**: v21.6.1
+- **Angular CLI**: v18.2.4
 
 Get Started on the Local Machine: To run the application on your local machine, follow these steps:
 
