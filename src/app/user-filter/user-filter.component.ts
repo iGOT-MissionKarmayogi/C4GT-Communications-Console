@@ -75,6 +75,10 @@ export class UserFilterComponent {
     if (savedFormData) {
       console.log('Patching form with saved data:', savedFormData);
       this.userFilterForm.patchValue(savedFormData);
+      this.userFilterForm.patchValue({
+        progressType: ['single'],
+        dateType: ['single'],
+      });
     }
 
     this.onProgressTypeChange('single');
